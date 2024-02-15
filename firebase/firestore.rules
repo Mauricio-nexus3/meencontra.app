@@ -1,0 +1,244 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /Anunciante/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /Anunciante/{parent}/ComentarioAvalicao/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/ComentarioAvalicao/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /Anunciante/{parent}/Catalogo/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/Catalogo/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /Anunciante/{parent}/Anuncios/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/Anuncios/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /Anunciante/{parent}/horarioAtendimento/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/horarioAtendimento/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /Categorias/{document} {
+      allow create: if false;
+      allow read: if false;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /Anunciante/{parent}/Produto/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/Produto/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /Anunciante/{parent}/RedeSocial/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/RedeSocial/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /PlanosModelo01/{document} {
+      allow create: if false;
+      allow read: if false;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /SubCategorias/{document} {
+      allow create: if false;
+      allow read: if false;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /Anunciante/{parent}/Endereco/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/Endereco/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /TicketSuporte/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /meInforma/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /meInforma/{parent}/Materias/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/Materias/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /meInforma/{parent}/RedesSociais/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/RedesSociais/{document} {
+      allow read: if request.auth != null;
+    }
+
+
+    match /meContrataVAGAS/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /meDiverte/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /notificacao/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /carrinho/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /carrinho/{parent}/produtoCarrinho/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/produtoCarrinho/{document} {
+      allow read: if true;
+    }
+
+
+    match /pedido/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /pedido/{parent}/produtoPedido/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/produtoPedido/{document} {
+      allow read: if true;
+    }
+
+
+    match /Anunciante/{parent}/pedidoWhatsapp/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/pedidoWhatsapp/{document} {
+      allow read: if true;
+    }
+
+
+    match /users/{parent}/CarrinhoDeComprasUsuario/{document} {
+      allow create: if request.auth.uid == parent;
+      allow read: if request.auth.uid == parent;
+      allow write: if request.auth.uid == parent;
+      allow delete: if false;
+    }
+
+    match /ff_user_push_notifications/{id} {
+      allow read, update, delete: if false;
+      allow create: if /databases/$(database)/documents/users/$(request.auth.uid) == request.resource.data.sender;
+    }
+  }
+}

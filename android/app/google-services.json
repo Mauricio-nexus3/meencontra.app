@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "133757473516",
+    "project_id": "meencontra-64c35",
+    "storage_bucket": "meencontra-64c35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133757473516:android:58e0da0041cd172a984bc9",
+        "android_client_info": {
+          "package_name": "com.mycompany.meencontra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133757473516-blq873q2hpluh9tri7k294t47pc7jo3s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.meencontra",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "133757473516-9c1e5kukubv2qrnopt9dbvla0vk4rml0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNld4qbgGKUHAT-zcAYq3ndxpjZuFzoZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133757473516-9c1e5kukubv2qrnopt9dbvla0vk4rml0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "133757473516-v68t459eak2plths85su843stpr3r4jn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.meencontra"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

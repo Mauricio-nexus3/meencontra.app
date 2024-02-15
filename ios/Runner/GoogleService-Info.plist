@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>133757473516-v68t459eak2plths85su843stpr3r4jn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.133757473516-v68t459eak2plths85su843stpr3r4jn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>133757473516-blq873q2hpluh9tri7k294t47pc7jo3s.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXJ2ZVZNQhK13zv23H3suoulfpJUhqOnk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>133757473516</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.meencontra</string>
+	<key>PROJECT_ID</key>
+	<string>meencontra-64c35</string>
+	<key>STORAGE_BUCKET</key>
+	<string>meencontra-64c35.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:133757473516:ios:edab7525eb610e78984bc9</string>
+</dict>
+</plist>
