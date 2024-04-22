@@ -14,7 +14,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,49 +39,56 @@ class _SuporteWidgetState extends State<SuporteWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => SuporteModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Suporte'});
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.textFieldAssuntoController ??= TextEditingController();
+    _model.textFieldAssuntoTextController ??= TextEditingController();
     _model.textFieldAssuntoFocusNode ??= FocusNode();
 
-    _model.textFieldConteudoController ??= TextEditingController();
+    _model.textFieldConteudoTextController ??= TextEditingController();
     _model.textFieldConteudoFocusNode ??= FocusNode();
 
-    _model.expandableController1 = ExpandableController(initialExpanded: false);
-    _model.expandableController2 = ExpandableController(initialExpanded: false);
-    _model.expandableController3 = ExpandableController(initialExpanded: false);
-    _model.expandableController4 = ExpandableController(initialExpanded: false);
-    _model.expandableController5 = ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController1 =
+        ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController2 =
+        ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController3 =
+        ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController4 =
+        ExpandableController(initialExpanded: false);
+    _model.expandableExpandableController5 =
+        ExpandableController(initialExpanded: false);
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -102,24 +108,13 @@ class _SuporteWidgetState extends State<SuporteWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
@@ -134,6 +129,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
               size: 30.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('SUPORTE_PAGE_arrow_back_ios_ICN_ON_TAP');
+
               context.pushNamed('Feed');
             },
           ),
@@ -142,6 +139,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter',
                   color: FlutterFlowTheme.of(context).secondaryText,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: [],
@@ -154,7 +152,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Material(
               color: Colors.transparent,
-              elevation: 2.0,
+              elevation: 1.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
@@ -188,6 +186,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                   color:
                                       FlutterFlowTheme.of(context).blackTextos,
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
@@ -228,7 +227,11 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                   .primary,
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyMedium,
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           unselectedLabelStyle: TextStyle(),
                                           indicatorColor:
                                               FlutterFlowTheme.of(context)
@@ -293,7 +296,13 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintText:
                                                             'Escolha um tópico',
                                                         fillColor: FlutterFlowTheme
@@ -328,7 +337,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                   6.0),
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .textFieldAssuntoController,
+                                                            .textFieldAssuntoTextController,
                                                         focusNode: _model
                                                             .textFieldAssuntoFocusNode,
                                                         autofocus: true,
@@ -339,7 +348,13 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                           hintStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodySmall,
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                           enabledBorder:
                                                               OutlineInputBorder(
                                                             borderSide:
@@ -398,9 +413,15 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         validator: _model
-                                                            .textFieldAssuntoControllerValidator
+                                                            .textFieldAssuntoTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -415,9 +436,10 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                   6.0),
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .textFieldConteudoController,
+                                                            .textFieldConteudoTextController,
                                                         focusNode: _model
                                                             .textFieldConteudoFocusNode,
+                                                        autofocus: false,
                                                         obscureText: false,
                                                         decoration:
                                                             InputDecoration(
@@ -426,7 +448,13 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                           hintStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodySmall,
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                           enabledBorder:
                                                               OutlineInputBorder(
                                                             borderSide:
@@ -485,10 +513,16 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         maxLines: 10,
                                                         validator: _model
-                                                            .textFieldConteudoControllerValidator
+                                                            .textFieldConteudoTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -511,6 +545,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'SUPORTE_PAGE_printTela_ON_TAP');
                                                           final selectedMedia =
                                                               await selectMedia(
                                                             maxWidth: 1080.00,
@@ -646,7 +682,13 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                             .center,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyMedium,
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
                                                                   ),
                                                                 ),
                                                               ],
@@ -667,10 +709,12 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                   12.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          if (_model.textFieldAssuntoController
+                                                          logFirebaseEvent(
+                                                              'SUPORTE_PAGE_ENVIAR_TICKET_BTN_ON_TAP');
+                                                          if (_model.textFieldAssuntoTextController
                                                                       .text !=
                                                                   null &&
-                                                              _model.textFieldAssuntoController
+                                                              _model.textFieldAssuntoTextController
                                                                       .text !=
                                                                   '') {
                                                             var ticketSuporteRecordReference =
@@ -683,10 +727,10 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                               topico: _model
                                                                   .dropDownTopicoValue,
                                                               assunto: _model
-                                                                  .textFieldAssuntoController
+                                                                  .textFieldAssuntoTextController
                                                                   .text,
                                                               conteudo: _model
-                                                                  .textFieldConteudoController
+                                                                  .textFieldConteudoTextController
                                                                   .text,
                                                               printTela: _model
                                                                   .uploadedFileUrl,
@@ -709,6 +753,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                               email:
                                                                   containerUsersRecord
                                                                       .email,
+                                                              dataTicket:
+                                                                  getCurrentTimestamp,
                                                             ));
                                                             _model.chamadoSuporte =
                                                                 TicketSuporteRecord
@@ -717,10 +763,10 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                           topico:
                                                                               _model.dropDownTopicoValue,
                                                                           assunto: _model
-                                                                              .textFieldAssuntoController
+                                                                              .textFieldAssuntoTextController
                                                                               .text,
                                                                           conteudo: _model
-                                                                              .textFieldConteudoController
+                                                                              .textFieldConteudoTextController
                                                                               .text,
                                                                           printTela:
                                                                               _model.uploadedFileUrl,
@@ -740,6 +786,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                               containerUsersRecord.whatsapp,
                                                                           email:
                                                                               containerUsersRecord.email,
+                                                                          dataTicket:
+                                                                              getCurrentTimestamp,
                                                                         ),
                                                                         ticketSuporteRecordReference);
                                                             await showDialog(
@@ -830,8 +878,10 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Colors
                                                                         .white,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
-                                                          elevation: 4.0,
+                                                          elevation: 1.0,
                                                           borderSide:
                                                               BorderSide(
                                                             color: Colors
@@ -859,7 +909,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                     color: Colors.white,
                                                     child: ExpandableNotifier(
                                                       controller: _model
-                                                          .expandableController1,
+                                                          .expandableExpandableController1,
                                                       child: ExpandablePanel(
                                                         header: Text(
                                                           'O meencontra é uma plataforma para encontrar novos clientes?',
@@ -872,6 +922,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                         collapsed: Container(
@@ -905,6 +957,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -923,6 +977,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ],
@@ -952,7 +1008,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                     color: Colors.white,
                                                     child: ExpandableNotifier(
                                                       controller: _model
-                                                          .expandableController2,
+                                                          .expandableExpandableController2,
                                                       child: ExpandablePanel(
                                                         header: Text(
                                                           'Quais profissionais podem se cadastrar para ser anunciante no meencontra?',
@@ -965,6 +1021,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                         collapsed: Container(
@@ -998,6 +1056,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -1016,6 +1076,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ],
@@ -1045,7 +1107,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                     color: Colors.white,
                                                     child: ExpandableNotifier(
                                                       controller: _model
-                                                          .expandableController3,
+                                                          .expandableExpandableController3,
                                                       child: ExpandablePanel(
                                                         header: Text(
                                                           'Existe algum custo para usar o aplicativo?',
@@ -1058,6 +1120,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                         collapsed: Container(
@@ -1091,6 +1155,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -1109,6 +1175,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                         'Inter',
                                                                     color: Color(
                                                                         0x8A000000),
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ],
@@ -1139,7 +1207,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                       color: Colors.white,
                                                       child: ExpandableNotifier(
                                                         controller: _model
-                                                            .expandableController4,
+                                                            .expandableExpandableController4,
                                                         child: ExpandablePanel(
                                                           header: Text(
                                                             'Quais são os recursos de segurança do aplicativo?',
@@ -1153,6 +1221,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                       .black,
                                                                   fontSize:
                                                                       16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                           collapsed: Container(
@@ -1186,6 +1256,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                           'Inter',
                                                                       color: Color(
                                                                           0x8A000000),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ),
@@ -1205,6 +1277,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                           'Inter',
                                                                       color: Color(
                                                                           0x8A000000),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ],
@@ -1236,7 +1310,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                       color: Colors.white,
                                                       child: ExpandableNotifier(
                                                         controller: _model
-                                                            .expandableController5,
+                                                            .expandableExpandableController5,
                                                         child: ExpandablePanel(
                                                           header: Text(
                                                             'Posso receber pagamento do cliente através da me.encontra?',
@@ -1250,6 +1324,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                       .black,
                                                                   fontSize:
                                                                       16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                           collapsed: Container(
@@ -1283,6 +1359,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                           'Inter',
                                                                       color: Color(
                                                                           0x8A000000),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ),
@@ -1302,6 +1380,8 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                                                           'Inter',
                                                                       color: Color(
                                                                           0x8A000000),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ],

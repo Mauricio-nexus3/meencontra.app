@@ -1,19 +1,18 @@
 import '/auth/base_auth_user_provider.dart';
 import '/backend/backend.dart';
+import '/categorias/componentes/resultado_algolia_anunciantes/resultado_algolia_anunciantes_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/login/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
+import '/login/componentes/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
 import '/flutter_flow/request_manager.dart';
 
 import 'categorias_widget.dart' show CategoriasWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -29,9 +28,9 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
   // State field(s) for allApp widget.
   final allAppKey = GlobalKey();
   FocusNode? allAppFocusNode;
-  TextEditingController? allAppController;
+  TextEditingController? allAppTextController;
   String? allAppSelectedOption;
-  String? Function(BuildContext, String?)? allAppControllerValidator;
+  String? Function(BuildContext, String?)? allAppTextControllerValidator;
   // Algolia Search Results from action on allApp
   List<AnuncianteRecord>? algoliaSearchResults = [];
 
@@ -52,8 +51,6 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
   void clearCategoriasCacheKey(String? uniqueKey) =>
       _categoriasManager.clearRequest(uniqueKey);
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -66,8 +63,4 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
 
     clearCategoriasCache();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

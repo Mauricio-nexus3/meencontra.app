@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'politica_privacidade_widget.dart' show PoliticaPrivacidadeWidget;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -15,8 +14,6 @@ class PoliticaPrivacidadeModel
 
   final unfocusNode = FocusNode();
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -24,8 +21,4 @@ class PoliticaPrivacidadeModel
   void dispose() {
     unfocusNode.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

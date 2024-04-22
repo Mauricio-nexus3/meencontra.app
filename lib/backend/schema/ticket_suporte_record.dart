@@ -67,6 +67,16 @@ class TicketSuporteRecord extends FirestoreRecord {
   bool get resolvido => _resolvido ?? false;
   bool hasResolvido() => _resolvido != null;
 
+  // "dataTicket" field.
+  DateTime? _dataTicket;
+  DateTime? get dataTicket => _dataTicket;
+  bool hasDataTicket() => _dataTicket != null;
+
+  // "ConclusaoTicket" field.
+  DateTime? _conclusaoTicket;
+  DateTime? get conclusaoTicket => _conclusaoTicket;
+  bool hasConclusaoTicket() => _conclusaoTicket != null;
+
   void _initializeFields() {
     _topico = snapshotData['Topico'] as String?;
     _assunto = snapshotData['Assunto'] as String?;
@@ -78,6 +88,8 @@ class TicketSuporteRecord extends FirestoreRecord {
     _whatsapp = snapshotData['Whatsapp'] as String?;
     _email = snapshotData['Email'] as String?;
     _resolvido = snapshotData['Resolvido'] as bool?;
+    _dataTicket = snapshotData['dataTicket'] as DateTime?;
+    _conclusaoTicket = snapshotData['ConclusaoTicket'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -125,6 +137,8 @@ Map<String, dynamic> createTicketSuporteRecordData({
   String? whatsapp,
   String? email,
   bool? resolvido,
+  DateTime? dataTicket,
+  DateTime? conclusaoTicket,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -138,6 +152,8 @@ Map<String, dynamic> createTicketSuporteRecordData({
       'Whatsapp': whatsapp,
       'Email': email,
       'Resolvido': resolvido,
+      'dataTicket': dataTicket,
+      'ConclusaoTicket': conclusaoTicket,
     }.withoutNulls,
   );
 
@@ -159,7 +175,9 @@ class TicketSuporteRecordDocumentEquality
         e1?.usuarioRef == e2?.usuarioRef &&
         e1?.whatsapp == e2?.whatsapp &&
         e1?.email == e2?.email &&
-        e1?.resolvido == e2?.resolvido;
+        e1?.resolvido == e2?.resolvido &&
+        e1?.dataTicket == e2?.dataTicket &&
+        e1?.conclusaoTicket == e2?.conclusaoTicket;
   }
 
   @override
@@ -173,7 +191,9 @@ class TicketSuporteRecordDocumentEquality
         e?.usuarioRef,
         e?.whatsapp,
         e?.email,
-        e?.resolvido
+        e?.resolvido,
+        e?.dataTicket,
+        e?.conclusaoTicket
       ]);
 
   @override

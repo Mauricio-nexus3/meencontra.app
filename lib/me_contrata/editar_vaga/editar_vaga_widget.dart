@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,12 +8,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -43,8 +43,10 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
     super.initState();
     _model = createModel(context, () => EditarVagaModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditarVaga'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('EDITAR_VAGA_EditarVaga_ON_INIT_STATE');
       setState(() {
         _model.modoExibicao = false;
         _model.etapaCadastro = 1;
@@ -77,17 +79,6 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return StreamBuilder<MeContrataVAGASRecord>(
       stream: MeContrataVAGASRecord.getDocument(widget.editarVaga!),
       builder: (context, snapshot) {
@@ -144,6 +135,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                           perfil:
                               valueOrDefault(currentUserDocument?.perfil, ''),
                           iconLeft: () async {
+                            logFirebaseEvent(
+                                'EDITAR_VAGA_Container_0c7baf40_CALLBACK');
                             var confirmDialogResponse = await showDialog<bool>(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -175,6 +168,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                             }
                           },
                           iconRight: () async {
+                            logFirebaseEvent(
+                                'EDITAR_VAGA_Container_0c7baf40_CALLBACK');
                             if (_model.modoExibicao == true) {
                               setState(() {
                                 _model.modoExibicao = false;
@@ -235,14 +230,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                             ),
                                           ),
                                           Text(
-                                            _model.nomeEmpresaController.text,
+                                            _model
+                                                .nomeEmpresaTextController.text,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
+                                                .bodyLarge
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                           Text(
-                                            _model.nomeVagaController.text,
+                                            _model.nomeVagaTextController.text,
                                             style: FlutterFlowTheme.of(context)
-                                                .headlineLarge,
+                                                .headlineLarge
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -257,8 +261,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                 size: 16.0,
                                               ),
                                               Text(
-                                                _model
-                                                    .localidadeController.text,
+                                                _model.localidadeTextController
+                                                    .text,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .labelMedium
@@ -267,6 +271,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ].divide(SizedBox(width: 4.0)),
@@ -308,6 +313,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .accent2,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                   Text(
@@ -324,6 +330,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondary,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ].divide(SizedBox(height: 8.0)),
@@ -341,11 +348,13 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .accent2,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                   Text(
                                                     valueOrDefault<String>(
-                                                      _model.salarioController
+                                                      _model
+                                                          .salarioTextController
                                                           .text,
                                                       'A combinar',
                                                     ),
@@ -357,6 +366,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondary,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ].divide(SizedBox(height: 8.0)),
@@ -374,6 +384,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .accent2,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                   Text(
@@ -390,6 +401,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondary,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ].divide(SizedBox(height: 8.0)),
@@ -423,6 +435,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondary,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                                 Row(
@@ -432,12 +445,18 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                     Flexible(
                                                       child: Text(
                                                         _model
-                                                            .descriptionController1
+                                                            .descriptionTextController1
                                                             .text,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                       ),
                                                     ),
                                                   ],
@@ -468,6 +487,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondary,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                                 Row(
@@ -485,11 +505,17 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     0.0),
                                                         child: Text(
                                                           _model
-                                                              .descriptionController2
+                                                              .descriptionTextController2
                                                               .text,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyMedium,
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                         ),
                                                       ),
                                                     ),
@@ -521,6 +547,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondary,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                                 Container(
@@ -560,14 +587,26 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                 '•',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                               Flexible(
                                                                 child: Text(
                                                                   listaBenficiosItem,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMedium,
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
                                                                 ),
                                                               ),
                                                             ].divide(SizedBox(
@@ -609,6 +648,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                     .override(
                                                       fontFamily: 'Inter',
                                                       color: Colors.white,
+                                                      letterSpacing: 0.0,
                                                     ),
                                             elevation: 2.0,
                                             borderSide: BorderSide(
@@ -645,6 +685,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'EDITAR_VAGA_PAGE_logo_ON_TAP');
                                                 final selectedMedia =
                                                     await selectMedia(
                                                   maxWidth: 1080.00,
@@ -803,24 +845,33 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                             ),
                                             TextFormField(
-                                              controller:
-                                                  _model.nomeVagaController ??=
-                                                      TextEditingController(
+                                              controller: _model
+                                                      .nomeVagaTextController ??=
+                                                  TextEditingController(
                                                 text:
                                                     editarVagaMeContrataVAGASRecord
                                                         .nomeVaga,
                                               ),
                                               focusNode:
                                                   _model.nomeVagaFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Vaga',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelLarge,
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -888,14 +939,18 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               validator: _model
-                                                  .nomeVagaControllerValidator
+                                                  .nomeVagaTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                             TextFormField(
                                               controller: _model
-                                                      .nomeEmpresaController ??=
+                                                      .nomeEmpresaTextController ??=
                                                   TextEditingController(
                                                 text:
                                                     editarVagaMeContrataVAGASRecord
@@ -903,17 +958,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               focusNode:
                                                   _model.nomeEmpresaFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Nome da empresa',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelLarge
                                                         .override(
                                                           fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                         ),
@@ -984,14 +1045,18 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               validator: _model
-                                                  .nomeEmpresaControllerValidator
+                                                  .nomeEmpresaTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                             TextFormField(
                                               controller: _model
-                                                      .localidadeController ??=
+                                                      .localidadeTextController ??=
                                                   TextEditingController(
                                                 text:
                                                     editarVagaMeContrataVAGASRecord
@@ -999,17 +1064,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               focusNode:
                                                   _model.localidadeFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Cidade ',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelLarge
                                                         .override(
                                                           fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                         ),
@@ -1080,32 +1151,45 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               maxLines: 3,
                                               minLines: 1,
                                               validator: _model
-                                                  .localidadeControllerValidator
+                                                  .localidadeTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                             TextFormField(
-                                              controller:
-                                                  _model.salarioController ??=
-                                                      TextEditingController(
+                                              controller: _model
+                                                      .salarioTextController ??=
+                                                  TextEditingController(
                                                 text:
                                                     editarVagaMeContrataVAGASRecord
                                                         .salario,
                                               ),
                                               focusNode:
                                                   _model.salarioFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Salário',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelLarge,
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -1173,9 +1257,13 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               validator: _model
-                                                  .salarioControllerValidator
+                                                  .salarioTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                             FlutterFlowDropDown<String>(
@@ -1201,7 +1289,11 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               height: 50.0,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               hintText:
                                                   'Experiencia necessária',
                                               icon: Icon(
@@ -1251,7 +1343,11 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               height: 50.0,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               hintText: 'Tipo de contrato',
                                               icon: Icon(
                                                 Icons
@@ -1298,7 +1394,11 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               height: 50.0,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               hintText: 'Regime do contrato',
                                               icon: Icon(
                                                 Icons
@@ -1370,6 +1470,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -1392,6 +1494,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_Proximo_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               2;
@@ -1427,6 +1531,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -1447,6 +1553,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_Proximo_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               3;
@@ -1482,6 +1590,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .grdContrata190deg,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -1528,6 +1638,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                     ],
@@ -1539,7 +1651,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       Expanded(
                                                         child: TextFormField(
                                                           controller: _model
-                                                                  .descriptionController1 ??=
+                                                                  .descriptionTextController1 ??=
                                                               TextEditingController(
                                                             text:
                                                                 editarVagaMeContrataVAGASRecord
@@ -1547,6 +1659,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           ),
                                                           focusNode: _model
                                                               .descriptionFocusNode1,
+                                                          autofocus: false,
                                                           obscureText: false,
                                                           decoration:
                                                               InputDecoration(
@@ -1555,11 +1668,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                             labelStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium,
+                                                                    .labelMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                             hintStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                             enabledBorder:
                                                                 OutlineInputBorder(
                                                               borderSide:
@@ -1643,11 +1768,17 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                           maxLines: 20,
                                                           minLines: 4,
                                                           validator: _model
-                                                              .descriptionController1Validator
+                                                              .descriptionTextController1Validator
                                                               .asValidator(
                                                                   context),
                                                         ),
@@ -1685,6 +1816,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                       Row(
@@ -1709,6 +1842,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .accent1,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(
@@ -1723,13 +1858,14 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       Expanded(
                                                         child: TextFormField(
                                                           controller: _model
-                                                                  .descriptionController2 ??=
+                                                                  .descriptionTextController2 ??=
                                                               TextEditingController(
                                                             text: editarVagaMeContrataVAGASRecord
                                                                 .qualificacao,
                                                           ),
                                                           focusNode: _model
                                                               .descriptionFocusNode2,
+                                                          autofocus: false,
                                                           obscureText: false,
                                                           decoration:
                                                               InputDecoration(
@@ -1738,11 +1874,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                             labelStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium,
+                                                                    .labelMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                             hintStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                             enabledBorder:
                                                                 OutlineInputBorder(
                                                               borderSide:
@@ -1826,11 +1974,17 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                           maxLines: 20,
                                                           minLines: 4,
                                                           validator: _model
-                                                              .descriptionController2Validator
+                                                              .descriptionTextController2Validator
                                                               .asValidator(
                                                                   context),
                                                         ),
@@ -1858,6 +2012,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondary,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                   Wrap(
@@ -1912,17 +2067,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.planodeSaudeValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_PlanodeSaude_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Plano de Saúde');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_PlanodeSaude_ON_TOGGLE_OFF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Plano de Saúde');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -1944,6 +2109,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -1985,17 +2152,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.planoOdontolgicoValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_PlanoOdontolgico_ON_TOGGLE_O');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Plano Odontológico');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_PlanoOdontolgico_ON_TOGGLE_O');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Plano Odontológico');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2017,6 +2194,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2058,17 +2237,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.valeAlimentaoValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Alimentao_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Vale-Alimentação');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Alimentao_ON_TOGGLE_OFF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Vale-Alimentação');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2090,6 +2279,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2131,17 +2322,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.valeRefeioValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Refeio_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Vale-Refeição');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Refeio_ON_TOGGLE_OFF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Vale-Refeição');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2163,6 +2364,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2204,17 +2407,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.valeTransporteValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Transporte_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Vale-Transporte');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Vale-Transporte_ON_TOGGLE_OF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Vale-Transporte');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2236,6 +2449,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2277,17 +2492,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.participaonosLucrosPLRValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_ParticipaonosLucrosPLR_ON_TO');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Participação nos Lucros (PLR)');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_ParticipaonosLucrosPLR_ON_TO');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Participação nos Lucros (PLR)');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2309,6 +2534,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2350,17 +2577,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.auxlioEducaoValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Auxlio-Educao_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Auxílio-Educação');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Auxlio-Educao_ON_TOGGLE_OFF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Auxílio-Educação');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2382,6 +2619,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2423,17 +2662,27 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     _model.auxlioCrecheValue =
                                                                         newValue!);
                                                                 if (newValue!) {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Auxlio-Creche_ON_TOGGLE_ON');
                                                                   setState(() {
                                                                     _model.addToBeneficios(
                                                                         'Auxílio-Creche');
                                                                   });
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'EDITAR_VAGA_Auxlio-Creche_ON_TOGGLE_OFF');
                                                                   setState(() {
                                                                     _model.removeFromBeneficios(
                                                                         'Auxílio-Creche');
                                                                   });
                                                                 }
                                                               },
+                                                              side: BorderSide(
+                                                                width: 2,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
                                                               activeColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -2455,6 +2704,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -2491,6 +2742,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_Anterior_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               1;
@@ -2526,6 +2779,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -2565,6 +2820,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -2587,6 +2844,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_Anterior_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               3;
@@ -2623,6 +2882,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -2657,7 +2918,11 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                     'Essa vaga ficará disponivel até quando?',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .titleMedium,
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                   ),
                                                   Row(
                                                     mainAxisSize:
@@ -2676,6 +2941,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       ),
                                                       FFButtonWidget(
                                                         onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'EDITAR_VAGA_MARCAR_VENCIMENTO_BTN_ON_TAP');
                                                           final _datePickedDate =
                                                               await showDatePicker(
                                                             context: context,
@@ -2750,6 +3017,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondary,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                           elevation: 3.0,
                                                           borderSide:
@@ -2786,7 +3055,13 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                       ),
                                                       Switch.adaptive(
                                                         value: _model
@@ -2848,6 +3123,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                             true
                                                                         ? 14.0
                                                                         : 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                       ),
@@ -2857,7 +3134,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       true)
                                                     TextFormField(
                                                       controller: _model
-                                                              .urlController ??=
+                                                              .urlTextController ??=
                                                           TextEditingController(
                                                         text:
                                                             editarVagaMeContrataVAGASRecord
@@ -2865,6 +3142,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       ),
                                                       focusNode:
                                                           _model.urlFocusNode,
+                                                      autofocus: false,
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -2873,11 +3151,23 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                         enabledBorder:
                                                             UnderlineInputBorder(
                                                           borderSide:
@@ -2959,12 +3249,15 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           ),
                                                         ),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyLarge
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                       validator: _model
-                                                          .urlControllerValidator
+                                                          .urlTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                 ].divide(
@@ -2975,6 +3268,20 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                               decoration: BoxDecoration(),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'EDITAR_VAGA_SALVAR_ALTERAÇÕES_BTN_ON_TAP');
+                                                  if (_model.uploadedFileUrl !=
+                                                          null &&
+                                                      _model.uploadedFileUrl !=
+                                                          '') {
+                                                    await FirebaseStorage
+                                                        .instance
+                                                        .refFromURL(
+                                                            editarVagaMeContrataVAGASRecord
+                                                                .logoEmpresa)
+                                                        .delete();
+                                                  }
+
                                                   await widget.editarVaga!
                                                       .update({
                                                     ...createMeContrataVAGASRecordData(
@@ -2988,7 +3295,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           : editarVagaMeContrataVAGASRecord
                                                               .logoEmpresa,
                                                       nomeEmpresa: _model
-                                                          .nomeEmpresaController
+                                                          .nomeEmpresaTextController
                                                           .text,
                                                       nomeVaga:
                                                           editarVagaMeContrataVAGASRecord
@@ -2998,24 +3305,25 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       regimeCLTorCNPJ: _model
                                                           .dropDownRegimeValue,
                                                       localidade: _model
-                                                          .localidadeController
+                                                          .localidadeTextController
                                                           .text,
                                                       salario: _model
-                                                          .localidadeController
+                                                          .localidadeTextController
                                                           .text,
                                                       experiencia: _model
                                                           .dropDownExperienciaValue,
                                                       descricao: _model
-                                                          .descriptionController1
+                                                          .descriptionTextController1
                                                           .text,
                                                       qualificacao: _model
-                                                          .descriptionController2
+                                                          .descriptionTextController2
                                                           .text,
                                                       validade:
                                                           _model.datePicked,
                                                       status: 'Ativo',
                                                       uRLexterno: _model
-                                                          .urlController.text,
+                                                          .urlTextController
+                                                          .text,
                                                     ),
                                                     ...mapToFirestore(
                                                       {
@@ -3069,6 +3377,7 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                           .override(
                                                             fontFamily: 'Inter',
                                                             color: Colors.white,
+                                                            letterSpacing: 0.0,
                                                           ),
                                                   elevation: 2.0,
                                                   borderSide: BorderSide(
@@ -3108,6 +3417,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_primeira_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               1;
@@ -3143,6 +3454,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -3163,6 +3476,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'EDITAR_VAGA_PAGE_Anterior_ON_TAP');
                                                         setState(() {
                                                           _model.etapaCadastro =
                                                               1;
@@ -3198,6 +3513,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -3237,6 +3554,8 @@ class _EditarVagaWidgetState extends State<EditarVagaWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,

@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +28,8 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
     super.initState();
     _model = createModel(context, () => ValidarEmailModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ValidarEmail'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -41,24 +42,13 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
@@ -73,6 +63,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('VALIDAR_EMAIL_PAGE_arrowBack_ICN_ON_TAP');
               context.pop();
             },
           ),
@@ -81,6 +72,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
             style: FlutterFlowTheme.of(context).headlineLarge.override(
                   fontFamily: 'Inter',
                   color: FlutterFlowTheme.of(context).secondaryText,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: [],
@@ -91,7 +83,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Material(
             color: Colors.transparent,
-            elevation: 2.0,
+            elevation: 1.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -138,11 +130,15 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                           children: [
                             Text(
                               'Por favor, valide seu email',
-                              style: FlutterFlowTheme.of(context).headlineLarge,
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                             RichText(
-                              textScaleFactor:
-                                  MediaQuery.of(context).textScaleFactor,
+                              textScaler: MediaQuery.of(context).textScaler,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
@@ -158,6 +154,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                   ),
@@ -167,7 +164,12 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                                     style: TextStyle(),
                                   )
                                 ],
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -184,6 +186,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                                       fontFamily: 'Inter',
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                     ),
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -260,8 +263,9 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                                     fontFamily: 'Inter',
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
+                                    letterSpacing: 0.0,
                                   ),
-                              elevation: 3.0,
+                              elevation: 1.0,
                               borderSide: BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
@@ -270,8 +274,7 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -286,11 +289,17 @@ class _ValidarEmailWidgetState extends State<ValidarEmailWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
+                                        letterSpacing: 0.0,
                                         decoration: TextDecoration.underline,
                                       ),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                             textAlign: TextAlign.center,
                           ),

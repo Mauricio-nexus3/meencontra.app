@@ -42,12 +42,18 @@ class NotificacaoRecord extends FirestoreRecord {
   String get destino => _destino ?? '';
   bool hasDestino() => _destino != null;
 
+  // "versao" field.
+  String? _versao;
+  String get versao => _versao ?? '';
+  bool hasVersao() => _versao != null;
+
   void _initializeFields() {
     _titulo = snapshotData['titulo'] as String?;
     _descricao = snapshotData['descricao'] as String?;
     _dataCriacao = snapshotData['data_criacao'] as DateTime?;
     _assunto = snapshotData['assunto'] as String?;
     _destino = snapshotData['destino'] as String?;
+    _versao = snapshotData['versao'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -90,6 +96,7 @@ Map<String, dynamic> createNotificacaoRecordData({
   DateTime? dataCriacao,
   String? assunto,
   String? destino,
+  String? versao,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -98,6 +105,7 @@ Map<String, dynamic> createNotificacaoRecordData({
       'data_criacao': dataCriacao,
       'assunto': assunto,
       'destino': destino,
+      'versao': versao,
     }.withoutNulls,
   );
 
@@ -113,12 +121,19 @@ class NotificacaoRecordDocumentEquality implements Equality<NotificacaoRecord> {
         e1?.descricao == e2?.descricao &&
         e1?.dataCriacao == e2?.dataCriacao &&
         e1?.assunto == e2?.assunto &&
-        e1?.destino == e2?.destino;
+        e1?.destino == e2?.destino &&
+        e1?.versao == e2?.versao;
   }
 
   @override
-  int hash(NotificacaoRecord? e) => const ListEquality()
-      .hash([e?.titulo, e?.descricao, e?.dataCriacao, e?.assunto, e?.destino]);
+  int hash(NotificacaoRecord? e) => const ListEquality().hash([
+        e?.titulo,
+        e?.descricao,
+        e?.dataCriacao,
+        e?.assunto,
+        e?.destino,
+        e?.versao
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is NotificacaoRecord;

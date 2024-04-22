@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'politica_privacidade_model.dart';
@@ -28,6 +27,8 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
     super.initState();
     _model = createModel(context, () => PoliticaPrivacidadeModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'PoliticaPrivacidade'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -40,17 +41,6 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -72,6 +62,7 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('POLITICA_PRIVACIDADE_arrowBack_ICN_ON_TA');
               context.pop();
             },
           ),
@@ -81,6 +72,7 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                   fontFamily: 'Inter',
                   color: FlutterFlowTheme.of(context).secondaryText,
                   fontSize: 20.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: [],
@@ -117,12 +109,18 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'A sua privacidade é de extrema importância para nós. É política do meencontra App respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site meencontra.app e outros sites que possuímos e operamos. Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. As informações que coletamos são o seu nome, telefone e endereço de e-mail. Reforçamos que as senhas fornecidas são criptografadas em nosso banco de dados e não temos acesso a elas. Caso você esqueça sua senha, é possível redefini-la para recuperar o acesso à sua conta.\n\nAo utilizar nosso aplicativo, você consente com a coleta e uso das informações fornecidas, de acordo com esta política de privacidade. Ressaltamos que você tem o direito de retirar o seu consentimento a qualquer momento, mediante solicitação por e-mail para sac@meencontra.app. No entanto, observe que isso pode implicar na impossibilidade de continuar a fornecer alguns dos serviços desejados.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
@@ -134,13 +132,19 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   .override(
                                     fontFamily: 'Inter',
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
                           ),
                           Text(
                             'O login no aplicativo é necessário para garantir a segurança e autenticidade das interações dos usuários, bem como para permitir que eles se tornem responsáveis por estabelecimentos cadastrados. Através do login, os usuários podem gerenciar seus perfis e a responsabilidade pelos estabelecimentos listados.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
@@ -152,13 +156,19 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   .override(
                                     fontFamily: 'Inter',
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
                           ),
                           Text(
                             'Entendemos a importância de manter a integridade das informações sobre os estabelecimentos listados em nossa plataforma. Os usuários têm controle total sobre os estabelecimentos cadastrados, podendo editá-los, remover informações ou encerrar sua responsabilidade por eles a qualquer momento.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Dados Tratados por terceiros e Finalidade do Tratamento',
@@ -168,20 +178,30 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'O aplicativo usa serviços de terceiros que podem coletar informações usadas para identificá-lo, como:',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             '• WhatsApp Troca de mensagens\nStripe Plataforma de pagamento de anuidade do anuncio comercial.\nFacebook Finalizar o cadastro no aplicativo através do login social com Facebook\nFirebase\nOnde seus dados serão armazenados , Monitorar o desempenho e a\nestabilidade e enviar notificações para os usuários.\nGoogle Cloud\nPlataform\nFinalizar o cadastro no aplicativo através do login social com Google\nGoogle Maps\nAtivar geolocalização no app, para organizar o conteúdo do app ou definir o\nlocal de eventual entrega contratada através do serviço do app\nGoogle Play\nServices\nCriação e funcionamento do app',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -192,11 +212,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_w4he68');
                                       await launchURL(
                                           'https://www.whatsapp.com/legal/terms-of-service?lang=pt_BR');
                                     },
@@ -206,12 +229,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -222,11 +249,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_5zlyne');
                                       await launchURL(
                                           'https://www.mercadopago.com.br/');
                                     },
@@ -237,12 +267,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -253,11 +287,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_mqanz2');
                                       await launchURL(
                                           'https://www.facebook.com/privacy/explanation&sa=D&source=editors&ust=1668114069942591&usg=AOvVaw2vYPHymRopyUQn895fmtSj');
                                     },
@@ -268,12 +305,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -284,11 +325,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_ai920q');
                                       await launchURL(
                                           'https://firebase.google.com/support/privacy/&sa=D&source=editors&ust=1668114069943858&usg=AOvVaw2nSFsO2yKdbcPwFh_vj3RT');
                                     },
@@ -299,12 +343,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -315,11 +363,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_iunmmj');
                                       await launchURL(
                                           'https://policies.google.com/privacy?hl%3Dpt-BR&sa=D&source=editors&ust=1668114069945066&usg=AOvVaw2ELTDCsK_oAG97wIf_ANDG');
                                     },
@@ -330,12 +381,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -346,11 +401,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_4anwba');
                                       await launchURL(
                                           'https://www.google.com/intl/pt_US/help/terms_maps/&sa=D&source=editors&ust=1668114069945906&usg=AOvVaw2SdQYx2jrpLPKOxrXslQHY');
                                     },
@@ -361,12 +419,16 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -377,11 +439,14 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                   mouseCursor: SystemMouseCursors.click,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
+                                      logFirebaseEvent(
+                                          'POLITICA_PRIVACIDADE_RichTextSpan_u1nobe');
                                       await launchURL(
                                           'https://policies.google.com/privacy?hl%3Dpt-BR&sa=D&source=editors&ust=1668114069946722&usg=AOvVaw22tVZzn8Z0is4JiXg9Eb9x');
                                     },
@@ -391,12 +456,22 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                   style: TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Text(
                             'Importante ressaltar que, sempre que você usar os nossos Serviços, coletamos dados de registro. Esses dados de registro podem incluir informações como identificadores online, identificadores de cookies, endereços de protocolo de internet, identificadores de dispositivos, identificadores de cliente, endereço de ip, nome do dispositivo, versão do sistema operacional, configuração do aplicativo ao utilizar os nossos serviços, a hora e a data do seu uso do serviço e outras estatísticas.\n\nUma vez que os serviços de hospedagem e servidores podem não estar localizados no território brasileiro. Ressaltamos que sempre que transferirmos informações pessoais para outras jurisdições, garantimos que tais informações sejam transferidas de acordo com esta política de privacidade e conforme permitido pela legislação de proteção de dados aplicável.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Compartilhamento dos Dados',
@@ -405,6 +480,7 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
@@ -424,12 +500,18 @@ class _PoliticaPrivacidadeWidgetState extends State<PoliticaPrivacidadeWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'É muito importante que você tenha total controle dos dados pessoais que compartilha conosco. Observe que, para ajudar a proteger sua privacidade e manter a segurança, tomamos medidas para verificar sua identidade antes de conceder acesso a suas informações pessoais ou cumprir exclusão, portabilidade ou outras solicitações relacionadas.\n\nCaso você tenha alguma dúvida sobre como lidamos com seus dados pessoais, ou deseje realizar qualquer alteração nos seus dados cadastrados, basta acessar a aba \"Perfil\" em nosso aplicativo e selecionar \"Editar Perfil\" para atualizar suas informações. Além disso, você pode optar por excluir sua conta no aplicativo, juntamente com todos os dados coletados, acessando a aba \"Perfil\", selecionando \"Configurações de Conta\" e, em seguida, a aba \"Excluir Conta\".\n\nEsperamos que estas informações estejam esclarecedoras. Caso tenha alguma dúvida ou precise de esclarecimentos adicionais, sinta-se à vontade para entrar em contato conosco pelo e-mail sac@meencontra.app.\n\nEsta política é efetiva a partir de 01 de Outubro de 2023.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ]
                             .divide(SizedBox(height: 16.0))

@@ -6,7 +6,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'validar_email_widget.dart' show ValidarEmailWidget;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +18,6 @@ class ValidarEmailModel extends FlutterFlowModel<ValidarEmailWidget> {
   TextEditingController? pinCodeController;
   String? Function(BuildContext, String?)? pinCodeControllerValidator;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     pinCodeController = TextEditingController();
@@ -31,8 +28,4 @@ class ValidarEmailModel extends FlutterFlowModel<ValidarEmailWidget> {
     unfocusNode.dispose();
     pinCodeController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

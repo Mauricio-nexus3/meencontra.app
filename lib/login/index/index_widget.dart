@@ -1,12 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/login/login_criar_conta_componente/login_criar_conta_componente_widget.dart';
-import '/login/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
+import '/login/componentes/login_criar_conta_componente/login_criar_conta_componente_widget.dart';
+import '/login/componentes/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +30,10 @@ class _IndexWidgetState extends State<IndexWidget> {
     super.initState();
     _model = createModel(context, () => IndexModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Index'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('INDEX_PAGE_Index_ON_INIT_STATE');
       if (isWeb == true) {
         // versão web
         setState(() {
@@ -58,24 +59,12 @@ class _IndexWidgetState extends State<IndexWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Column(
@@ -163,6 +152,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                       Text(
@@ -178,6 +169,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                       'Inter',
                                                                   color: Color(
                                                                       0xFFBDBCC2),
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                     ].divide(
@@ -263,6 +256,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                   children: [
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_PRÓXIMO_BTN_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'meinforma';
@@ -300,6 +295,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 2.0,
                                                         borderSide: BorderSide(
@@ -322,6 +319,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_BtnLogar_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'login';
@@ -348,6 +347,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .cinzaEscuro,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -448,6 +449,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                       Text(
@@ -463,6 +466,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                       'Inter',
                                                                   color: Color(
                                                                       0xFFBDBCC2),
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                     ].divide(
@@ -537,6 +542,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                   children: [
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_PRÓXIMO_BTN_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'mecontrata';
@@ -574,6 +581,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 2.0,
                                                         borderSide: BorderSide(
@@ -596,6 +605,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_BtnLogar_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'login';
@@ -622,6 +633,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .cinzaEscuro,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -722,6 +735,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                       Text(
@@ -737,6 +752,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                       'Inter',
                                                                   color: Color(
                                                                       0xFFBDBCC2),
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                     ].divide(
@@ -811,6 +828,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                   children: [
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_PRÓXIMO_BTN_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'medivirta';
@@ -848,6 +867,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 2.0,
                                                         borderSide: BorderSide(
@@ -870,6 +891,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_BtnLogar_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'login';
@@ -896,6 +919,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .cinzaEscuro,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -996,6 +1021,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                       Text(
@@ -1011,6 +1038,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                       'Inter',
                                                                   color: Color(
                                                                       0xFFBDBCC2),
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                       ),
                                                     ].divide(
@@ -1085,6 +1114,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                   children: [
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_COMEÇAR_BTN_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'login';
@@ -1122,6 +1153,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                         elevation: 2.0,
                                                         borderSide: BorderSide(
@@ -1144,6 +1177,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'INDEX_PAGE_BtnLogar_ON_TAP');
                                                         setState(() {
                                                           _model.onboarding =
                                                               'login';
@@ -1170,6 +1205,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .cinzaEscuro,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
@@ -1309,6 +1346,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -1329,6 +1368,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                               FFButtonWidget(
                                                             onPressed:
                                                                 () async {
+                                                              logFirebaseEvent(
+                                                                  'INDEX_PAGE_COMEÇAR_BTN_ON_TAP');
                                                               if (MediaQuery.sizeOf(
                                                                           context)
                                                                       .width >
@@ -1362,7 +1403,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                           child:
                                                                               LoginCriarContaComponenteWidget(
                                                                             login:
-                                                                                'Login',
+                                                                                'CriarConta',
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1440,6 +1481,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                             'Inter',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                               elevation: 2.0,
                                                               borderSide:
@@ -1468,6 +1511,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'INDEX_PAGE_BtnLogar_ON_TAP');
                                                               await showDialog(
                                                                 context:
                                                                     context,
@@ -1529,6 +1574,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                             'Inter',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .accent4,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                         decoration:
                                                                             TextDecoration.underline,
                                                                       ),
@@ -1619,6 +1666,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ],
@@ -1639,6 +1688,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                               FFButtonWidget(
                                                             onPressed:
                                                                 () async {
+                                                              logFirebaseEvent(
+                                                                  'INDEX_PAGE_COMEÇAR_BTN_ON_TAP');
                                                               if (MediaQuery.sizeOf(
                                                                           context)
                                                                       .width >
@@ -1672,7 +1723,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                           child:
                                                                               LoginCriarContaComponenteWidget(
                                                                             login:
-                                                                                'Login',
+                                                                                'CriarConta',
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1705,9 +1756,9 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                           padding:
                                                                               MediaQuery.viewInsetsOf(context),
                                                                           child:
-                                                                              UsarDeslogadoUsoExclusivoCompWidget(
-                                                                            usoExclusivo:
-                                                                                false,
+                                                                              LoginCriarContaComponenteWidget(
+                                                                            login:
+                                                                                'CriarConta',
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1750,6 +1801,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                             'Inter',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                               elevation: 2.0,
                                                               borderSide:
@@ -1775,6 +1828,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'INDEX_PAGE_BtnLogar_ON_TAP');
                                                             await showModalBottomSheet(
                                                               isScrollControlled:
                                                                   true,
@@ -1834,6 +1889,8 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                           'Inter',
                                                                       color: Color(
                                                                           0xFFBDBCC2),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ),

@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'termos_de_uso_model.dart';
@@ -26,6 +25,7 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
     super.initState();
     _model = createModel(context, () => TermosDeUsoModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'TermosDeUso'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -38,17 +38,6 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -70,6 +59,7 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
               size: 24.0,
             ),
             onPressed: () async {
+              logFirebaseEvent('TERMOS_DE_USO_PAGE_arrowBack_ICN_ON_TAP');
               context.pop();
             },
           ),
@@ -79,6 +69,7 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                   fontFamily: 'Inter',
                   color: FlutterFlowTheme.of(context).secondaryText,
                   fontSize: 20.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: [],
@@ -115,12 +106,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'É concedida permissão para baixar temporariamente uma cópia dos materiais (informações ou software) no site meencontra.App, apenas para visualização transitória pessoal e não comercial. Esta é a concessão de uma licença, não uma transferência de título, e sob esta licença, você não pode:\n\n- Modificar ou copiar os materiais;\n- Usar os materiais para qualquer finalidade comercial ou para exibição pública (comercial ou não comercial);\n- Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site meencontra.App;\n- Remover quaisquer direitos autorais ou outras notações de propriedade dos materiais; ou\n- Transferir os materiais para outra pessoa ou \"espelhar\" os materiais em qualquer outro servidor.\n\nEsta licença será automaticamente rescindida se você violar alguma dessas restrições e poderá ser rescindida por meencontra.App a qualquer momento. Ao encerrar a visualização desses materiais ou após o término desta licença, você deve apagar todos os materiais baixados em sua posse, seja em formato eletrônico ou impresso.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Licença de Uso',
@@ -130,20 +127,36 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'É concedida permissão para baixar temporariamente uma cópia dos materiais (informações ou software) no site meencontra.app, apenas para visualização transitória pessoal e não comercial. Esta é a concessão de uma licença, não uma transferência de título, e sob esta licença, você não pode:',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             '- Modificar ou copiar os materiais;\n- Usar os materiais para qualquer finalidade comercial ou para exibição pública (comercial ou não comercial);\n- Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site meencontra.app;\n- Remover quaisquer direitos autorais ou outras notações de propriedade dos materiais; ou\n- Transferir os materiais para outra pessoa ou \"espelhar\" os materiais em qualquer outro servidor.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Esta licença será automaticamente rescindida se você violar alguma dessas restrições e poderá ser rescindida por meencontra.app a qualquer momento. Ao encerrar a visualização desses materiais ou após o término desta licença, você deve apagar todos os materiais baixados em sua posse, seja em formato eletrônico ou impresso.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Isenção de Responsabilidade',
@@ -152,6 +165,7 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
@@ -180,12 +194,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'Em nenhum caso o meencontra app ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro, ou devido a interrupção dos negócios) decorrentes do uso ou da incapacidade de usar os materiais em MeEncontraApp, mesmo que MeEncontraApp ou um representante autorizado da MeEncontraApp tenha sido notificado oralmente ou por escrito da possibilidade de tais danos. Como algumas jurisdições não permitem limitações em garantias implícitas ou limitações de responsabilidade por danos consequentes ou incidentais, essas limitações podem não se aplicar a você.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Precisão dos Materiais',
@@ -194,12 +214,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'Os materiais exibidos no site da meencontra.app e por seus clientes/terceiros podem incluir erros técnicos, tipográficos ou fotográficos. meencontra.app não garante que qualquer material de clientes/terceiros em seu site seja preciso, completo ou atual. MeEncontraApp pode fazer alterações nos materiais contidos em seu site a qualquer momento, sem aviso prévio. No entanto, MeEncontraApp não se compromete a atualizar os materiais de clientes/terceiros.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Links para Terceiros',
@@ -208,12 +234,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'O meencontra.app pode não ter analisado todos os sites vinculados ao seu site e não é responsável pelo conteúdo de nenhum site vinculado. A inclusão de qualquer link não implica endosso por meencontra.app do site. O uso de qualquer site vinculado é por conta e risco do usuário.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Modificações',
@@ -222,12 +254,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'O meencontra.app pode revisar estes termos de serviço do site a qualquer momento, sem aviso prévio. Ao usar este site, você concorda em ficar vinculado à versão atual desses termos de serviço.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Text(
                             'Lei Aplicável e Foro',
@@ -236,12 +274,18 @@ class _TermosDeUsoWidgetState extends State<TermosDeUsoWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
                             'Estes termos e condições são regidos e interpretados de acordo com as leis do meencontra.app, e para dirimir eventuais questões oriundas da interpretação deste documento, as partes elegem o Foro da Comarca de Guaíba como competente, com renúncia de qualquer outro, por mais privilegiado que seja. Você se submete irrevogavelmente à jurisdição exclusiva dos tribunais da Comarca de Guaíba.',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ]
                             .divide(SizedBox(height: 24.0))

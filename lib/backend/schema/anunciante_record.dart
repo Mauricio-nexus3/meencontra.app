@@ -205,6 +205,21 @@ class AnuncianteRecord extends FirestoreRecord {
   String get formatoAnuncio => _formatoAnuncio ?? '';
   bool hasFormatoAnuncio() => _formatoAnuncio != null;
 
+  // "temCarrinho" field.
+  bool? _temCarrinho;
+  bool get temCarrinho => _temCarrinho ?? false;
+  bool hasTemCarrinho() => _temCarrinho != null;
+
+  // "visualizacaoPagina" field.
+  double? _visualizacaoPagina;
+  double get visualizacaoPagina => _visualizacaoPagina ?? 0.0;
+  bool hasVisualizacaoPagina() => _visualizacaoPagina != null;
+
+  // "CadastradoPor" field.
+  String? _cadastradoPor;
+  String get cadastradoPor => _cadastradoPor ?? '';
+  bool hasCadastradoPor() => _cadastradoPor != null;
+
   void _initializeFields() {
     _logo = snapshotData['Logo'] as String?;
     _nomeFantasia = snapshotData['NomeFantasia'] as String?;
@@ -243,6 +258,10 @@ class AnuncianteRecord extends FirestoreRecord {
     _templeteLayout = snapshotData['templeteLayout'] as String?;
     _capa = snapshotData['Capa'] as String?;
     _formatoAnuncio = snapshotData['formatoAnuncio'] as String?;
+    _temCarrinho = snapshotData['temCarrinho'] as bool?;
+    _visualizacaoPagina =
+        castToType<double>(snapshotData['visualizacaoPagina']);
+    _cadastradoPor = snapshotData['CadastradoPor'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -348,6 +367,13 @@ class AnuncianteRecord extends FirestoreRecord {
           'templeteLayout': snapshot.data['templeteLayout'],
           'Capa': snapshot.data['Capa'],
           'formatoAnuncio': snapshot.data['formatoAnuncio'],
+          'temCarrinho': snapshot.data['temCarrinho'],
+          'visualizacaoPagina': convertAlgoliaParam(
+            snapshot.data['visualizacaoPagina'],
+            ParamType.double,
+            false,
+          ),
+          'CadastradoPor': snapshot.data['CadastradoPor'],
         },
         AnuncianteRecord.collection.doc(snapshot.objectID),
       );
@@ -420,6 +446,9 @@ Map<String, dynamic> createAnuncianteRecordData({
   String? templeteLayout,
   String? capa,
   String? formatoAnuncio,
+  bool? temCarrinho,
+  double? visualizacaoPagina,
+  String? cadastradoPor,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -459,6 +488,9 @@ Map<String, dynamic> createAnuncianteRecordData({
       'templeteLayout': templeteLayout,
       'Capa': capa,
       'formatoAnuncio': formatoAnuncio,
+      'temCarrinho': temCarrinho,
+      'visualizacaoPagina': visualizacaoPagina,
+      'CadastradoPor': cadastradoPor,
     }.withoutNulls,
   );
 
@@ -507,7 +539,10 @@ class AnuncianteRecordDocumentEquality implements Equality<AnuncianteRecord> {
         listEquality.equals(e1?.emailColaboradores, e2?.emailColaboradores) &&
         e1?.templeteLayout == e2?.templeteLayout &&
         e1?.capa == e2?.capa &&
-        e1?.formatoAnuncio == e2?.formatoAnuncio;
+        e1?.formatoAnuncio == e2?.formatoAnuncio &&
+        e1?.temCarrinho == e2?.temCarrinho &&
+        e1?.visualizacaoPagina == e2?.visualizacaoPagina &&
+        e1?.cadastradoPor == e2?.cadastradoPor;
   }
 
   @override
@@ -548,7 +583,10 @@ class AnuncianteRecordDocumentEquality implements Equality<AnuncianteRecord> {
         e?.emailColaboradores,
         e?.templeteLayout,
         e?.capa,
-        e?.formatoAnuncio
+        e?.formatoAnuncio,
+        e?.temCarrinho,
+        e?.visualizacaoPagina,
+        e?.cadastradoPor
       ]);
 
   @override

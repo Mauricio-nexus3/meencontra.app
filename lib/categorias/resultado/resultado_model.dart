@@ -9,7 +9,6 @@ import '/flutter_flow/request_manager.dart';
 import 'resultado_widget.dart' show ResultadoWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -35,8 +34,6 @@ class ResultadoModel extends FlutterFlowModel<ResultadoWidget> {
   void clearResultadoSubCacheKey(String? uniqueKey) =>
       _resultadoSubManager.clearRequest(uniqueKey);
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -48,8 +45,4 @@ class ResultadoModel extends FlutterFlowModel<ResultadoWidget> {
 
     clearResultadoSubCache();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

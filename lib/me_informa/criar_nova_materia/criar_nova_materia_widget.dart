@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
-import '/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -10,11 +9,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -44,26 +43,29 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
     super.initState();
     _model = createModel(context, () => CriarNovaMateriaModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CriarNovaMateria'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CRIAR_NOVA_MATERIA_CriarNovaMateria_ON_I');
       setState(() {
         _model.modoExibicao = false;
       });
     });
 
-    _model.descricaoFotoController ??= TextEditingController();
+    _model.descricaoFotoTextController ??= TextEditingController();
     _model.descricaoFotoFocusNode ??= FocusNode();
 
-    _model.creditosImgController ??= TextEditingController();
+    _model.creditosImgTextController ??= TextEditingController();
     _model.creditosImgFocusNode ??= FocusNode();
 
-    _model.escritoPorController ??= TextEditingController();
+    _model.escritoPorTextController ??= TextEditingController();
     _model.escritoPorFocusNode ??= FocusNode();
 
-    _model.tituloController ??= TextEditingController();
+    _model.tituloTextController ??= TextEditingController();
     _model.tituloFocusNode ??= FocusNode();
 
-    _model.conteudoController ??= TextEditingController();
+    _model.conteudoTextController ??= TextEditingController();
     _model.conteudoFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -78,24 +80,13 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -120,9 +111,13 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                           : FlutterFlowTheme.of(context).secondaryBackground,
                       perfil: valueOrDefault(currentUserDocument?.perfil, ''),
                       iconLeft: () async {
+                        logFirebaseEvent(
+                            'CRIAR_NOVA_MATERIA_Container_fm1w3izx_CA');
                         context.safePop();
                       },
                       iconRight: () async {
+                        logFirebaseEvent(
+                            'CRIAR_NOVA_MATERIA_Container_fm1w3izx_CA');
                         if (_model.modoExibicao == true) {
                           setState(() {
                             _model.modoExibicao = false;
@@ -223,9 +218,13 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${_model.descricaoFotoController.text}— Foto:${_model.creditosImgController.text}',
+                                        '${_model.descricaoFotoTextController.text}— Foto:${_model.creditosImgTextController.text}',
                                         style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ].divide(SizedBox(height: 16.0)),
                                   ),
@@ -253,6 +252,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                         .override(
                                           fontFamily: 'Inter',
                                           color: Color(0xFFB60924),
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                   Row(
@@ -261,10 +261,14 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                       Text(
                                         'Por ',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                       Text(
-                                        _model.escritoPorController.text,
+                                        _model.escritoPorTextController.text,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(
@@ -272,6 +276,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
@@ -296,6 +301,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                             .override(
                                               fontFamily: 'Inter',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                       Text(
@@ -305,6 +311,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                             .override(
                                               fontFamily: 'Inter',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                       Text(
@@ -319,21 +326,27 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                             .override(
                                               fontFamily: 'Inter',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
                                   ),
                                   Text(
-                                    _model.tituloController.text,
+                                    _model.tituloTextController.text,
                                     style: FlutterFlowTheme.of(context)
-                                        .headlineLarge,
+                                        .headlineLarge
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                   Text(
-                                    _model.conteudoController.text,
+                                    _model.conteudoTextController.text,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
@@ -365,7 +378,11 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               'Redação TVGO',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ].divide(SizedBox(width: 12.0)),
                                         ),
@@ -435,6 +452,8 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'CRIAR_NOVA_MATERIA_PAGE_uploadImg_ON_TAP');
                                       final selectedMedia = await selectMedia(
                                         maxWidth: 1600.00,
                                         maxHeight: 1200.00,
@@ -573,19 +592,28 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: TextFormField(
                                               controller: _model
-                                                  .descricaoFotoController,
+                                                  .descricaoFotoTextController,
                                               focusNode:
                                                   _model.descricaoFotoFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText:
                                                     'De uma descrição da imagem',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -641,29 +669,42 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               maxLines: 2,
                                               minLines: 1,
                                               validator: _model
-                                                  .descricaoFotoControllerValidator
+                                                  .descricaoFotoTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
                                           TextFormField(
-                                            controller:
-                                                _model.creditosImgController,
+                                            controller: _model
+                                                .creditosImgTextController,
                                             focusNode:
                                                 _model.creditosImgFocusNode,
+                                            autofocus: false,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText:
                                                   'De quem é os créditos da imagem?',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium,
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium,
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
@@ -713,11 +754,15 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                           12.0, 0.0, 0.0, 0.0),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
                                             maxLines: 5,
                                             minLines: 1,
                                             validator: _model
-                                                .creditosImgControllerValidator
+                                                .creditosImgTextControllerValidator
                                                 .asValidator(context),
                                           ),
                                         ].divide(SizedBox(height: 16.0)),
@@ -762,7 +807,11 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                       width: double.infinity,
                                       height: 50.0,
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintText: 'Escolha uma categoria',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
@@ -784,16 +833,26 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                       isMultiSelect: false,
                                     ),
                                     TextFormField(
-                                      controller: _model.escritoPorController,
+                                      controller:
+                                          _model.escritoPorTextController,
                                       focusNode: _model.escritoPorFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             'A matéria esta sendo escrita por...',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -836,22 +895,35 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                 12.0, 0.0, 0.0, 0.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       validator: _model
-                                          .escritoPorControllerValidator
+                                          .escritoPorTextControllerValidator
                                           .asValidator(context),
                                     ),
                                     TextFormField(
-                                      controller: _model.tituloController,
+                                      controller: _model.tituloTextController,
                                       focusNode: _model.tituloFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             'Escreva o titulo da matéria',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -890,25 +962,38 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       maxLines: 5,
                                       minLines: 1,
                                       validator: _model
-                                          .tituloControllerValidator
+                                          .tituloTextControllerValidator
                                           .asValidator(context),
                                     ),
                                     TextFormField(
-                                      controller: _model.conteudoController,
+                                      controller: _model.conteudoTextController,
                                       focusNode: _model.conteudoFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             'Escreva o conteudo da matéria',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         alignLabelWithHint: true,
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -947,11 +1032,15 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       maxLines: 20,
                                       minLines: 4,
                                       validator: _model
-                                          .conteudoControllerValidator
+                                          .conteudoTextControllerValidator
                                           .asValidator(context),
                                     ),
                                     Container(
@@ -962,7 +1051,11 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                           Text(
                                             'Matéria destaque?',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                           Switch.adaptive(
                                             value: _model.destaqueValue ??=
@@ -1005,6 +1098,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                               true
                                                           ? 14.0
                                                           : 12.0,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ],
@@ -1017,6 +1111,8 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                       ),
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'CRIAR_NOVA_MATERIA_PUBLICAR_MATÉRIA_BTN_');
                                           var _shouldSetState = false;
 
                                           var materiasRecordReference =
@@ -1025,13 +1121,15 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                           await materiasRecordReference.set({
                                             ...createMateriasRecordData(
                                               creditosImagem: _model
-                                                  .creditosImgController.text,
+                                                  .creditosImgTextController
+                                                  .text,
                                               escritoPor: _model
-                                                  .escritoPorController.text,
-                                              tituloMateria:
-                                                  _model.tituloController.text,
+                                                  .escritoPorTextController
+                                                  .text,
+                                              tituloMateria: _model
+                                                  .tituloTextController.text,
                                               conteudoMateria: _model
-                                                  .conteudoController.text,
+                                                  .conteudoTextController.text,
                                               categoria:
                                                   _model.dropDownCategoriaValue,
                                               materiaDestaque:
@@ -1041,7 +1139,8 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               imagemCapa:
                                                   _model.uploadedFileUrl,
                                               descricaoImg: _model
-                                                  .descricaoFotoController.text,
+                                                  .descricaoFotoTextController
+                                                  .text,
                                               notificacaoEnviada: false,
                                             ),
                                             ...mapToFirestore(
@@ -1054,13 +1153,15 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               .getDocumentFromData({
                                             ...createMateriasRecordData(
                                               creditosImagem: _model
-                                                  .creditosImgController.text,
+                                                  .creditosImgTextController
+                                                  .text,
                                               escritoPor: _model
-                                                  .escritoPorController.text,
-                                              tituloMateria:
-                                                  _model.tituloController.text,
+                                                  .escritoPorTextController
+                                                  .text,
+                                              tituloMateria: _model
+                                                  .tituloTextController.text,
                                               conteudoMateria: _model
-                                                  .conteudoController.text,
+                                                  .conteudoTextController.text,
                                               categoria:
                                                   _model.dropDownCategoriaValue,
                                               materiaDestaque:
@@ -1070,7 +1171,8 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                               imagemCapa:
                                                   _model.uploadedFileUrl,
                                               descricaoImg: _model
-                                                  .descricaoFotoController.text,
+                                                  .descricaoFotoTextController
+                                                  .text,
                                               notificacaoEnviada: false,
                                             ),
                                             ...mapToFirestore(
@@ -1148,12 +1250,11 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                   await queryUsersRecordOnce();
                                               _shouldSetState = true;
                                               triggerPushNotification(
-                                                notificationTitle:
-                                                    'meinforma: ${_model.tituloController.text}',
+                                                notificationTitle: 'meinforma',
                                                 notificationText: _model
-                                                    .conteudoController.text,
+                                                    .tituloTextController.text,
                                                 notificationImageUrl:
-                                                    _model.uploadedFileUrl,
+                                                    _model.imgLogoMeinforma,
                                                 notificationSound: 'default',
                                                 userRefs: _model.todosUsuarios!
                                                     .map((e) => e.reference)
@@ -1161,7 +1262,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                 initialPageName:
                                                     'meinformaDetalhesNoticia',
                                                 parameterData: {
-                                                  'materiaRef': _model
+                                                  'materiadoc': _model
                                                       .materiaRef?.reference,
                                                 },
                                               );
@@ -1251,6 +1352,7 @@ class _CriarNovaMateriaWidgetState extends State<CriarNovaMateriaWidget> {
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: Colors.white,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
                                           borderSide: BorderSide(

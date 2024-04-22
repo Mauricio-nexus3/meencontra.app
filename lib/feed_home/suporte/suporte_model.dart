@@ -15,7 +15,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,12 +34,14 @@ class SuporteModel extends FlutterFlowModel<SuporteWidget> {
   FormFieldController<String>? dropDownTopicoValueController;
   // State field(s) for TextFieldAssunto widget.
   FocusNode? textFieldAssuntoFocusNode;
-  TextEditingController? textFieldAssuntoController;
-  String? Function(BuildContext, String?)? textFieldAssuntoControllerValidator;
+  TextEditingController? textFieldAssuntoTextController;
+  String? Function(BuildContext, String?)?
+      textFieldAssuntoTextControllerValidator;
   // State field(s) for TextFieldConteudo widget.
   FocusNode? textFieldConteudoFocusNode;
-  TextEditingController? textFieldConteudoController;
-  String? Function(BuildContext, String?)? textFieldConteudoControllerValidator;
+  TextEditingController? textFieldConteudoTextController;
+  String? Function(BuildContext, String?)?
+      textFieldConteudoTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -49,21 +50,19 @@ class SuporteModel extends FlutterFlowModel<SuporteWidget> {
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   TicketSuporteRecord? chamadoSuporte;
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController1;
+  late ExpandableController expandableExpandableController1;
 
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController2;
+  late ExpandableController expandableExpandableController2;
 
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController3;
+  late ExpandableController expandableExpandableController3;
 
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController4;
+  late ExpandableController expandableExpandableController4;
 
   // State field(s) for Expandable widget.
-  late ExpandableController expandableController5;
-
-  /// Initialization and disposal methods.
+  late ExpandableController expandableExpandableController5;
 
   @override
   void initState(BuildContext context) {}
@@ -73,19 +72,15 @@ class SuporteModel extends FlutterFlowModel<SuporteWidget> {
     unfocusNode.dispose();
     tabBarController?.dispose();
     textFieldAssuntoFocusNode?.dispose();
-    textFieldAssuntoController?.dispose();
+    textFieldAssuntoTextController?.dispose();
 
     textFieldConteudoFocusNode?.dispose();
-    textFieldConteudoController?.dispose();
+    textFieldConteudoTextController?.dispose();
 
-    expandableController1.dispose();
-    expandableController2.dispose();
-    expandableController3.dispose();
-    expandableController4.dispose();
-    expandableController5.dispose();
+    expandableExpandableController1.dispose();
+    expandableExpandableController2.dispose();
+    expandableExpandableController3.dispose();
+    expandableExpandableController4.dispose();
+    expandableExpandableController5.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

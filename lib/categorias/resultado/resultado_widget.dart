@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'resultado_model.dart';
@@ -34,6 +33,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
     super.initState();
     _model = createModel(context, () => ResultadoModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Resultado'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -46,17 +46,6 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return FutureBuilder<SubCategoriasRecord>(
       future:
           SubCategoriasRecord.getDocumentOnce(widget.subCategoriasResultRef!),
@@ -156,6 +145,8 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                                         size: 28.0,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'RESULTADO_PAGE_arrow_back_ios_ICN_ON_TAP');
                                         context.safePop();
                                       },
                                     ),
@@ -168,6 +159,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                     Container(
@@ -203,7 +195,11 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                                       Text(
                                         'Total',
                                         style: FlutterFlowTheme.of(context)
-                                            .titleMedium,
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                       Text(
                                         valueOrDefault<String>(
@@ -231,69 +227,87 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                                           '0',
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ].divide(SizedBox(width: 2.0)),
                                   ),
                                 ),
                                 Container(
                                   decoration: BoxDecoration(),
-                                  child: Builder(
-                                    builder: (context) {
-                                      final planoPago =
-                                          containerAnuncianteRecordList
-                                              .where((e) =>
-                                                  (e.nomeSubCategoria01 ==
-                                                      resultadoSubCategoriasRecord
-                                                          .nomeSubCategoria) ||
-                                                  (e.nomeSubCategoria02 ==
-                                                      resultadoSubCategoriasRecord
-                                                          .nomeSubCategoria))
-                                              .toList();
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children:
-                                            List.generate(planoPago.length,
-                                                    (planoPagoIndex) {
-                                          final planoPagoItem =
-                                              planoPago[planoPagoIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                'Anunciante',
-                                                queryParameters: {
-                                                  'refAnunciante':
-                                                      serializeParam(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 12.0, 0.0),
+                                    child: Builder(
+                                      builder: (context) {
+                                        final planoPago = containerAnuncianteRecordList
+                                            .where((e) =>
+                                                (e.nomeSubCategoria01 ==
+                                                    resultadoSubCategoriasRecord
+                                                        .nomeSubCategoria) ||
+                                                (e.nomeSubCategoria02 ==
+                                                    resultadoSubCategoriasRecord
+                                                        .nomeSubCategoria))
+                                            .toList();
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: List.generate(
+                                                  planoPago.length,
+                                                  (planoPagoIndex) {
+                                            final planoPagoItem =
+                                                planoPago[planoPagoIndex];
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'RESULTADO_PAGE_Container_5hta4rac_ON_TAP');
+
+                                                context.pushNamed(
+                                                  'AnunciantePage',
+                                                  queryParameters: {
+                                                    'documentoRefAnunciante':
+                                                        serializeParam(
+                                                      planoPagoItem,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'documentoRefAnunciante':
+                                                        planoPagoItem,
+                                                  },
+                                                );
+                                              },
+                                              child:
+                                                  CardListaSubCategoriaWidget(
+                                                key: Key(
+                                                    'Key5ht_${planoPagoIndex}_of_${planoPago.length}'),
+                                                logo: planoPagoItem.logo,
+                                                nome:
+                                                    planoPagoItem.nomeFantasia,
+                                                endereco: planoPagoItem
+                                                    .enderecoCompleto,
+                                                planoAssinatura: planoPagoItem
+                                                    .planoAssinatura,
+                                                nota: planoPagoItem.notaMedia,
+                                                parameter3:
                                                     planoPagoItem.reference,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: CardListaSubCategoriaWidget(
-                                              key: Key(
-                                                  'Key5ht_${planoPagoIndex}_of_${planoPago.length}'),
-                                              logo: planoPagoItem.logo,
-                                              nome: planoPagoItem.nomeFantasia,
-                                              endereco: planoPagoItem
-                                                  .enderecoCompleto,
-                                              planoAnuncio:
-                                                  planoPagoItem.planoAssinatura,
-                                              nota: planoPagoItem.notaMedia,
-                                              parameter3:
-                                                  planoPagoItem.reference,
-                                              km: planoPagoItem.googleMaps,
-                                            ),
-                                          );
-                                        })
-                                                .divide(SizedBox(height: 12.0))
-                                                .around(SizedBox(height: 12.0)),
-                                      );
-                                    },
+                                                regatado:
+                                                    planoPagoItem.resgatado,
+                                              ),
+                                            );
+                                          })
+                                              .divide(SizedBox(height: 12.0))
+                                              .around(SizedBox(height: 12.0)),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ]

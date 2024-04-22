@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 import '../main.dart';
 
@@ -30,6 +32,7 @@ export 'package:cloud_firestore/cloud_firestore.dart'
 export 'package:page_transition/page_transition.dart';
 export 'custom_icons.dart' show FFIcons;
 export 'internationalization.dart' show FFLocalizations;
+export '/backend/firebase_analytics/analytics.dart';
 export 'nav/nav.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<PageRoute>();
@@ -54,9 +57,9 @@ String dateTimeFormat(String format, DateTime? dateTime, {String? locale}) {
 }
 
 Future launchURL(String url) async {
-  var uri = Uri.parse(url).toString();
+  var uri = Uri.parse(url);
   try {
-    await launch(uri);
+    await launchUrl(uri);
   } catch (e) {
     throw 'Could not launch $uri: $e';
   }
@@ -67,6 +70,34 @@ Color colorFromCssString(String color, {Color? defaultColor}) {
     return fromCssColor(color);
   } catch (_) {}
   return defaultColor ?? Colors.black;
+}
+
+Future launchMap({
+  MapType? mapType,
+  LatLng? location,
+  String? address,
+  required title,
+}) async {
+  final coords = location != null
+      ? Coords(location.latitude, location.longitude)
+      : Coords(0, 0);
+  final extraParams = address != null ? {'q': address} : null;
+  final noMap =
+      mapType == null || !(await MapLauncher.isMapAvailable(mapType) ?? false);
+  if (noMap) {
+    final installedMaps = await MapLauncher.installedMaps;
+    return installedMaps.first.showMarker(
+      coords: coords,
+      title: title,
+      extraParams: extraParams,
+    );
+  }
+  return MapLauncher.showMarker(
+    mapType: mapType!,
+    coords: coords,
+    title: title,
+    extraParams: extraParams,
+  );
 }
 
 enum FormatType {
@@ -391,5 +422,37 @@ extension StatefulWidgetExtensions on State<StatefulWidget> {
       // ignore: invalid_use_of_protected_member
       setState(fn);
     }
+  }
+}
+
+// For iOS 16 and below, set the status bar color to match the app's theme.
+// https://github.com/flutter/flutter/issues/41067
+Brightness? _lastBrightness;
+void fixStatusBarOniOS16AndBelow(BuildContext context) {
+  if (!isiOS) {
+    return;
+  }
+  final brightness = Theme.of(context).brightness;
+  if (_lastBrightness != brightness) {
+    _lastBrightness = brightness;
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: brightness,
+        systemStatusBarContrastEnforced: true,
+      ),
+    );
+  }
+}
+
+extension ListUniqueExt<T> on Iterable<T> {
+  List<T> unique(dynamic Function(T) getKey) {
+    var distinctSet = <dynamic>{};
+    var distinctList = <T>[];
+    for (var item in this) {
+      if (distinctSet.add(getKey(item))) {
+        distinctList.add(item);
+      }
+    }
+    return distinctList;
   }
 }

@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +27,8 @@ class _TestemarkdownWidgetState extends State<TestemarkdownWidget> {
     super.initState();
     _model = createModel(context, () => TestemarkdownModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'testemarkdown'});
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -43,17 +44,6 @@ class _TestemarkdownWidgetState extends State<TestemarkdownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -80,8 +70,16 @@ class _TestemarkdownWidgetState extends State<TestemarkdownWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Label here...',
-                    labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                    hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                    hintStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).alternate,
@@ -111,7 +109,10 @@ class _TestemarkdownWidgetState extends State<TestemarkdownWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyMedium,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
                   maxLines: 5,
                   validator:
                       _model.textControllerValidator.asValidator(context),

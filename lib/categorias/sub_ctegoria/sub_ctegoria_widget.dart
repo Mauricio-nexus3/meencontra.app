@@ -1,5 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/componentes/anuncios_c_a_r_d_s/card_premium_categoria/card_premium_categoria_widget.dart';
+import '/categorias/componentes/card_premium_categoria/card_premium_categoria_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,8 +10,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sub_ctegoria_model.dart';
@@ -38,6 +39,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
     super.initState();
     _model = createModel(context, () => SubCtegoriaModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SubCtegoria'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -50,17 +52,6 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return StreamBuilder<CategoriasRecord>(
       stream: CategoriasRecord.getDocument(widget.subCategoria!),
       builder: (context, snapshot) {
@@ -92,7 +83,12 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
             body: SafeArea(
               top: true,
               child: StreamBuilder<List<AnuncianteRecord>>(
-                stream: queryAnuncianteRecord(),
+                stream: queryAnuncianteRecord(
+                  queryBuilder: (anuncianteRecord) => anuncianteRecord.where(
+                    'Categoria',
+                    isEqualTo: subCtegoriaCategoriasRecord.nomeDaCategoria,
+                  ),
+                ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
@@ -111,14 +107,21 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                   List<AnuncianteRecord> containerAnuncianteRecordList =
                       snapshot.data!;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
                     child: StreamBuilder<List<AnunciosRecord>>(
                       stream: queryAnunciosRecord(
-                        queryBuilder: (anunciosRecord) => anunciosRecord.where(
-                          'Categoria',
-                          isEqualTo:
-                              subCtegoriaCategoriasRecord.nomeDaCategoria,
-                        ),
+                        queryBuilder: (anunciosRecord) => anunciosRecord
+                            .where(
+                              'Categoria',
+                              isEqualTo:
+                                  subCtegoriaCategoriasRecord.nomeDaCategoria,
+                            )
+                            .where(
+                              'Anunciado',
+                              isEqualTo: true,
+                            ),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -163,9 +166,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                             ((e.planoDoAnuncio ==
                                                                     'medestacaCapa') ||
                                                                 (e.planoDoAnuncio ==
-                                                                    'Turbo') ||
-                                                                (e.planoDoAnuncio ==
-                                                                    'Master')) &&
+                                                                    'meimpulsionaPlus')) &&
                                                             (e.anunciado ==
                                                                 true))
                                                         .toList()
@@ -188,14 +189,15 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                           controller: _model
                                                                   .pageViewController ??=
                                                               PageController(
-                                                                  initialPage: min(
-                                                                      valueOrDefault<int>(
-                                                                        random_data.randomInteger(
+                                                                  initialPage: max(
+                                                                      0,
+                                                                      min(
+                                                                          valueOrDefault<int>(
+                                                                            random_data.randomInteger(0,
+                                                                                10),
                                                                             0,
-                                                                            10),
-                                                                        0,
-                                                                      ),
-                                                                      medestacaCapa.length - 1)),
+                                                                          ),
+                                                                          medestacaCapa.length - 1))),
                                                           scrollDirection:
                                                               Axis.horizontal,
                                                           itemCount:
@@ -208,63 +210,40 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                     medestacaCapaIndex];
                                                             return Stack(
                                                               children: [
-                                                                InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    context
-                                                                        .pushNamed(
-                                                                      'Anunciante',
-                                                                      queryParameters:
-                                                                          {
-                                                                        'refAnunciante':
-                                                                            serializeParam(
+                                                                Hero(
+                                                                  tag:
+                                                                      'italyImage',
+                                                                  transitionOnUserGestures:
+                                                                      true,
+                                                                  child:
+                                                                      Material(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    child:
+                                                                        CardPremiumCategoriaWidget(
+                                                                      key: Key(
+                                                                          'Keyhy7_${medestacaCapaIndex}_of_${medestacaCapa.length}'),
+                                                                      fotoDestaquePremium:
+                                                                          medestacaCapaItem
+                                                                              .fotoAnuncio,
+                                                                      discricao:
+                                                                          medestacaCapaItem
+                                                                              .descricao,
+                                                                      tituloPaginaCategoria:
+                                                                          subCtegoriaCategoriasRecord
+                                                                              .nomeDaCategoria,
+                                                                      auncianteREF:
                                                                           medestacaCapaItem
                                                                               .parentReference,
-                                                                          ParamType
-                                                                              .DocumentReference,
-                                                                        ),
-                                                                      }.withoutNulls,
-                                                                    );
-                                                                  },
-                                                                  child: Hero(
-                                                                    tag:
-                                                                        'italyImage',
-                                                                    transitionOnUserGestures:
-                                                                        true,
-                                                                    child:
-                                                                        Material(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      child:
-                                                                          CardPremiumCategoriaWidget(
-                                                                        key: Key(
-                                                                            'Keyhy7_${medestacaCapaIndex}_of_${medestacaCapa.length}'),
-                                                                        fotoDestaquePremium:
-                                                                            medestacaCapaItem.fotoAnuncio,
-                                                                        discricao:
-                                                                            medestacaCapaItem.descricao,
-                                                                        tituloPaginaCategoria:
-                                                                            subCtegoriaCategoriasRecord.nomeDaCategoria,
-                                                                        auncianteREF:
-                                                                            medestacaCapaItem.parentReference,
-                                                                        nomeFantasia: containerAnuncianteRecordList
-                                                                            .where((e) =>
-                                                                                e.reference ==
-                                                                                medestacaCapaItem.parentReference)
-                                                                            .toList()
-                                                                            .first
-                                                                            .nomeFantasia,
-                                                                      ),
+                                                                      nomeFantasia: containerAnuncianteRecordList
+                                                                          .where((e) =>
+                                                                              e.reference ==
+                                                                              medestacaCapaItem.parentReference)
+                                                                          .toList()
+                                                                          .first
+                                                                          .nomeFantasia,
+                                                                      nextPage:
+                                                                          () async {},
                                                                     ),
                                                                   ),
                                                                 ),
@@ -290,14 +269,14 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                             controller: _model
                                                                     .pageViewController ??=
                                                                 PageController(
-                                                                    initialPage: min(
-                                                                        valueOrDefault<int>(
-                                                                          random_data.randomInteger(
+                                                                    initialPage: max(
+                                                                        0,
+                                                                        min(
+                                                                            valueOrDefault<int>(
+                                                                              random_data.randomInteger(0, 10),
                                                                               0,
-                                                                              10),
-                                                                          0,
-                                                                        ),
-                                                                        medestacaCapa.length - 1)),
+                                                                            ),
+                                                                            medestacaCapa.length - 1))),
                                                             count: medestacaCapa
                                                                 .length,
                                                             axisDirection:
@@ -391,6 +370,9 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                       size: 24.0,
                                                     ),
                                                     onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'SUB_CTEGORIA_arrow_back_ios_new_ICN_ON_T');
+
                                                       context.pushNamed(
                                                           'Categorias');
                                                     },
@@ -406,6 +388,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryText,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                   Container(
@@ -463,6 +446,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                           .override(
                                                             fontFamily: 'Inter',
                                                             fontSize: 16.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
                                                           ),
@@ -545,7 +529,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                             return Material(
                                                               color: Colors
                                                                   .transparent,
-                                                              elevation: 2.0,
+                                                              elevation: 1.0,
                                                               shape:
                                                                   RoundedRectangleBorder(
                                                                 borderRadius:
@@ -558,7 +542,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                     BoxDecoration(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primaryBackground,
+                                                                      .secondaryBackground,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -583,6 +567,9 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                           .transparent,
                                                                   onTap:
                                                                       () async {
+                                                                    logFirebaseEvent(
+                                                                        'SUB_CTEGORIA_PAGE_Row_umzn9plf_ON_TAP');
+
                                                                     context
                                                                         .pushNamed(
                                                                       'Resultado',
@@ -648,6 +635,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             style: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
                                                                                   color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  letterSpacing: 0.0,
                                                                                   fontWeight: FontWeight.w600,
                                                                                 ),
                                                                           ),
@@ -674,6 +662,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                                 style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                       fontFamily: 'Inter',
                                                                                       color: FlutterFlowTheme.of(context).primary,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               ),
                                                                               Flexible(
@@ -693,6 +682,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                                   style: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                         fontFamily: 'Inter',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
+                                                                                        letterSpacing: 0.0,
                                                                                       ),
                                                                                 ),
                                                                               ),
@@ -718,26 +708,272 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                             decoration: BoxDecoration(),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
                                               children: [
-                                                if (containerPaiAnunciosRecordList
-                                                        .where((e) =>
-                                                            ((e.planoDoAnuncio ==
-                                                                    'Essencial') ||
-                                                                (e.planoDoAnuncio ==
-                                                                    'Premium')) &&
-                                                            (e.anunciado ==
-                                                                true))
-                                                        .toList()
-                                                        .length >=
-                                                    1)
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 8.0),
-                                                    child: Row(
+                                                Container(
+                                                  decoration: BoxDecoration(),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      if (containerPaiAnunciosRecordList
+                                                              .where((e) =>
+                                                                  e.anunciado ==
+                                                                  true)
+                                                              .toList()
+                                                              .length >=
+                                                          1)
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      -1.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                'Destaques',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Builder(
+                                                          builder: (context) {
+                                                            final grid = containerPaiAnunciosRecordList
+                                                                .where((e) =>
+                                                                    e.planoDoAnuncio !=
+                                                                    'meencontra')
+                                                                .toList();
+                                                            return GridView
+                                                                .builder(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              gridDelegate:
+                                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    () {
+                                                                  if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointSmall) {
+                                                                    return 2;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointMedium) {
+                                                                    return 3;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointLarge) {
+                                                                    return 4;
+                                                                  } else {
+                                                                    return 4;
+                                                                  }
+                                                                }(),
+                                                                crossAxisSpacing:
+                                                                    12.0,
+                                                                mainAxisSpacing:
+                                                                    12.0,
+                                                                childAspectRatio:
+                                                                    1.0,
+                                                              ),
+                                                              shrinkWrap: true,
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              itemCount:
+                                                                  grid.length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      gridIndex) {
+                                                                final gridItem =
+                                                                    grid[
+                                                                        gridIndex];
+                                                                return InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'SUB_CTEGORIA_Container_2m2wj667_ON_TAP');
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'AnunciantePage',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'documentoRefAnunciante':
+                                                                            serializeParam(
+                                                                          containerAnuncianteRecordList
+                                                                              .where((e) => e.reference == gridItem.parentReference)
+                                                                              .toList()
+                                                                              .first,
+                                                                          ParamType
+                                                                              .Document,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        'documentoRefAnunciante': containerAnuncianteRecordList
+                                                                            .where((e) =>
+                                                                                e.reference ==
+                                                                                gridItem.parentReference)
+                                                                            .toList()
+                                                                            .first,
+                                                                      },
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      Material(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    elevation:
+                                                                        0.8,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              12.0),
+                                                                    ),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          150.0,
+                                                                      height:
+                                                                          150.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            blurRadius:
+                                                                                4.0,
+                                                                            color:
+                                                                                Color(0x230E151B),
+                                                                            offset:
+                                                                                Offset(
+                                                                              0.0,
+                                                                              2.0,
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(12.0),
+                                                                      ),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Container(
+                                                                            decoration:
+                                                                                BoxDecoration(),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsets.all(4.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Container(
+                                                                                    width: 30.0,
+                                                                                    height: 30.0,
+                                                                                    clipBehavior: Clip.antiAlias,
+                                                                                    decoration: BoxDecoration(
+                                                                                      shape: BoxShape.circle,
+                                                                                    ),
+                                                                                    child: Image.network(
+                                                                                      containerAnuncianteRecordList.where((e) => e.reference == gridItem.parentReference).toList().first.logo,
+                                                                                      fit: BoxFit.cover,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Flexible(
+                                                                                    child: Text(
+                                                                                      containerAnuncianteRecordList.where((e) => e.reference == gridItem.parentReference).toList().first.nomeFantasia,
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Inter',
+                                                                                            fontSize: 12.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ].divide(SizedBox(width: 4.0)),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          Expanded(
+                                                                            child:
+                                                                                ClipRRect(
+                                                                              borderRadius: BorderRadius.only(
+                                                                                bottomLeft: Radius.circular(12.0),
+                                                                                bottomRight: Radius.circular(12.0),
+                                                                                topLeft: Radius.circular(0.0),
+                                                                                topRight: Radius.circular(0.0),
+                                                                              ),
+                                                                              child: CachedNetworkImage(
+                                                                                fadeInDuration: Duration(milliseconds: 500),
+                                                                                fadeOutDuration: Duration(milliseconds: 500),
+                                                                                imageUrl: gridItem.fotoAnuncio,
+                                                                                width: double.infinity,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ]
+                                                        .divide(SizedBox(
+                                                            height: 12.0))
+                                                        .around(SizedBox(
+                                                            height: 12.0)),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 24.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(),
+                                                    child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
@@ -746,7 +982,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                               AlignmentDirectional(
                                                                   -1.0, 0.0),
                                                           child: Text(
-                                                            'Destaques',
+                                                            'Encontre também',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .titleSmall
@@ -755,155 +991,188 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                       'Inter',
                                                                   fontSize:
                                                                       16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(),
-                                                  child: Builder(
-                                                    builder: (context) {
-                                                      final grid =
-                                                          containerPaiAnunciosRecordList
-                                                              .where((e) =>
-                                                                  e.anunciado ==
-                                                                  true)
-                                                              .toList();
-                                                      return GridView.builder(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        gridDelegate:
-                                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: () {
-                                                            if (MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width <
-                                                                kBreakpointSmall) {
-                                                              return 2;
-                                                            } else if (MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .width <
-                                                                kBreakpointMedium) {
-                                                              return 3;
-                                                            } else if (MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .width <
-                                                                kBreakpointLarge) {
-                                                              return 4;
-                                                            } else {
-                                                              return 4;
-                                                            }
-                                                          }(),
-                                                          crossAxisSpacing:
-                                                              12.0,
-                                                          mainAxisSpacing: 12.0,
-                                                          childAspectRatio: 1.0,
-                                                        ),
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount: grid.length,
-                                                        itemBuilder: (context,
-                                                            gridIndex) {
-                                                          final gridItem =
-                                                              grid[gridIndex];
-                                                          return InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              context.pushNamed(
-                                                                'Anunciante',
-                                                                queryParameters:
-                                                                    {
-                                                                  'refAnunciante':
-                                                                      serializeParam(
-                                                                    gridItem
-                                                                        .parentReference,
-                                                                    ParamType
-                                                                        .DocumentReference,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              width: 150.0,
-                                                              height: 150.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    blurRadius:
-                                                                        4.0,
-                                                                    color: Color(
-                                                                        0x230E151B),
-                                                                    offset:
-                                                                        Offset(
-                                                                            0.0,
-                                                                            2.0),
-                                                                  )
-                                                                ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
+                                                        Builder(
+                                                          builder: (context) {
+                                                            final gridGratis =
+                                                                containerPaiAnunciosRecordList
+                                                                    .where((e) =>
+                                                                        e.planoDoAnuncio ==
+                                                                        'meencontra')
+                                                                    .toList();
+                                                            return GridView
+                                                                .builder(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              gridDelegate:
+                                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    valueOrDefault<
+                                                                        int>(
+                                                                  () {
+                                                                    if (MediaQuery.sizeOf(context)
+                                                                            .width <
+                                                                        kBreakpointSmall) {
+                                                                      return 4;
+                                                                    } else if (MediaQuery.sizeOf(context)
+                                                                            .width <
+                                                                        kBreakpointMedium) {
+                                                                      return 6;
+                                                                    } else if (MediaQuery.sizeOf(context)
+                                                                            .width <
+                                                                        kBreakpointLarge) {
+                                                                      return 8;
+                                                                    } else {
+                                                                      return 4;
+                                                                    }
+                                                                  }(),
+                                                                  4,
+                                                                ),
+                                                                crossAxisSpacing:
+                                                                    12.0,
+                                                                mainAxisSpacing:
+                                                                    12.0,
+                                                                childAspectRatio:
+                                                                    1.0,
                                                               ),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        ClipRRect(
+                                                              shrinkWrap: true,
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              itemCount:
+                                                                  gridGratis
+                                                                      .length,
+                                                              itemBuilder: (context,
+                                                                  gridGratisIndex) {
+                                                                final gridGratisItem =
+                                                                    gridGratis[
+                                                                        gridGratisIndex];
+                                                                return InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'SUB_CTEGORIA_Container_1e6zr9yx_ON_TAP');
+                                                                    _model.anuncinateGratisdoc =
+                                                                        await queryAnuncianteRecordOnce(
+                                                                      queryBuilder:
+                                                                          (anuncianteRecord) =>
+                                                                              anuncianteRecord.where(
+                                                                        'aid',
+                                                                        isEqualTo: gridGratisItem
+                                                                            .anuncianteRef
+                                                                            ?.id,
+                                                                      ),
+                                                                      singleRecord:
+                                                                          true,
+                                                                    ).then((s) =>
+                                                                            s.firstOrNull);
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'AnunciantePage',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'documentoRefAnunciante':
+                                                                            serializeParam(
+                                                                          _model
+                                                                              .anuncinateGratisdoc,
+                                                                          ParamType
+                                                                              .Document,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        'documentoRefAnunciante':
+                                                                            _model.anuncinateGratisdoc,
+                                                                      },
+                                                                    );
+
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  child:
+                                                                      Material(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    elevation:
+                                                                        0.8,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              10.0),
+                                                                              12.0),
+                                                                    ),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          150.0,
+                                                                      height:
+                                                                          150.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            blurRadius:
+                                                                                4.0,
+                                                                            color:
+                                                                                Color(0x230E151B),
+                                                                            offset:
+                                                                                Offset(
+                                                                              0.0,
+                                                                              2.0,
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(12.0),
+                                                                      ),
                                                                       child:
-                                                                          CachedNetworkImage(
-                                                                        fadeInDuration:
-                                                                            Duration(milliseconds: 500),
-                                                                        fadeOutDuration:
-                                                                            Duration(milliseconds: 500),
-                                                                        imageUrl:
-                                                                            gridItem.fotoAnuncio,
-                                                                        width: double
-                                                                            .infinity,
-                                                                        fit: BoxFit
-                                                                            .cover,
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10.0),
+                                                                        child:
+                                                                            CachedNetworkImage(
+                                                                          fadeInDuration:
+                                                                              Duration(milliseconds: 500),
+                                                                          fadeOutDuration:
+                                                                              Duration(milliseconds: 500),
+                                                                          imageUrl:
+                                                                              gridGratisItem.fotoAnuncio,
+                                                                          width:
+                                                                              double.infinity,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-                                                    },
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      ].divide(SizedBox(
+                                                          height: 8.0)),
+                                                    ),
                                                   ),
                                                 ),
-                                              ].divide(SizedBox(height: 12.0)),
+                                              ],
                                             ),
                                           ),
                                         ].divide(SizedBox(height: 24.0)),

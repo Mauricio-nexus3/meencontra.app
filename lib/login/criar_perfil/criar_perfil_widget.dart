@@ -13,7 +13,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -46,8 +45,10 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
     super.initState();
     _model = createModel(context, () => CriarPerfilModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'CriarPerfil'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CRIAR_PERFIL_CriarPerfil_ON_INIT_STATE');
       setState(() {
         _model.statusCastro = 'perfil';
       });
@@ -62,16 +63,16 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
       });
     }
 
-    _model.nomeController ??= TextEditingController();
+    _model.nomeTextController ??= TextEditingController();
     _model.nomeFocusNode ??= FocusNode();
 
-    _model.whatsappaController ??= TextEditingController();
+    _model.whatsappaTextController ??= TextEditingController();
     _model.whatsappaFocusNode ??= FocusNode();
 
-    _model.tFildOutroController ??= TextEditingController();
+    _model.tFildOutroTextController ??= TextEditingController();
     _model.tFildOutroFocusNode ??= FocusNode();
 
-    _model.conviteAnuncianteController ??= TextEditingController();
+    _model.conviteAnuncianteTextController ??= TextEditingController();
     _model.conviteAnuncianteFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -89,17 +90,6 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -153,11 +143,14 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'CRIAR_PERFIL_ESCOLHER_FOTO_DE_PERFIL_BTN');
                                     final selectedMedia =
                                         await selectMediaWithSourceBottomSheet(
                                       context: context,
                                       maxWidth: 1080.00,
                                       maxHeight: 1080.00,
+                                      imageQuality: 92,
                                       allowPhoto: true,
                                       includeBlurHash: true,
                                       pickerFontFamily: 'Inter',
@@ -226,6 +219,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         .override(
                                           fontFamily: 'Inter',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: BorderSide(
@@ -255,15 +249,24 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                   child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
-                                      controller: _model.nomeController,
+                                      controller: _model.nomeTextController,
                                       focusNode: _model.nomeFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Seu nome',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -305,9 +308,14 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                             .primaryBackground,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       keyboardType: TextInputType.name,
-                                      validator: _model.nomeControllerValidator
+                                      validator: _model
+                                          .nomeTextControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -315,15 +323,24 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                 Container(
                                   width: double.infinity,
                                   child: TextFormField(
-                                    controller: _model.whatsappaController,
+                                    controller: _model.whatsappaTextController,
                                     focusNode: _model.whatsappaFocusNode,
+                                    autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Whatsapp',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -364,11 +381,15 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                       fillColor: FlutterFlowTheme.of(context)
                                           .primaryBackground,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
                                     keyboardType: TextInputType.phone,
                                     validator: _model
-                                        .whatsappaControllerValidator
+                                        .whatsappaTextControllerValidator
                                         .asValidator(context),
                                     inputFormatters: [_model.whatsappaMask],
                                   ),
@@ -380,7 +401,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                     Text(
                                       'Gênero',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                     Text(
                                       '*Isso não será divulgado em seu perfil',
@@ -390,6 +415,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                     Padding(
@@ -410,7 +436,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         width: double.infinity,
                                         height: 50.0,
                                         textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintText: 'Seu gênero',
                                         icon: Icon(
                                           Icons.keyboard_arrow_down_rounded,
@@ -439,7 +469,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                             0.0, 8.0, 0.0, 0.0),
                                         child: TextFormField(
                                           controller:
-                                              _model.tFildOutroController,
+                                              _model.tFildOutroTextController,
                                           focusNode: _model.tFildOutroFocusNode,
                                           autofocus: true,
                                           obscureText: false,
@@ -448,10 +478,18 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                                 'Por favor, digite sua identidade de gênero aqui',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -495,10 +533,14 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                           textAlign: TextAlign.start,
                                           validator: _model
-                                              .tFildOutroControllerValidator
+                                              .tFildOutroTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -518,9 +560,8 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                       ),
                                       Flexible(
                                         child: RichText(
-                                          textScaleFactor:
-                                              MediaQuery.of(context)
-                                                  .textScaleFactor,
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
@@ -540,6 +581,9 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () async {
+                                                        logFirebaseEvent(
+                                                            'CRIAR_PERFIL_RichTextSpan_296daada_ON_TA');
+
                                                         context.pushNamed(
                                                           'LinkExterno',
                                                           queryParameters: {
@@ -573,7 +617,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                               )
                                             ],
                                             style: FlutterFlowTheme.of(context)
-                                                .labelMedium,
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -617,6 +665,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                           _model.liAceitoPoliticaTermosValue =
                                               newValue!);
                                     },
+                                    side: BorderSide(
+                                      width: 2,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
+                                    ),
                                     activeColor:
                                         FlutterFlowTheme.of(context).primary,
                                     checkColor: FlutterFlowTheme.of(context)
@@ -625,8 +678,8 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                 ),
                                 Flexible(
                                   child: RichText(
-                                    textScaleFactor:
-                                        MediaQuery.of(context).textScaleFactor,
+                                    textScaler:
+                                        MediaQuery.of(context).textScaler,
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
@@ -643,12 +696,16 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
+                                                letterSpacing: 0.0,
                                                 decoration:
                                                     TextDecoration.underline,
                                               ),
                                           mouseCursor: SystemMouseCursors.click,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
+                                              logFirebaseEvent(
+                                                  'CRIAR_PERFIL_RichTextSpan_rh590l2z_ON_TA');
+
                                               context.pushNamed('TermosDeUso');
                                             },
                                         ),
@@ -665,19 +722,27 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
+                                                letterSpacing: 0.0,
                                                 decoration:
                                                     TextDecoration.underline,
                                               ),
                                           mouseCursor: SystemMouseCursors.click,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
+                                              logFirebaseEvent(
+                                                  'CRIAR_PERFIL_RichTextSpan_83zh8h9g_ON_TA');
+
                                               context.pushNamed(
                                                   'PoliticaPrivacidade');
                                             },
                                         )
                                       ],
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -687,8 +752,10 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                           ),
                         FFButtonWidget(
                           onPressed: () async {
-                            if (_model.nomeController.text == null ||
-                                _model.nomeController.text == '') {
+                            logFirebaseEvent(
+                                'CRIAR_PERFIL_PAGE_AVANÇAR_BTN_ON_TAP');
+                            if (_model.nomeTextController.text == null ||
+                                _model.nomeTextController.text == '') {
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -708,9 +775,9 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                   );
                                 },
                               );
-                            } else if (_model.whatsappaController.text ==
+                            } else if (_model.whatsappaTextController.text ==
                                     null ||
-                                _model.whatsappaController.text == '') {
+                                _model.whatsappaTextController.text == '') {
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -812,6 +879,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                       fontFamily: 'Inter',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
+                                      letterSpacing: 0.0,
                                     ),
                             elevation: 3.0,
                             borderSide: BorderSide(
@@ -882,6 +950,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         fontFamily: 'Inter',
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
+                                        letterSpacing: 0.0,
                                       ),
                                   hintText: 'Localização',
                                   icon: Icon(
@@ -929,6 +998,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 40.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
@@ -942,6 +1012,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
                                           ),
                                     ),
@@ -952,13 +1023,20 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                 decoration: BoxDecoration(),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'CRIAR_PERFIL_PAGE_CONFIRMAR_BTN_ON_TAP');
+
                                     await widget.userRef!.update({
                                       ...createUsersRecordData(
-                                        displayName: _model.nomeController.text,
-                                        photoUrl: _model.uploadedFileUrl,
+                                        displayName:
+                                            _model.nomeTextController.text,
+                                        photoUrl: valueOrDefault<String>(
+                                          _model.uploadedFileUrl,
+                                          'https://i.pinimg.com/564x/67/56/c7/6756c7bc7039baab0006cd1a216a3a86.jpg',
+                                        ),
                                         liAceitoTermosPrivacidade: true,
                                         whatsapp:
-                                            _model.whatsappaController.text,
+                                            _model.whatsappaTextController.text,
                                         genero: _model.dropDownGeneroValue,
                                         isAnunciante: false,
                                         cadastroAnuncianteAndamento: false,
@@ -990,6 +1068,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         .override(
                                           fontFamily: 'Inter',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: BorderSide(
@@ -1020,7 +1099,12 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                     children: [
                       Text(
                         'Escolha o modo',
-                        style: FlutterFlowTheme.of(context).headlineMedium,
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -1067,7 +1151,12 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                               ),
                               Text(
                                 'Tema claro',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ].divide(SizedBox(height: 8.0)),
                           ),
@@ -1099,7 +1188,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         child: Text(
                                           'Código promocional de Anunciante',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
                                     ),
@@ -1112,7 +1205,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                         child: Text(
                                           'Esse espaço é para você  insirir o código caso tenha sido indicado por algum nossos anunciantes. \nAlém de  aproveitar descontos exclusivos e outras vantagens, você pode aumentar a popularidade desse estabelecimento.',
                                           style: FlutterFlowTheme.of(context)
-                                              .labelMedium,
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
                                     ),
@@ -1120,8 +1217,8 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 28.0, 0.0, 18.0),
                                       child: TextFormField(
-                                        controller:
-                                            _model.conviteAnuncianteController,
+                                        controller: _model
+                                            .conviteAnuncianteTextController,
                                         focusNode:
                                             _model.conviteAnuncianteFocusNode,
                                         autofocus: true,
@@ -1132,7 +1229,11 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                               'Digite o código de convite',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodySmall,
+                                                  .bodySmall
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -1171,9 +1272,13 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                           contentPadding: EdgeInsets.all(6.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .conviteAnuncianteControllerValidator
+                                            .conviteAnuncianteTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -1189,6 +1294,7 @@ class _CriarPerfilWidgetState extends State<CriarPerfilWidget> {
                                               .bodySmall
                                               .override(
                                                 fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),

@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +31,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
     super.initState();
     _model = createModel(context, () => ForgotPasswordModel());
 
-    _model.emailAddressController ??=
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ForgotPassword'});
+    _model.emailAddressTextController ??=
         TextEditingController(text: currentUserEmail);
     _model.emailAddressFocusNode ??= FocusNode();
 
@@ -48,17 +49,6 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -79,7 +69,10 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                       BoxShadow(
                         blurRadius: 2.0,
                         color: Color(0x33000000),
-                        offset: Offset(0.0, 1.0),
+                        offset: Offset(
+                          0.0,
+                          1.0,
+                        ),
                       )
                     ],
                   ),
@@ -98,9 +91,11 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                           icon: Icon(
                             Icons.arrow_back_ios,
                             color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
+                            size: 30.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'FORGOT_PASSWORD_arrow_back_ios_ICN_ON_TA');
                             context.pop();
                           },
                         ),
@@ -112,6 +107,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             .override(
                               fontFamily: 'Inter',
                               color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
                             ),
                       ),
                       Container(
@@ -126,7 +122,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
                   child: Material(
                     color: Colors.transparent,
-                    elevation: 2.0,
+                    elevation: 1.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
@@ -135,7 +131,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                         maxWidth: 800.0,
                       ),
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(
                           color: FlutterFlowTheme.of(context).accent4,
@@ -177,7 +173,11 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                       child: Text(
                                         'Não se preocupe, vamos enviar um um link para seu e-mail, para você cadastrar uma nova senha.\nPor favor insira seu email cadastrado na plataforma.',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodySmall,
+                                            .bodySmall
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -189,13 +189,17 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: TextFormField(
-                                controller: _model.emailAddressController,
+                                controller: _model.emailAddressTextController,
                                 focusNode: _model.emailAddressFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Seu email',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
                                   hintText: 'Seu e-mail',
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -203,6 +207,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF57636C),
                                         fontSize: 14.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
                                       ),
                                   enabledBorder: OutlineInputBorder(
@@ -242,28 +247,35 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           24.0, 24.0, 20.0, 24.0),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
                                 maxLines: null,
                                 validator: _model
-                                    .emailAddressControllerValidator
+                                    .emailAddressTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'FORGOT_PASSWORD_PAGE_Button-Login_ON_TAP');
                                 _model.usuarioRef = await queryUsersRecordOnce(
                                   queryBuilder: (usersRecord) =>
                                       usersRecord.where(
                                     'email',
                                     isEqualTo:
-                                        _model.emailAddressController.text,
+                                        _model.emailAddressTextController.text,
                                   ),
                                   singleRecord: true,
                                 ).then((s) => s.firstOrNull);
-                                if (_model.emailAddressController.text ==
+                                if (_model.emailAddressTextController.text ==
                                     _model.usuarioRef?.email) {
-                                  if (_model
-                                      .emailAddressController.text.isEmpty) {
+                                  if (_model.emailAddressTextController.text
+                                      .isEmpty) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -274,7 +286,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                     return;
                                   }
                                   await authManager.resetPassword(
-                                    email: _model.emailAddressController.text,
+                                    email:
+                                        _model.emailAddressTextController.text,
                                     context: context,
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -331,8 +344,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                       fontFamily: 'Inter',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
+                                      letterSpacing: 0.0,
                                     ),
-                                elevation: 3.0,
+                                elevation: 1.0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,

@@ -233,8 +233,32 @@ service cloud.firestore {
       allow create: if request.auth.uid == parent;
       allow read: if request.auth.uid == parent;
       allow write: if request.auth.uid == parent;
+      allow delete: if request.auth.uid == parent;
+    }
+
+    match /Anunciante/{parent}/Relatorio/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
       allow delete: if false;
     }
+
+    match /{path=**}/Relatorio/{document} {
+      allow read: if true;
+    }
+
+
+    match /Anunciante/{parent}/assinaturas/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/assinaturas/{document} {
+      allow read: if true;
+    }
+
 
     match /ff_user_push_notifications/{id} {
       allow read, update, delete: if false;

@@ -8,7 +8,6 @@ import 'forgot_password_widget.dart' show ForgotPasswordWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,12 +19,10 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
+  TextEditingController? emailAddressTextController;
+  String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Button-Login widget.
   UsersRecord? usuarioRef;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {}
@@ -34,10 +31,6 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
   void dispose() {
     unfocusNode.dispose();
     emailAddressFocusNode?.dispose();
-    emailAddressController?.dispose();
+    emailAddressTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -233,15 +233,119 @@ class PagamentoCartaoCall {
 
 /// End MercadoPago Group Code
 
-class ApiViacepCall {
-  static Future<ApiCallResponse> call({
-    String? cep = '92704-380',
+/// Start Stripe Group Code
+
+class StripeGroup {
+  static String baseUrl = 'https://api.stripe.com/v1';
+  static Map<String, String> headers = {
+    'Authorization':
+        'Bearer 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',
+    'Stripe-Version': '2020-03-02',
+  };
+  static RetrieveBalanceBuscarSaldoCall retrieveBalanceBuscarSaldoCall =
+      RetrieveBalanceBuscarSaldoCall();
+  static CreateCheckoutSessionCall createCheckoutSessionCall =
+      CreateCheckoutSessionCall();
+  static RetrievePaymentIntentCall retrievePaymentIntentCall =
+      RetrievePaymentIntentCall();
+  static RetrieveCheckoutSessionCall retrieveCheckoutSessionCall =
+      RetrieveCheckoutSessionCall();
+  static ListCustomersUsuariosAtivoCall listCustomersUsuariosAtivoCall =
+      ListCustomersUsuariosAtivoCall();
+}
+
+class RetrieveBalanceBuscarSaldoCall {
+  Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Retrieve balance Buscar Saldo',
+      apiUrl: '${StripeGroup.baseUrl}/balance',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Stripe-Version': '2020-03-02',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreateCheckoutSessionCall {
+  Future<ApiCallResponse> call({
+    String? lineItemsPrice = 'price_1OvhDVASe7GrgGs5kbIuALws',
+    int? lineItemsQtd = 1,
+    String? mode = 'payment',
+    String? successUrl = 'https://meencontra.com.br/pagamento/',
+    String? customerEmail = '',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'ApiViacep',
-      apiUrl: 'viacep.com.br/ws/${cep}/json/',
+      callName: 'Create Checkout Session',
+      apiUrl: '${StripeGroup.baseUrl}/checkout/sessions',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Stripe-Version': '2020-03-02',
+      },
+      params: {
+        'line_items[0][price]': lineItemsPrice,
+        'line_items[0][quantity]': lineItemsQtd,
+        'mode': mode,
+        'success_url': successUrl,
+        'customer_email': customerEmail,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RetrievePaymentIntentCall {
+  Future<ApiCallResponse> call({
+    String? idPaymentIntent = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Retrieve PaymentIntent',
+      apiUrl: '${StripeGroup.baseUrl}/payment_intents/${idPaymentIntent}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Stripe-Version': '2020-03-02',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RetrieveCheckoutSessionCall {
+  Future<ApiCallResponse> call({
+    String? idsessionCheckout = '',
+    String? status = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Retrieve Checkout Session',
+      apiUrl: '${StripeGroup.baseUrl}/checkout/sessions/${idsessionCheckout}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Stripe-Version': '2020-03-02',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -251,29 +355,66 @@ class ApiViacepCall {
     );
   }
 
-  static String? logradouro(dynamic response) =>
-      castToType<String>(getJsonField(
+  String? status(dynamic response) => castToType<String>(getJsonField(
         response,
-        r'''$.logradouro''',
-      ));
-  static String? complemento(dynamic response) =>
-      castToType<String>(getJsonField(
-        response,
-        r'''$.complemento''',
-      ));
-  static String? bairro(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.bairro''',
-      ));
-  static String? cidade(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.localidade''',
-      ));
-  static String? uf(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.uf''',
+        r'''$.status''',
       ));
 }
+
+class ListCustomersUsuariosAtivoCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? status = 'complete',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Customers UsuariosAtivo',
+      apiUrl: '${StripeGroup.baseUrl}/customers',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Stripe-Version': '2020-03-02',
+      },
+      params: {
+        'email': email,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? statusAssinatura(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data[:].subscriptions.data[:].status''',
+      ));
+  List<String>? emailAnunciante(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].email''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? nomeAnunciante(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  bool? status(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.data[:].subscriptions.data[:].items.data[:].plan.active''',
+      ));
+}
+
+/// End Stripe Group Code
 
 class ApiPagingParams {
   int nextPageNumber = 0;

@@ -21,6 +21,7 @@ import '/backend/firebase_dynamic_links/firebase_dynamic_links.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
   await initFirebase();
 
@@ -100,6 +101,7 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
+        useMaterial3: false,
       ),
       themeMode: _themeMode,
       routerConfig: _router,
@@ -146,80 +148,86 @@ class _NavBarPageState extends State<NavBarPage> {
 
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() {
-          _currentPage = null;
-          _currentPageName = tabs.keys.toList()[i];
-        }),
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: FlutterFlowTheme.of(context).accent2,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              FFIcons.khomeOFFStroke,
-              size: 20.0,
+      bottomNavigationBar: Visibility(
+        visible: responsiveVisibility(
+          context: context,
+          desktop: false,
+        ),
+        child: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (i) => setState(() {
+            _currentPage = null;
+            _currentPageName = tabs.keys.toList()[i];
+          }),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          selectedItemColor: FlutterFlowTheme.of(context).primary,
+          unselectedItemColor: FlutterFlowTheme.of(context).accent2,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                FFIcons.khomeOFFStroke,
+                size: 20.0,
+              ),
+              activeIcon: Icon(
+                FFIcons.khomeON,
+                size: 24.0,
+              ),
+              label: 'Inicio',
+              tooltip: '',
             ),
-            activeIcon: Icon(
-              FFIcons.khomeON,
-              size: 24.0,
+            BottomNavigationBarItem(
+              icon: Icon(
+                FFIcons.klupa,
+                size: 24.0,
+              ),
+              activeIcon: Icon(
+                FFIcons.klupa,
+                size: 24.0,
+              ),
+              label: 'Categoria',
+              tooltip: '',
             ),
-            label: 'Inicio',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FFIcons.klupa,
-              size: 24.0,
+            BottomNavigationBarItem(
+              icon: Icon(
+                FFIcons.kmeInformaOFF,
+                size: 20.0,
+              ),
+              activeIcon: Icon(
+                FFIcons.kmeInformaON,
+                size: 24.0,
+              ),
+              label: 'meinforma',
+              tooltip: '',
             ),
-            activeIcon: Icon(
-              FFIcons.klupa,
-              size: 24.0,
+            BottomNavigationBarItem(
+              icon: Icon(
+                FFIcons.kmeContrataOFF,
+                size: 20.0,
+              ),
+              activeIcon: Icon(
+                FFIcons.kmeContrataOFF,
+                size: 24.0,
+              ),
+              label: 'mecontrata',
+              tooltip: '',
             ),
-            label: 'Categoria',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FFIcons.kmeInformaOFF,
-              size: 20.0,
-            ),
-            activeIcon: Icon(
-              FFIcons.kmeInformaON,
-              size: 24.0,
-            ),
-            label: 'meinforma',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FFIcons.kmeContrataOFF,
-              size: 20.0,
-            ),
-            activeIcon: Icon(
-              FFIcons.kmeContrataOFF,
-              size: 24.0,
-            ),
-            label: 'mecontrata',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FFIcons.kmeDivirtaOFF,
-              size: 20.0,
-            ),
-            activeIcon: Icon(
-              FFIcons.kmeDivirtaON,
-              size: 24.0,
-            ),
-            label: 'medivirta',
-            tooltip: '',
-          )
-        ],
+            BottomNavigationBarItem(
+              icon: Icon(
+                FFIcons.kmeDivirtaOFF,
+                size: 20.0,
+              ),
+              activeIcon: Icon(
+                FFIcons.kmeDivirtaON,
+                size: 24.0,
+              ),
+              label: 'medivirta',
+              tooltip: '',
+            )
+          ],
+        ),
       ),
     );
   }

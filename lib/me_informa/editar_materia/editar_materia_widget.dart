@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,10 +8,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +42,11 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
     super.initState();
     _model = createModel(context, () => EditarMateriaModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'EditarMateria'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('EDITAR_MATERIA_EditarMateria_ON_INIT_STA');
       setState(() {
         _model.modoExibicao = false;
       });
@@ -71,17 +74,6 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return StreamBuilder<MateriasRecord>(
       stream: MateriasRecord.getDocument(widget.materiaRef!),
       builder: (context, snapshot) {
@@ -138,6 +130,8 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                           perfil:
                               valueOrDefault(currentUserDocument?.perfil, ''),
                           iconLeft: () async {
+                            logFirebaseEvent(
+                                'EDITAR_MATERIA_Container_pxn8e06r_CALLBA');
                             var confirmDialogResponse = await showDialog<bool>(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -169,6 +163,8 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                             }
                           },
                           iconRight: () async {
+                            logFirebaseEvent(
+                                'EDITAR_MATERIA_Container_pxn8e06r_CALLBA');
                             if (_model.modoExibicao == true) {
                               setState(() {
                                 _model.modoExibicao = false;
@@ -260,10 +256,14 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${_model.descricaoFotoController.text}— Foto:${_model.creditosImgController.text}',
+                                              '${_model.descricaoFotoTextController.text}— Foto:${_model.creditosImgTextController.text}',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium,
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ].divide(SizedBox(height: 16.0)),
                                         ),
@@ -289,6 +289,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                               .override(
                                                 fontFamily: 'Inter',
                                                 color: Color(0xFFB60924),
+                                                letterSpacing: 0.0,
                                               ),
                                         ),
                                         Row(
@@ -298,10 +299,15 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                               'Por ',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
-                                              _model.escritoPorController.text,
+                                              _model.escritoPorTextController
+                                                  .text,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -311,6 +317,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .alternate,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ],
@@ -338,6 +345,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                             Text(
@@ -348,6 +356,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                             Text(
@@ -364,21 +373,27 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ],
                                         ),
                                         Text(
-                                          _model.tituloController.text,
+                                          _model.tituloTextController.text,
                                           style: FlutterFlowTheme.of(context)
-                                              .headlineLarge,
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                         Text(
-                                          _model.conteudoController.text,
+                                          _model.conteudoTextController.text,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
                                         ),
@@ -411,7 +426,11 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                     'Redação TVGO',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                   ),
                                                 ].divide(SizedBox(width: 12.0)),
                                               ),
@@ -477,6 +496,8 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'EDITAR_MATERIA_PAGE_uploadImg_ON_TAP');
                                           final selectedMedia =
                                               await selectMedia(
                                             maxWidth: 1600.00,
@@ -618,7 +639,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                         0.0, 12.0, 0.0, 0.0),
                                                 child: TextFormField(
                                                   controller: _model
-                                                          .descricaoFotoController ??=
+                                                          .descricaoFotoTextController ??=
                                                       TextEditingController(
                                                     text:
                                                         editarMateriaMateriasRecord
@@ -626,18 +647,25 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                   ),
                                                   focusNode: _model
                                                       .descricaoFotoFocusNode,
+                                                  autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText:
                                                         'De uma descrição da imagem',
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
-                                                    hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
+                                                    labelStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    hintStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -697,17 +725,21 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                   maxLines: 2,
                                                   minLines: 1,
                                                   validator: _model
-                                                      .descricaoFotoControllerValidator
+                                                      .descricaoFotoTextControllerValidator
                                                       .asValidator(context),
                                                 ),
                                               ),
                                               TextFormField(
                                                 controller: _model
-                                                        .creditosImgController ??=
+                                                        .creditosImgTextController ??=
                                                     TextEditingController(
                                                   text:
                                                       editarMateriaMateriasRecord
@@ -715,6 +747,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                 ),
                                                 focusNode:
                                                     _model.creditosImgFocusNode,
+                                                autofocus: false,
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   labelText:
@@ -722,11 +755,19 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                   labelStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMedium,
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                   hintStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelMedium,
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
                                                   enabledBorder:
                                                       UnderlineInputBorder(
                                                     borderSide: BorderSide(
@@ -786,11 +827,15 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 maxLines: 5,
                                                 minLines: 1,
                                                 validator: _model
-                                                    .creditosImgControllerValidator
+                                                    .creditosImgTextControllerValidator
                                                     .asValidator(context),
                                               ),
                                             ].divide(SizedBox(height: 16.0)),
@@ -842,7 +887,11 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                           height: 50.0,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyMedium,
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintText: 'Escolha uma categoria',
                                           icon: Icon(
                                             Icons.keyboard_arrow_down_rounded,
@@ -867,23 +916,32 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                           isMultiSelect: false,
                                         ),
                                         TextFormField(
-                                          controller:
-                                              _model.escritoPorController ??=
-                                                  TextEditingController(
+                                          controller: _model
+                                                  .escritoPorTextController ??=
+                                              TextEditingController(
                                             text: editarMateriaMateriasRecord
                                                 .escritoPor,
                                           ),
                                           focusNode: _model.escritoPorFocusNode,
+                                          autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
                                                 'A matéria esta sendo escrita por...',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -930,29 +988,42 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                     12.0, 0.0, 0.0, 0.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                           validator: _model
-                                              .escritoPorControllerValidator
+                                              .escritoPorTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         TextFormField(
                                           controller:
-                                              _model.tituloController ??=
+                                              _model.tituloTextController ??=
                                                   TextEditingController(
                                             text: editarMateriaMateriasRecord
                                                 .tituloMateria,
                                           ),
                                           focusNode: _model.tituloFocusNode,
+                                          autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
                                                 'Escreva o titulo da matéria',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -996,31 +1067,44 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                           maxLines: 5,
                                           minLines: 1,
                                           validator: _model
-                                              .tituloControllerValidator
+                                              .tituloTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         TextFormField(
                                           controller:
-                                              _model.conteudoController ??=
+                                              _model.conteudoTextController ??=
                                                   TextEditingController(
                                             text: editarMateriaMateriasRecord
                                                 .conteudoMateria,
                                           ),
                                           focusNode: _model.conteudoFocusNode,
+                                          autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
                                                 'Escreva o conteudo da matéria',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -1064,11 +1148,15 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
                                           maxLines: 20,
                                           minLines: 4,
                                           validator: _model
-                                              .conteudoControllerValidator
+                                              .conteudoTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         Container(
@@ -1080,7 +1168,11 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                 'Matéria destaque?',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Switch.adaptive(
                                                 value: _model.switchValue ??=
@@ -1126,6 +1218,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                                   true
                                                               ? 14.0
                                                               : 12.0,
+                                                      letterSpacing: 0.0,
                                                     ),
                                               ),
                                             ],
@@ -1138,33 +1231,47 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                           ),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_MATERIA_SALVAR_ALTERAÇÕES_BTN_ON_');
+                                              if (_model.uploadedFileUrl !=
+                                                      null &&
+                                                  _model.uploadedFileUrl !=
+                                                      '') {
+                                                await FirebaseStorage.instance
+                                                    .refFromURL(
+                                                        editarMateriaMateriasRecord
+                                                            .imagemCapa)
+                                                    .delete();
+                                              }
+
                                               await widget.materiaRef!.update(
                                                   createMateriasRecordData(
                                                 creditosImagem: _model
-                                                    .creditosImgController.text,
+                                                    .creditosImgTextController
+                                                    .text,
                                                 escritoPor: _model
-                                                    .escritoPorController.text,
+                                                    .escritoPorTextController
+                                                    .text,
                                                 tituloMateria: _model
-                                                    .tituloController.text,
+                                                    .tituloTextController.text,
                                                 conteudoMateria: _model
-                                                    .conteudoController.text,
+                                                    .conteudoTextController
+                                                    .text,
                                                 categoria: _model
                                                     .dropDownCategoriaValue,
                                                 materiaDestaque:
                                                     _model.switchValue,
                                                 imagemCapa: _model
-                                                                .uploadedLocalFile !=
+                                                                .uploadedFileUrl !=
                                                             null &&
-                                                        (_model
-                                                                .uploadedLocalFile
-                                                                .bytes
-                                                                ?.isNotEmpty ??
-                                                            false)
+                                                        _model.uploadedFileUrl !=
+                                                            ''
                                                     ? _model.uploadedFileUrl
                                                     : editarMateriaMateriasRecord
                                                         .imagemCapa,
                                                 descricaoImg: _model
-                                                    .creditosImgController.text,
+                                                    .creditosImgTextController
+                                                    .text,
                                               ));
                                               var confirmDialogResponse =
                                                   await showDialog<bool>(
@@ -1235,6 +1342,7 @@ class _EditarMateriaWidgetState extends State<EditarMateriaWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color: Colors.white,
+                                                        letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
                                               borderSide: BorderSide(

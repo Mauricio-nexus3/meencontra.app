@@ -38,11 +38,13 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
     super.initState();
     _model = createModel(context, () => EditarPerfilModel());
 
-    _model.yourNameController ??=
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'EditarPerfil'});
+    _model.yourNameTextController ??=
         TextEditingController(text: currentUserDisplayName);
     _model.yourNameFocusNode ??= FocusNode();
 
-    _model.editWhatsController ??= TextEditingController(
+    _model.editWhatsTextController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.whatsapp, ''));
     _model.editWhatsFocusNode ??= FocusNode();
 
@@ -58,20 +60,9 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
@@ -83,9 +74,10 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
           icon: Icon(
             FFIcons.karrowBack,
             color: FlutterFlowTheme.of(context).secondaryText,
-            size: 24.0,
+            size: 30.0,
           ),
           onPressed: () async {
+            logFirebaseEvent('EDITAR_PERFIL_PAGE_arrowBack_ICN_ON_TAP');
             context.pop();
           },
         ),
@@ -94,6 +86,7 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
           style: FlutterFlowTheme.of(context).headlineMedium.override(
                 fontFamily: 'Inter',
                 color: FlutterFlowTheme.of(context).secondaryText,
+                letterSpacing: 0.0,
               ),
         ),
         actions: [],
@@ -170,6 +163,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'EDITAR_PERFIL_ALTERAR_FOTO_DE_PERFIL_BTN');
                               final selectedMedia = await selectMedia(
                                 maxWidth: 100.00,
                                 maxHeight: 100.00,
@@ -231,13 +226,14 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Lexend Deca',
                                     color: FlutterFlowTheme.of(context).primary,
                                     fontSize: 14.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                               elevation: 3.0,
@@ -253,15 +249,24 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                         builder: (context) => Container(
                           width: 345.0,
                           child: TextFormField(
-                            controller: _model.yourNameController,
+                            controller: _model.yourNameTextController,
                             focusNode: _model.yourNameFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Seu nome',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context).accent4,
@@ -294,8 +299,13 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.yourNameControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model.yourNameTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -304,15 +314,24 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                         builder: (context) => Container(
                           width: 345.0,
                           child: TextFormField(
-                            controller: _model.editWhatsController,
+                            controller: _model.editWhatsTextController,
                             focusNode: _model.editWhatsFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Whatsapp',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context).accent4,
@@ -345,7 +364,12 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
                             maxLength: 11,
                             maxLengthEnforcement: MaxLengthEnforcement.none,
                             buildCounter: (context,
@@ -353,7 +377,7 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                     required isFocused,
                                     maxLength}) =>
                                 null,
-                            validator: _model.editWhatsControllerValidator
+                            validator: _model.editWhatsTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -403,6 +427,7 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
@@ -419,6 +444,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                   size: 30.0,
                                 ),
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'EDITAR_PERFIL_chevron_right_ICN_ON_TAP');
                                   if (currentUserEmail.isEmpty) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -443,10 +470,13 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                         alignment: AlignmentDirectional(0.0, 0.05),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDITAR_PERFIL_SALVAR_ALTERAÇÕES_BTN_ON_T');
+
                             await currentUserReference!
                                 .update(createUsersRecordData(
-                              displayName: _model.yourNameController.text,
-                              whatsapp: _model.editWhatsController.text,
+                              displayName: _model.yourNameTextController.text,
+                              whatsapp: _model.editWhatsTextController.text,
                               photoUrl: _model.uploadedFileUrl,
                             ));
 
@@ -467,9 +497,10 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                   fontFamily: 'Lexend Deca',
                                   color: Colors.white,
                                   fontSize: 16.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.normal,
                                 ),
-                            elevation: 2.0,
+                            elevation: 1.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
@@ -531,6 +562,7 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .accent2,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -546,6 +578,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_PERFIL_PAGE_Icon_r5ftt6qv_ON_TAP');
                                               setState(() {
                                                 _model.configuracoes = 0;
                                               });
@@ -565,6 +599,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_PERFIL_PAGE_Icon_bl0ud1px_ON_TAP');
                                               setState(() {
                                                 _model.configuracoes = 1;
                                               });
@@ -600,6 +636,9 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_PERFIL_Container_wxutjslw_ON_TAP');
+
                                               context.pushNamed(
                                                 'LinkExterno',
                                                 queryParameters: {
@@ -666,6 +705,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .normal,
@@ -684,6 +725,9 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_PERFIL_Container_vkj3caox_ON_TAP');
+
                                               context.pushNamed(
                                                 'LinkExterno',
                                                 queryParameters: {
@@ -751,6 +795,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .normal,
@@ -769,6 +815,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_PERFIL_Container_v9osx1rd_ON_TAP');
                                               var _shouldSetState = false;
                                               var confirmDialogResponse =
                                                   await showDialog<bool>(
@@ -949,6 +997,8 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,

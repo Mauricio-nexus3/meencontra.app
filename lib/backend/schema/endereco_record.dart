@@ -57,6 +57,11 @@ class EnderecoRecord extends FirestoreRecord {
   String get cep => _cep ?? '';
   bool hasCep() => _cep != null;
 
+  // "EnderecoCompleto" field.
+  String? _enderecoCompleto;
+  String get enderecoCompleto => _enderecoCompleto ?? '';
+  bool hasEnderecoCompleto() => _enderecoCompleto != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -68,6 +73,7 @@ class EnderecoRecord extends FirestoreRecord {
     _cidade = snapshotData['Cidade'] as String?;
     _uf = snapshotData['Uf'] as String?;
     _cep = snapshotData['Cep'] as String?;
+    _enderecoCompleto = snapshotData['EnderecoCompleto'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -118,6 +124,7 @@ Map<String, dynamic> createEnderecoRecordData({
   String? cidade,
   String? uf,
   String? cep,
+  String? enderecoCompleto,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -129,6 +136,7 @@ Map<String, dynamic> createEnderecoRecordData({
       'Cidade': cidade,
       'Uf': uf,
       'Cep': cep,
+      'EnderecoCompleto': enderecoCompleto,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class EnderecoRecordDocumentEquality implements Equality<EnderecoRecord> {
         e1?.bairro == e2?.bairro &&
         e1?.cidade == e2?.cidade &&
         e1?.uf == e2?.uf &&
-        e1?.cep == e2?.cep;
+        e1?.cep == e2?.cep &&
+        e1?.enderecoCompleto == e2?.enderecoCompleto;
   }
 
   @override
@@ -159,7 +168,8 @@ class EnderecoRecordDocumentEquality implements Equality<EnderecoRecord> {
         e?.bairro,
         e?.cidade,
         e?.uf,
-        e?.cep
+        e?.cep,
+        e?.enderecoCompleto
       ]);
 
   @override

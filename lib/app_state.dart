@@ -22,12 +22,6 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
-      _ultimaNotificacao = prefs.containsKey('ff_ultimaNotificacao')
-          ? DateTime.fromMillisecondsSinceEpoch(
-              prefs.getInt('ff_ultimaNotificacao')!)
-          : _ultimaNotificacao;
-    });
-    _safeInit(() {
       _acaoDeAtualizacao =
           prefs.getBool('ff_acaoDeAtualizacao') ?? _acaoDeAtualizacao;
     });
@@ -38,8 +32,23 @@ class FFAppState extends ChangeNotifier {
           : _resetarNotificacao;
     });
     _safeInit(() {
-      _ultimaAtualizacao =
-          prefs.getString('ff_ultimaAtualizacao') ?? _ultimaAtualizacao;
+      _ultimaNotificacaoAtualizacao =
+          prefs.containsKey('ff_ultimaNotificacaoAtualizacao')
+              ? DateTime.fromMillisecondsSinceEpoch(
+                  prefs.getInt('ff_ultimaNotificacaoAtualizacao')!)
+              : _ultimaNotificacaoAtualizacao;
+    });
+    _safeInit(() {
+      _versaoNoDispositivo =
+          prefs.getString('ff_versaoNoDispositivo') ?? _versaoNoDispositivo;
+    });
+    _safeInit(() {
+      _versaoAtualMobile =
+          prefs.getString('ff_versaoAtualMobile') ?? _versaoAtualMobile;
+    });
+    _safeInit(() {
+      _versaoAtualDesktop =
+          prefs.getString('ff_versaoAtualDesktop') ?? _versaoAtualDesktop;
     });
     _safeInit(() {
       _resetarAtualizacao =
@@ -65,6 +74,10 @@ class FFAppState extends ChangeNotifier {
       _nomesProdutosCarrinhoUsuer =
           prefs.getStringList('ff_nomesProdutosCarrinhoUsuer') ??
               _nomesProdutosCarrinhoUsuer;
+    });
+    _safeInit(() {
+      _paginaPagamentoLink =
+          prefs.getString('ff_paginaPagamentoLink') ?? _paginaPagamentoLink;
     });
   }
 
@@ -123,16 +136,6 @@ class FFAppState extends ChangeNotifier {
     _VarDataPagamento = _value;
   }
 
-  DateTime? _ultimaNotificacao =
-      DateTime.fromMillisecondsSinceEpoch(1701856800000);
-  DateTime? get ultimaNotificacao => _ultimaNotificacao;
-  set ultimaNotificacao(DateTime? _value) {
-    _ultimaNotificacao = _value;
-    _value != null
-        ? prefs.setInt('ff_ultimaNotificacao', _value.millisecondsSinceEpoch)
-        : prefs.remove('ff_ultimaNotificacao');
-  }
-
   bool _acaoDeAtualizacao = false;
   bool get acaoDeAtualizacao => _acaoDeAtualizacao;
   set acaoDeAtualizacao(bool _value) {
@@ -150,11 +153,36 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_resetarNotificacao');
   }
 
-  String _ultimaAtualizacao = '2.0.1';
-  String get ultimaAtualizacao => _ultimaAtualizacao;
-  set ultimaAtualizacao(String _value) {
-    _ultimaAtualizacao = _value;
-    prefs.setString('ff_ultimaAtualizacao', _value);
+  DateTime? _ultimaNotificacaoAtualizacao =
+      DateTime.fromMillisecondsSinceEpoch(1701856800000);
+  DateTime? get ultimaNotificacaoAtualizacao => _ultimaNotificacaoAtualizacao;
+  set ultimaNotificacaoAtualizacao(DateTime? _value) {
+    _ultimaNotificacaoAtualizacao = _value;
+    _value != null
+        ? prefs.setInt(
+            'ff_ultimaNotificacaoAtualizacao', _value.millisecondsSinceEpoch)
+        : prefs.remove('ff_ultimaNotificacaoAtualizacao');
+  }
+
+  String _versaoNoDispositivo = '2.0.1';
+  String get versaoNoDispositivo => _versaoNoDispositivo;
+  set versaoNoDispositivo(String _value) {
+    _versaoNoDispositivo = _value;
+    prefs.setString('ff_versaoNoDispositivo', _value);
+  }
+
+  String _versaoAtualMobile = '';
+  String get versaoAtualMobile => _versaoAtualMobile;
+  set versaoAtualMobile(String _value) {
+    _versaoAtualMobile = _value;
+    prefs.setString('ff_versaoAtualMobile', _value);
+  }
+
+  String _versaoAtualDesktop = '3.2.5';
+  String get versaoAtualDesktop => _versaoAtualDesktop;
+  set versaoAtualDesktop(String _value) {
+    _versaoAtualDesktop = _value;
+    prefs.setString('ff_versaoAtualDesktop', _value);
   }
 
   String _resetarAtualizacao = '2.0.1';
@@ -299,6 +327,57 @@ class FFAppState extends ChangeNotifier {
   String get templeteLayoutSelecionado => _templeteLayoutSelecionado;
   set templeteLayoutSelecionado(String _value) {
     _templeteLayoutSelecionado = _value;
+  }
+
+  List<DocumentReference> _testeAleatorioEmpresaAnunciantesRef = [];
+  List<DocumentReference> get testeAleatorioEmpresaAnunciantesRef =>
+      _testeAleatorioEmpresaAnunciantesRef;
+  set testeAleatorioEmpresaAnunciantesRef(List<DocumentReference> _value) {
+    _testeAleatorioEmpresaAnunciantesRef = _value;
+  }
+
+  void addToTesteAleatorioEmpresaAnunciantesRef(DocumentReference _value) {
+    _testeAleatorioEmpresaAnunciantesRef.add(_value);
+  }
+
+  void removeFromTesteAleatorioEmpresaAnunciantesRef(DocumentReference _value) {
+    _testeAleatorioEmpresaAnunciantesRef.remove(_value);
+  }
+
+  void removeAtIndexFromTesteAleatorioEmpresaAnunciantesRef(int _index) {
+    _testeAleatorioEmpresaAnunciantesRef.removeAt(_index);
+  }
+
+  void updateTesteAleatorioEmpresaAnunciantesRefAtIndex(
+    int _index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    _testeAleatorioEmpresaAnunciantesRef[_index] =
+        updateFn(_testeAleatorioEmpresaAnunciantesRef[_index]);
+  }
+
+  void insertAtIndexInTesteAleatorioEmpresaAnunciantesRef(
+      int _index, DocumentReference _value) {
+    _testeAleatorioEmpresaAnunciantesRef.insert(_index, _value);
+  }
+
+  String _valueFormat = '';
+  String get valueFormat => _valueFormat;
+  set valueFormat(String _value) {
+    _valueFormat = _value;
+  }
+
+  double _valueDouble = 0.0;
+  double get valueDouble => _valueDouble;
+  set valueDouble(double _value) {
+    _valueDouble = _value;
+  }
+
+  String _paginaPagamentoLink = '';
+  String get paginaPagamentoLink => _paginaPagamentoLink;
+  set paginaPagamentoLink(String _value) {
+    _paginaPagamentoLink = _value;
+    prefs.setString('ff_paginaPagamentoLink', _value);
   }
 }
 

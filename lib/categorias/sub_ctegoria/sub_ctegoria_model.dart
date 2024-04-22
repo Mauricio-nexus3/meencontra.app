@@ -1,5 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/componentes/anuncios_c_a_r_d_s/card_premium_categoria/card_premium_categoria_widget.dart';
+import '/categorias/componentes/card_premium_categoria/card_premium_categoria_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,8 +11,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 import 'sub_ctegoria_widget.dart' show SubCtegoriaWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +28,8 @@ class SubCtegoriaModel extends FlutterFlowModel<SubCtegoriaWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
-
-  /// Initialization and disposal methods.
+  // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
+  AnuncianteRecord? anuncinateGratisdoc;
 
   @override
   void initState(BuildContext context) {}
@@ -37,8 +38,4 @@ class SubCtegoriaModel extends FlutterFlowModel<SubCtegoriaWidget> {
   void dispose() {
     unfocusNode.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

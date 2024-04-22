@@ -59,8 +59,7 @@ Isso ajudará a saber com precisão a distancia que está do estabelecimento des
 	<key>NSCameraUsageDescription</key>
     <string>Para tirar fotos ou gravar vídeos para seus anúncios, esse aplicativo requer acesso à câmera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Para adicionar foto ao seu perfil de usúario,  esse aplicativo requer permissão para sua galeria.
-isso além de deixar seu aplicativo mais amigavel ajudará na confiabilidade ao iniciar uma conversa com algum estabelecimento</string>
+    <string>Deixa seu perfil mais atraente e convidativo. Permite que você seja facilmente reconhecido nas conversas e avaliações dentro do app.</string>
 	<key>NSCalendarsUsageDescription</key>
     <string>Para comparar as datas dos próximos eventos da cidade, esse aplicativo requer acesso ao calendario.</string>
 	<key>PermissionGroupNotification</key>
@@ -73,6 +72,22 @@ isso além de deixar seu aplicativo mais amigavel ajudará na confiabilidade ao 
         <string>remote-notification</string>
     </array>
 
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>comgooglemaps</string>
+      <string>baidumap</string>
+      <string>iosamap</string>
+      <string>waze</string>
+      <string>yandexmaps</string>
+      <string>yandexnavi</string>
+      <string>citymapper</string>
+      <string>mapswithme</string>
+      <string>osmandmaps</string>
+      <string>dgis</string>
+      <string>qqmap</string>
+      <string>here-location</string>
+
+    </array>
 
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

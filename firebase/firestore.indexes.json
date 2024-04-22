@@ -1,20 +1,6 @@
 {
   "indexes": [
     {
-      "collectionGroup": "meContrataVAGAS",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "Status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "Publicado",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
       "collectionGroup": "Anunciante",
       "queryScope": "COLLECTION",
       "fields": [
@@ -24,6 +10,20 @@
         },
         {
           "fieldPath": "PlanoAssinatura",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "meContrataVAGAS",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Publicado",
           "order": "DESCENDING"
         }
       ]
@@ -41,16 +41,6 @@
       ]
     },
     {
-      "collectionGroup": "Materias",
-      "fieldPath": "DataPublicacaoMateria",
-      "indexes": [
-        {
-          "order": "DESCENDING",
-          "queryScope": "COLLECTION_GROUP"
-        }
-      ]
-    },
-    {
       "collectionGroup": "Anuncios",
       "fieldPath": "Categoria",
       "indexes": [
@@ -92,10 +82,30 @@
     },
     {
       "collectionGroup": "Anuncios",
-      "fieldPath": "Categoria",
+      "fieldPath": "Anunciado",
       "indexes": [
         {
           "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Produto",
+      "fieldPath": "ProdutoAnunciado",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Materias",
+      "fieldPath": "DataPublicacaoMateria",
+      "indexes": [
+        {
+          "order": "DESCENDING",
           "queryScope": "COLLECTION_GROUP"
         }
       ]

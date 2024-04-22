@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +65,6 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -94,7 +92,10 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
             BoxShadow(
               blurRadius: 3.0,
               color: Color(0x411D2429),
-              offset: Offset(0.0, 1.0),
+              offset: Offset(
+                0.0,
+                1.0,
+              ),
             )
           ],
           borderRadius: BorderRadius.circular(8.0),
@@ -138,7 +139,10 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                     children: [
                       Text(
                         widget.nomeFantasia!,
-                        style: FlutterFlowTheme.of(context).bodyLarge,
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                       Padding(
                         padding:
@@ -173,7 +177,12 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                                 replacement: '…',
                               ),
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ],
                         ),
@@ -200,7 +209,12 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                                 replacement: '…',
                               ),
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context).bodySmall,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ],
                         ),
@@ -259,7 +273,11 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                             locale: 'br',
                           ),
                           textAlign: TextAlign.end,
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Icon(
@@ -297,6 +315,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                   ),
                         ),

@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,13 +8,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import 'criar_nova_vaga_widget.dart' show CriarNovaVagaWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -48,20 +47,20 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
 
   // State field(s) for nomeVaga widget.
   FocusNode? nomeVagaFocusNode;
-  TextEditingController? nomeVagaController;
-  String? Function(BuildContext, String?)? nomeVagaControllerValidator;
+  TextEditingController? nomeVagaTextController;
+  String? Function(BuildContext, String?)? nomeVagaTextControllerValidator;
   // State field(s) for nomeEmpresa widget.
   FocusNode? nomeEmpresaFocusNode;
-  TextEditingController? nomeEmpresaController;
-  String? Function(BuildContext, String?)? nomeEmpresaControllerValidator;
+  TextEditingController? nomeEmpresaTextController;
+  String? Function(BuildContext, String?)? nomeEmpresaTextControllerValidator;
   // State field(s) for Localidade widget.
   FocusNode? localidadeFocusNode;
-  TextEditingController? localidadeController;
-  String? Function(BuildContext, String?)? localidadeControllerValidator;
+  TextEditingController? localidadeTextController;
+  String? Function(BuildContext, String?)? localidadeTextControllerValidator;
   // State field(s) for Salario widget.
   FocusNode? salarioFocusNode;
-  TextEditingController? salarioController;
-  String? Function(BuildContext, String?)? salarioControllerValidator;
+  TextEditingController? salarioTextController;
+  String? Function(BuildContext, String?)? salarioTextControllerValidator;
   // State field(s) for DropDown_Experiencia widget.
   String? dropDownExperienciaValue;
   FormFieldController<String>? dropDownExperienciaValueController;
@@ -73,12 +72,12 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
   FormFieldController<String>? dropDownRegimeValueController;
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode1;
-  TextEditingController? descriptionController1;
-  String? Function(BuildContext, String?)? descriptionController1Validator;
+  TextEditingController? descriptionTextController1;
+  String? Function(BuildContext, String?)? descriptionTextController1Validator;
   // State field(s) for description widget.
   FocusNode? descriptionFocusNode2;
-  TextEditingController? descriptionController2;
-  String? Function(BuildContext, String?)? descriptionController2Validator;
+  TextEditingController? descriptionTextController2;
+  String? Function(BuildContext, String?)? descriptionTextController2Validator;
   // State field(s) for PlanodeSaude widget.
   bool? planodeSaudeValue;
   // State field(s) for PlanoOdontolgico widget.
@@ -100,10 +99,8 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
   bool? switchURLValue;
   // State field(s) for URL widget.
   FocusNode? urlFocusNode;
-  TextEditingController? urlController;
-  String? Function(BuildContext, String?)? urlControllerValidator;
-
-  /// Initialization and disposal methods.
+  TextEditingController? urlTextController;
+  String? Function(BuildContext, String?)? urlTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -115,28 +112,24 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
     unfocusNode.dispose();
     appbarGrupoMeModel.dispose();
     nomeVagaFocusNode?.dispose();
-    nomeVagaController?.dispose();
+    nomeVagaTextController?.dispose();
 
     nomeEmpresaFocusNode?.dispose();
-    nomeEmpresaController?.dispose();
+    nomeEmpresaTextController?.dispose();
 
     localidadeFocusNode?.dispose();
-    localidadeController?.dispose();
+    localidadeTextController?.dispose();
 
     salarioFocusNode?.dispose();
-    salarioController?.dispose();
+    salarioTextController?.dispose();
 
     descriptionFocusNode1?.dispose();
-    descriptionController1?.dispose();
+    descriptionTextController1?.dispose();
 
     descriptionFocusNode2?.dispose();
-    descriptionController2?.dispose();
+    descriptionTextController2?.dispose();
 
     urlFocusNode?.dispose();
-    urlController?.dispose();
+    urlTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

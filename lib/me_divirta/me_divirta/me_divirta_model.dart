@@ -1,15 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
+import '/feed_home/componentes/feed_menu_horizont/feed_menu_horizont_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/me_divirta/medivirta_card/medivirta_card_widget.dart';
+import '/me_divirta/componentes/medivirta_card/medivirta_card_widget.dart';
+import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'me_divirta_widget.dart' show MeDivirtaWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -36,34 +38,35 @@ class MeDivirtaModel extends FlutterFlowModel<MeDivirtaWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for ColumnOK widget.
   ScrollController? columnOK;
-  // Model for AppbarGrupoMe component.
-  late AppbarGrupoMeModel appbarGrupoMeModel;
   // State field(s) for Carousel widget.
   CarouselController? carouselController;
 
   int carouselCurrentIndex = 1;
 
-  // State field(s) for ListView widget.
-  ScrollController? listViewController;
+  // State field(s) for CarouselWeb_medivirta widget.
+  CarouselController? carouselWebMedivirtaController;
 
-  /// Initialization and disposal methods.
+  int carouselWebMedivirtaCurrentIndex = 0;
+
+  // State field(s) for GridView widget.
+  ScrollController? gridViewController;
+  // Model for AppbarGrupoMe component.
+  late AppbarGrupoMeModel appbarGrupoMeModel;
+  // Model for FeedMenuHorizont component.
+  late FeedMenuHorizontModel feedMenuHorizontModel;
 
   @override
   void initState(BuildContext context) {
-    columnOK = ScrollController();
+    gridViewController = ScrollController();
     appbarGrupoMeModel = createModel(context, () => AppbarGrupoMeModel());
-    listViewController = ScrollController();
+    feedMenuHorizontModel = createModel(context, () => FeedMenuHorizontModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    columnOK?.dispose();
+    gridViewController?.dispose();
     appbarGrupoMeModel.dispose();
-    listViewController?.dispose();
+    feedMenuHorizontModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

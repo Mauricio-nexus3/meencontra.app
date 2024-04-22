@@ -37,3 +37,8 @@ double? distanceBetweenTwoPoints(
   // if you uncommented the line above, you have to replace result in the line below with finalResult
   return result;
 }
+
+String formatarParaWhatsApp(String texto) {
+  // I need a function to encode a string into URI component format
+  return Uri.encodeComponent(texto);
+}

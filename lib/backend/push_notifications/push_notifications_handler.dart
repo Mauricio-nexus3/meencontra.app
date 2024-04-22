@@ -115,13 +115,6 @@ final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
   'Index': ParameterData.none(),
   'Categorias': ParameterData.none(),
-  'Feed': ParameterData.none(),
-  'Anunciante': (data) async => ParameterData(
-        allParams: {
-          'refAnunciante':
-              getParameter<DocumentReference>(data, 'refAnunciante'),
-        },
-      ),
   'Resultado': (data) async => ParameterData(
         allParams: {
           'subCategoriasResultRef':
@@ -134,7 +127,6 @@ final parametersBuilderMap =
         },
       ),
   'ForgotPassword': ParameterData.none(),
-  'BuscaAvancada': ParameterData.none(),
   'NovoAnunciante': ParameterData.none(),
   'Suporte': (data) async => ParameterData(
         allParams: {
@@ -146,42 +138,12 @@ final parametersBuilderMap =
           'usuarioREF': getParameter<DocumentReference>(data, 'usuarioREF'),
         },
       ),
-  'DashboardAnuncios': (data) async => ParameterData(
-        allParams: {
-          'dashboardAnuncios':
-              getParameter<DocumentReference>(data, 'dashboardAnuncios'),
-        },
-      ),
-  'DashboardCatalogo': (data) async => ParameterData(
-        allParams: {
-          'dashMenuCatalogo':
-              getParameter<DocumentReference>(data, 'dashMenuCatalogo'),
-        },
-      ),
   'LinkExterno': (data) async => ParameterData(
         allParams: {
           'linkExterno': getParameter<String>(data, 'linkExterno'),
         },
       ),
-  'SuporteAnunciante': (data) async => ParameterData(
-        allParams: {
-          'anuncianteRef':
-              getParameter<DocumentReference>(data, 'anuncianteRef'),
-        },
-      ),
   'PoliticaPrivacidade': ParameterData.none(),
-  'sucesso': (data) async => ParameterData(
-        allParams: {
-          'anuncianteREF':
-              getParameter<DocumentReference>(data, 'anuncianteREF'),
-        },
-      ),
-  'PagamentoInterno': (data) async => ParameterData(
-        allParams: {
-          'anuncianteREF':
-              getParameter<DocumentReference>(data, 'anuncianteREF'),
-        },
-      ),
   'TermosDeUso': ParameterData.none(),
   'Bloqueio': (data) async => ParameterData(
         allParams: {
@@ -191,7 +153,8 @@ final parametersBuilderMap =
       ),
   'meinformaDetalhesNoticia': (data) async => ParameterData(
         allParams: {
-          'materiaRef': getParameter<DocumentReference>(data, 'materiaRef'),
+          'materiadoc': await getDocumentParameter<MateriasRecord>(
+              data, 'materiadoc', MateriasRecord.fromSnapshot),
         },
       ),
   'TVGON': (data) async => ParameterData(
@@ -211,13 +174,15 @@ final parametersBuilderMap =
   'meContrata': ParameterData.none(),
   'meContrataDetalhesVaga': (data) async => ParameterData(
         allParams: {
-          'vagaRef': getParameter<DocumentReference>(data, 'vagaRef'),
+          'vagaRef': await getDocumentParameter<MeContrataVAGASRecord>(
+              data, 'vagaRef', MeContrataVAGASRecord.fromSnapshot),
         },
       ),
   'meDivirta': ParameterData.none(),
   'meDivirtiDetalhesEvento': (data) async => ParameterData(
         allParams: {
-          'eventoRef': getParameter<DocumentReference>(data, 'eventoRef'),
+          'eventoRef': await getDocumentParameter<MeDiverteRecord>(
+              data, 'eventoRef', MeDiverteRecord.fromSnapshot),
         },
       ),
   'CriarNovaMateria': (data) async => ParameterData(
@@ -268,66 +233,52 @@ final parametersBuilderMap =
                   CarrinhoDeComprasUsuarioRecord.fromSnapshot),
         },
       ),
-  'DashboardNwAnunciante': (data) async => ParameterData(
+  'DashAnunciantePainelAdm': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
   'testeAtual': ParameterData.none(),
-  'AnuncianteCopy': (data) async => ParameterData(
+  'AnunciantePage': (data) async => ParameterData(
         allParams: {
           'documentoRefAnunciante':
               await getDocumentParameter<AnuncianteRecord>(data,
                   'documentoRefAnunciante', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'Produtos': (data) async => ParameterData(
+  'DashAnuncianteProdutos': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'catalogoCategoria': (data) async => ParameterData(
+  'DashAnuncianteCatalogo': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'DashboardNWAnuncios': (data) async => ParameterData(
+  'DashAnuncianteAnuncios': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'DashboardNWvagas': (data) async => ParameterData(
+  'DashAnunciantevagas': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'DashboardNWSuporte': (data) async => ParameterData(
+  'DashAnuncianteSuporte': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'EditarPerfilUsuario': (data) async => ParameterData(
-        allParams: {
-          'usuarioREF': await getDocumentParameter<UsersRecord>(
-              data, 'usuarioREF', UsersRecord.fromSnapshot),
-        },
-      ),
-  'detalhesProduto2': (data) async => ParameterData(
-        allParams: {
-          'detalheProduto': await getDocumentParameter<ProdutoRecord>(
-              data, 'detalheProduto', ProdutoRecord.fromSnapshot),
-          'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
-              data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
-        },
-      ),
-  'FeedCopy': ParameterData.none(),
-  'AnuncianteDashboard': (data) async => ParameterData(
+  'Feed': ParameterData.none(),
+  'DashAnunciantePerfil': (data) async => ParameterData(
         allParams: {
           'documentoRefAnunciante':
               await getDocumentParameter<AnuncianteRecord>(data,
@@ -337,20 +288,21 @@ final parametersBuilderMap =
   'notificacoes': (data) async => ParameterData(
         allParams: {},
       ),
-  'SubCtegoriaCopy2': (data) async => ParameterData(
-        allParams: {
-          'subCategoriaRefExcluir':
-              getParameter<DocumentReference>(data, 'subCategoriaRefExcluir'),
-          'categoriaDoc': await getDocumentParameter<CategoriasRecord>(
-              data, 'categoriaDoc', CategoriasRecord.fromSnapshot),
-        },
-      ),
-  'DashboardNWAssinatura': (data) async => ParameterData(
+  'DashAnuncianteAssinatura': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
+  'Pagamento': (data) async => ParameterData(
+        allParams: {
+          'anuncianteRef':
+              getParameter<DocumentReference>(data, 'anuncianteRef'),
+          'planoAssinatura': getParameter<String>(data, 'planoAssinatura'),
+          'nomeFantasia': getParameter<String>(data, 'nomeFantasia'),
+        },
+      ),
+  'meDashboardFinanceiro': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

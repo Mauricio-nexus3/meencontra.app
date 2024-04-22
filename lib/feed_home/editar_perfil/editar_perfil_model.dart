@@ -31,12 +31,12 @@ class EditarPerfilModel extends FlutterFlowModel<EditarPerfilWidget> {
 
   // State field(s) for yourName widget.
   FocusNode? yourNameFocusNode;
-  TextEditingController? yourNameController;
-  String? Function(BuildContext, String?)? yourNameControllerValidator;
+  TextEditingController? yourNameTextController;
+  String? Function(BuildContext, String?)? yourNameTextControllerValidator;
   // State field(s) for editWhats widget.
   FocusNode? editWhatsFocusNode;
-  TextEditingController? editWhatsController;
-  String? Function(BuildContext, String?)? editWhatsControllerValidator;
+  TextEditingController? editWhatsTextController;
+  String? Function(BuildContext, String?)? editWhatsTextControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
   AnuncianteRecord? anuncianteRef;
   // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
@@ -44,21 +44,15 @@ class EditarPerfilModel extends FlutterFlowModel<EditarPerfilWidget> {
   // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
   AnunciosRecord? anunciosAnuncianteRef;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
     yourNameFocusNode?.dispose();
-    yourNameController?.dispose();
+    yourNameTextController?.dispose();
 
     editWhatsFocusNode?.dispose();
-    editWhatsController?.dispose();
+    editWhatsTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
