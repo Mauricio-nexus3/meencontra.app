@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/login/componentes/login_criar_conta_componente/login_criar_conta_componente_widget.dart';
-import 'dart:ui';
+import 'dart:math';
 import 'usar_deslogado_uso_exclusivo_comp_widget.dart'
     show UsarDeslogadoUsoExclusivoCompWidget;
 import 'package:flutter/material.dart';

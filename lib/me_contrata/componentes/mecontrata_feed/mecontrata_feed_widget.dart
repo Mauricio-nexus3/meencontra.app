@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/login/componentes/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -41,7 +42,7 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
     super.initState();
     _model = createModel(context, () => MecontrataFeedModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -57,12 +58,15 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
       padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
       child: Material(
         color: Colors.transparent,
-        elevation: 0.8,
+        elevation: 2.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Container(
-          width: MediaQuery.sizeOf(context).width > 1080.0 ? 340.0 : 314.0,
+          width: valueOrDefault<double>(
+            MediaQuery.sizeOf(context).width > 1080.0 ? 340.0 : 314.0,
+            314.0,
+          ),
           height: MediaQuery.sizeOf(context).width > 1080.0 ? 240.0 : 200.0,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -85,12 +89,12 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
                     'meContrataDetalhesVaga',
                     queryParameters: {
                       'vagaRef': serializeParam(
-                        widget.parameter4,
+                        widget!.parameter4,
                         ParamType.Document,
                       ),
                     }.withoutNulls,
                     extra: <String, dynamic>{
-                      'vagaRef': widget.parameter4,
+                      'vagaRef': widget!.parameter4,
                     },
                   );
                 } else {
@@ -119,80 +123,64 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 48.0,
-                              height: 48.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                widget.parameter4!.logoEmpresa,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Flexible(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget.parameter4?.nomeVaga,
-                                      'nome vaga',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          fontSize:
-                                              MediaQuery.sizeOf(context).width >
-                                                      1080.0
-                                                  ? 16.0
-                                                  : 14.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget.parameter4?.nomeEmpresa,
-                                      'empresa nome',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          fontSize:
-                                              MediaQuery.sizeOf(context).width >
-                                                      1080.0
-                                                  ? 14.0
-                                                  : 12.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 8.0)),
-                              ),
-                            ),
-                          ].divide(SizedBox(width: 8.0)),
+                      Container(
+                        width: 48.0,
+                        height: 48.0,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.network(
+                          widget!.parameter4!.logoEmpresa,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_outward,
-                        color: FlutterFlowTheme.of(context).secondary,
-                        size: 24.0,
+                      Flexible(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              valueOrDefault<String>(
+                                widget!.parameter4?.nomeVaga,
+                                'nome vaga',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    fontSize: MediaQuery.sizeOf(context).width >
+                                            1080.0
+                                        ? 20.0
+                                        : 16.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                widget!.parameter4?.nomeEmpresa,
+                                'empresa nome',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    fontSize: MediaQuery.sizeOf(context).width >
+                                            1080.0
+                                        ? 14.0
+                                        : 12.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ].divide(SizedBox(height: 8.0)),
+                        ),
                       ),
-                    ].divide(SizedBox(width: 4.0)),
+                    ].divide(SizedBox(width: 12.0)),
                   ),
                   Expanded(
                     child: Row(
@@ -202,7 +190,7 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
                         Flexible(
                           child: Text(
                             valueOrDefault<String>(
-                              widget.parameter4?.descricao,
+                              widget!.parameter4?.descricao,
                               'empresa descricao',
                             ).maybeHandleOverflow(
                               maxChars: 150,
@@ -211,7 +199,9 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
                             style:
                                 FlutterFlowTheme.of(context).bodySmall.override(
                                       fontFamily: 'Inter',
+                                      fontSize: 14.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FontWeight.normal,
                                     ),
                           ),
                         ),
@@ -222,139 +212,76 @@ class _MecontrataFeedWidgetState extends State<MecontrataFeedWidget>
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Material(
-                        color: Colors.transparent,
-                        elevation: 1.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).accent4,
-                              width: 1.0,
-                            ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            FFIcons.kpikerMap,
+                            color: FlutterFlowTheme.of(context).secondary,
+                            size: 16.0,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  FFIcons.kpikerMap,
+                          Text(
+                            valueOrDefault<String>(
+                              widget!.parameter4?.localidade,
+                              'empresa local',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
                                   color: FlutterFlowTheme.of(context).secondary,
-                                  size: 16.0,
+                                  letterSpacing: 0.0,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.parameter4?.localidade,
-                                    'empresa local',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 4.0)),
-                            ),
                           ),
-                        ),
+                        ].divide(SizedBox(width: 4.0)),
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        elevation: 1.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).accent4,
-                              width: 1.0,
-                            ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.dollarSign,
+                            color: FlutterFlowTheme.of(context).secondary,
+                            size: 16.0,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.dollarSign,
+                          Text(
+                            valueOrDefault<String>(
+                              widget!.parameter4?.salario,
+                              'empresa salario',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
                                   color: FlutterFlowTheme.of(context).secondary,
-                                  size: 16.0,
+                                  letterSpacing: 0.0,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.parameter4?.salario,
-                                    'empresa salario',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 4.0)),
-                            ),
                           ),
-                        ),
+                        ].divide(SizedBox(width: 4.0)),
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        elevation: 1.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).accent4,
-                              width: 1.0,
+                      Flexible(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.home_work_outlined,
+                              color: FlutterFlowTheme.of(context).secondary,
+                              size: 16.0,
                             ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.home_work_outlined,
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  size: 16.0,
-                                ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.parameter4?.contratoTrabalho,
-                                    'empresa contrato',
+                            Text(
+                              valueOrDefault<String>(
+                                widget!.parameter4?.contratoTrabalho,
+                                'empresa contrato',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    letterSpacing: 0.0,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 4.0)),
                             ),
-                          ),
+                          ].divide(SizedBox(width: 4.0)),
                         ),
                       ),
                     ].divide(SizedBox(width: 4.0)),

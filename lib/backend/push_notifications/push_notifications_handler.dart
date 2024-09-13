@@ -3,10 +3,11 @@ import 'dart:convert';
 
 import 'serialization_util.dart';
 import '../backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../index.dart';
 import '../../main.dart';
@@ -45,9 +46,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     }
     _handledMessageIds.add(message.messageId);
 
-    if (mounted) {
-      setState(() => _loading = true);
-    }
+    safeSetState(() => _loading = true);
     try {
       final initialPageName = message.data['initialPageName'] as String;
       final initialParameterData = getInitialParameterData(message.data);
@@ -63,16 +62,16 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     } catch (e) {
       print('Error: $e');
     } finally {
-      if (mounted) {
-        setState(() => _loading = false);
-      }
+      safeSetState(() => _loading = false);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    handleOpenedPushNotification();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      handleOpenedPushNotification();
+    });
   }
 
   @override
@@ -117,8 +116,8 @@ final parametersBuilderMap =
   'Categorias': ParameterData.none(),
   'Resultado': (data) async => ParameterData(
         allParams: {
-          'subCategoriasResultRef':
-              getParameter<DocumentReference>(data, 'subCategoriasResultRef'),
+          'total': getParameter<double>(data, 'total'),
+          'subCategoria': getParameter<String>(data, 'subCategoria'),
         },
       ),
   'SubCtegoria': (data) async => ParameterData(
@@ -157,18 +156,12 @@ final parametersBuilderMap =
               data, 'materiadoc', MateriasRecord.fromSnapshot),
         },
       ),
-  'TVGON': (data) async => ParameterData(
+  'Imprensa': (data) async => ParameterData(
         allParams: {
           'imprensaRef': getParameter<DocumentReference>(data, 'imprensaRef'),
         },
       ),
   'CadastroInicial': ParameterData.none(),
-  'ConcluirCadastro': (data) async => ParameterData(
-        allParams: {
-          'anuncianteRef':
-              getParameter<DocumentReference>(data, 'anuncianteRef'),
-        },
-      ),
   'ValidarEmail': ParameterData.none(),
   'meInforma': ParameterData.none(),
   'meContrata': ParameterData.none(),
@@ -185,26 +178,25 @@ final parametersBuilderMap =
               data, 'eventoRef', MeDiverteRecord.fromSnapshot),
         },
       ),
-  'CriarNovaMateria': (data) async => ParameterData(
+  'Materia': (data) async => ParameterData(
         allParams: {
-          'goRef': getParameter<DocumentReference>(data, 'goRef'),
+          'status': getParameter<String>(data, 'status'),
+          'materiaDoc': await getDocumentParameter<MateriasRecord>(
+              data, 'materiaDoc', MateriasRecord.fromSnapshot),
         },
       ),
-  'CriarNovaVaga': ParameterData.none(),
-  'CriarNovoEvento': ParameterData.none(),
-  'EditarMateria': (data) async => ParameterData(
+  'CriarNovaVaga': (data) async => ParameterData(
         allParams: {
-          'materiaRef': getParameter<DocumentReference>(data, 'materiaRef'),
+          'status': getParameter<String>(data, 'status'),
+          'vagaDoc': await getDocumentParameter<MeContrataVAGASRecord>(
+              data, 'vagaDoc', MeContrataVAGASRecord.fromSnapshot),
         },
       ),
-  'EditarVaga': (data) async => ParameterData(
+  'CriarNovoEvento': (data) async => ParameterData(
         allParams: {
-          'editarVaga': getParameter<DocumentReference>(data, 'editarVaga'),
-        },
-      ),
-  'EditarEvento': (data) async => ParameterData(
-        allParams: {
-          'eventoRef': getParameter<DocumentReference>(data, 'eventoRef'),
+          'status': getParameter<String>(data, 'status'),
+          'eventoDoc': await getDocumentParameter<MeDiverteRecord>(
+              data, 'eventoDoc', MeDiverteRecord.fromSnapshot),
         },
       ),
   'CriarPerfil': (data) async => ParameterData(
@@ -212,7 +204,6 @@ final parametersBuilderMap =
           'userRef': getParameter<DocumentReference>(data, 'userRef'),
         },
       ),
-  'testemarkdown': ParameterData.none(),
   'meDashboardAnunciantes': ParameterData.none(),
   'meDashboard': ParameterData.none(),
   'meDashboardmecontrata': ParameterData.none(),
@@ -220,25 +211,6 @@ final parametersBuilderMap =
   'meDashboardNotificacao': ParameterData.none(),
   'meDashboardUsuarios': ParameterData.none(),
   'meDashboardmeinforma': ParameterData.none(),
-  'DetalhesProduto': (data) async => ParameterData(
-        allParams: {
-          'detalhesProduto': await getDocumentParameter<ProdutoRecord>(
-              data, 'detalhesProduto', ProdutoRecord.fromSnapshot),
-          'anunciante': await getDocumentParameter<AnuncianteRecord>(
-              data, 'anunciante', AnuncianteRecord.fromSnapshot),
-          'carrinhoDeComprasUsuarioDoc':
-              await getDocumentParameter<CarrinhoDeComprasUsuarioRecord>(
-                  data,
-                  'carrinhoDeComprasUsuarioDoc',
-                  CarrinhoDeComprasUsuarioRecord.fromSnapshot),
-        },
-      ),
-  'DashAnunciantePainelAdm': (data) async => ParameterData(
-        allParams: {
-          'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
-              data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
-        },
-      ),
   'testeAtual': ParameterData.none(),
   'AnunciantePage': (data) async => ParameterData(
         allParams: {
@@ -247,19 +219,7 @@ final parametersBuilderMap =
                   'documentoRefAnunciante', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'DashAnuncianteProdutos': (data) async => ParameterData(
-        allParams: {
-          'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
-              data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
-        },
-      ),
   'DashAnuncianteCatalogo': (data) async => ParameterData(
-        allParams: {
-          'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
-              data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
-        },
-      ),
-  'DashAnuncianteAnuncios': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
@@ -278,31 +238,29 @@ final parametersBuilderMap =
         },
       ),
   'Feed': ParameterData.none(),
-  'DashAnunciantePerfil': (data) async => ParameterData(
+  'painelAdministrativo': (data) async => ParameterData(
         allParams: {
           'documentoRefAnunciante':
               await getDocumentParameter<AnuncianteRecord>(data,
                   'documentoRefAnunciante', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'notificacoes': (data) async => ParameterData(
-        allParams: {},
-      ),
+  'notificacoes': ParameterData.none(),
   'DashAnuncianteAssinatura': (data) async => ParameterData(
         allParams: {
           'anuncianteDoc': await getDocumentParameter<AnuncianteRecord>(
               data, 'anuncianteDoc', AnuncianteRecord.fromSnapshot),
         },
       ),
-  'Pagamento': (data) async => ParameterData(
+  'meDashboardSuporte': ParameterData.none(),
+  'configuracoes': ParameterData.none(),
+  'impreendimentos': ParameterData.none(),
+  'webView': (data) async => ParameterData(
         allParams: {
-          'anuncianteRef':
-              getParameter<DocumentReference>(data, 'anuncianteRef'),
-          'planoAssinatura': getParameter<String>(data, 'planoAssinatura'),
-          'nomeFantasia': getParameter<String>(data, 'nomeFantasia'),
+          'url': getParameter<String>(data, 'url'),
         },
       ),
-  'meDashboardFinanceiro': ParameterData.none(),
+  'TonyAssist': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

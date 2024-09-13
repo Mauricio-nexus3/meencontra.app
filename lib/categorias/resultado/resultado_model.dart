@@ -7,15 +7,20 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/request_manager.dart';
 
 import 'resultado_widget.dart' show ResultadoWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 class ResultadoModel extends FlutterFlowModel<ResultadoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
+  // State field(s) for ListView widget.
+
+  PagingController<DocumentSnapshot?, AnuncianteRecord>?
+      listViewPagingController;
+  Query? listViewPagingQuery;
+  List<StreamSubscription?> listViewStreamSubscriptions = [];
 
   /// Query cache managers for this widget.
 
@@ -39,10 +44,44 @@ class ResultadoModel extends FlutterFlowModel<ResultadoWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
+    listViewStreamSubscriptions.forEach((s) => s?.cancel());
+    listViewPagingController?.dispose();
 
     /// Dispose query cache managers for this widget.
 
     clearResultadoSubCache();
+  }
+
+  /// Additional helper methods.
+  PagingController<DocumentSnapshot?, AnuncianteRecord> setListViewController(
+    Query query, {
+    DocumentReference<Object?>? parent,
+  }) {
+    listViewPagingController ??= _createListViewController(query, parent);
+    if (listViewPagingQuery != query) {
+      listViewPagingQuery = query;
+      listViewPagingController?.refresh();
+    }
+    return listViewPagingController!;
+  }
+
+  PagingController<DocumentSnapshot?, AnuncianteRecord>
+      _createListViewController(
+    Query query,
+    DocumentReference<Object?>? parent,
+  ) {
+    final controller = PagingController<DocumentSnapshot?, AnuncianteRecord>(
+        firstPageKey: null);
+    return controller
+      ..addPageRequestListener(
+        (nextPageMarker) => queryAnuncianteRecordPage(
+          queryBuilder: (_) => listViewPagingQuery ??= query,
+          nextPageMarker: nextPageMarker,
+          streamSubscriptions: listViewStreamSubscriptions,
+          controller: controller,
+          pageSize: 25,
+          isStream: true,
+        ),
+      );
   }
 }

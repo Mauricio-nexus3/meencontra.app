@@ -1,8 +1,6 @@
-import '/anunciante/assinatura/selos_anunciante/selos_anunciante_widget.dart';
-import '/backend/backend.dart';
+import '/assinatura/selos_anunciante/selos_anunciante_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +20,7 @@ class CardListaSubCategoriaWidget extends StatefulWidget {
     this.planoAssinatura,
     this.nota,
     required this.regatado,
+    required this.whatsapp,
   });
 
   final String? logo;
@@ -31,6 +30,7 @@ class CardListaSubCategoriaWidget extends StatefulWidget {
   final String? planoAssinatura;
   final double? nota;
   final bool? regatado;
+  final String? whatsapp;
 
   @override
   State<CardListaSubCategoriaWidget> createState() =>
@@ -40,8 +40,6 @@ class CardListaSubCategoriaWidget extends StatefulWidget {
 class _CardListaSubCategoriaWidgetState
     extends State<CardListaSubCategoriaWidget> {
   late CardListaSubCategoriaModel _model;
-
-  LatLng? currentUserLocationValue;
 
   @override
   void setState(VoidCallback callback) {
@@ -54,9 +52,7 @@ class _CardListaSubCategoriaWidgetState
     super.initState();
     _model = createModel(context, () => CardListaSubCategoriaModel());
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,244 +64,179 @@ class _CardListaSubCategoriaWidgetState
 
   @override
   Widget build(BuildContext context) {
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 30.0,
-            height: 30.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Color(0xFF622AE2),
-              ),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 3.0,
+            color: Color(0x411D2429),
+            offset: Offset(
+              0.0,
+              1.0,
             ),
-          ),
+          )
+        ],
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          color: FlutterFlowTheme.of(context).accent4,
         ),
-      );
-    }
-
-    return FutureBuilder<List<EnderecoRecord>>(
-      future: queryEnderecoRecordOnce(
-        parent: widget.parameter3,
-        singleRecord: true,
       ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 30.0,
-              height: 30.0,
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Color(0xFF622AE2),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Material(
+              color: Colors.transparent,
+              elevation: 0.8,
+              shape: const CircleBorder(),
+              child: Container(
+                width: 64.0,
+                height: 64.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: widget!.planoAssinatura != 'gratis'
+                        ? FlutterFlowTheme.of(context).primary
+                        : FlutterFlowTheme.of(context).accent4,
+                    width: 1.5,
+                  ),
                 ),
-              ),
-            ),
-          );
-        }
-        List<EnderecoRecord> menuItemEnderecoRecordList = snapshot.data!;
-        final menuItemEnderecoRecord = menuItemEnderecoRecordList.isNotEmpty
-            ? menuItemEnderecoRecordList.first
-            : null;
-        return Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 3.0,
-                color: Color(0x411D2429),
-                offset: Offset(
-                  0.0,
-                  1.0,
-                ),
-              )
-            ],
-            borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(
-              color: FlutterFlowTheme.of(context).accent4,
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Material(
-                  color: Colors.transparent,
-                  elevation: 0.8,
-                  shape: const CircleBorder(),
-                  child: Container(
-                    width: 64.0,
-                    height: 64.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: widget.planoAssinatura != 'gratis'
-                            ? FlutterFlowTheme.of(context).primary
-                            : FlutterFlowTheme.of(context).accent4,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 1.0, 1.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(200.0),
-                        child: Image.network(
-                          widget.logo!,
-                          width: 64.0,
-                          height: 64.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 1.0, 1.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(200.0),
+                    child: Image.network(
+                      widget!.logo!,
+                      width: 64.0,
+                      height: 64.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(),
-                    child: Column(
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  widget.nome!
-                                      .maybeHandleOverflow(maxChars: 25),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.selosAnuncianteModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: SelosAnuncianteWidget(
-                                    planoAnunciante: widget.planoAssinatura!,
-                                    tamanhoPequenoNormalGrande: 'Pequeno',
-                                    resgatado: false,
-                                  ),
-                                ),
-                              ].divide(SizedBox(width: 4.0)),
-                            ),
-                            Flexible(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.star_rounded,
-                                    color: FlutterFlowTheme.of(context).warning,
-                                    size: 20.0,
-                                  ),
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget.nota.toString() == '0.0'
-                                          ? 'Não avaliado'
-                                          : widget.nota.toString(),
-                                      '0',
-                                    ),
-                                    textAlign: TextAlign.end,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 4.0, 0.0),
-                              child: Icon(
-                                FFIcons.kpikerMap,
-                                color: widget.planoAssinatura != 'gratis'
-                                    ? FlutterFlowTheme.of(context).primary
-                                    : FlutterFlowTheme.of(context).accent2,
-                                size: 14.0,
-                              ),
-                            ),
-                            AutoSizeText(
-                              widget.endereco!.maybeHandleOverflow(
-                                maxChars: 24,
-                                replacement: '…',
-                              ),
-                              textAlign: TextAlign.start,
+                            Text(
+                              widget!.nome!.maybeHandleOverflow(maxChars: 25),
                               style: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                                  .bodyLarge
                                   .override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
                             ),
-                          ],
+                            wrapWithModel(
+                              model: _model.selosAnuncianteModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: SelosAnuncianteWidget(
+                                planoAnunciante: widget!.planoAssinatura!,
+                                tamanhoPequenoNormalGrande: 'Pequeno',
+                                resgatado: false,
+                              ),
+                            ),
+                          ].divide(SizedBox(width: 4.0)),
                         ),
-                        if (widget.planoAssinatura != 'gratis')
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
+                        Flexible(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              FaIcon(
-                                FontAwesomeIcons.mapPin,
-                                color: widget.planoAssinatura != 'gratis'
-                                    ? FlutterFlowTheme.of(context).primary
-                                    : FlutterFlowTheme.of(context).accent2,
-                                size: 14.0,
+                              Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).warning,
+                                size: 20.0,
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 4.0, 0.0),
-                                child: Text(
-                                  '${formatNumber(
-                                    functions.distanceBetweenTwoPoints(
-                                        menuItemEnderecoRecord?.googleMaps,
-                                        currentUserLocationValue),
-                                    formatType: FormatType.custom,
-                                    format: '0.0',
-                                    locale: '',
-                                  )}Km',
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ].divide(SizedBox(width: 4.0)),
+                            ],
                           ),
-                      ].divide(SizedBox(height: 8.0)),
+                        ),
+                      ],
                     ),
-                  ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 4.0, 0.0),
+                          child: Icon(
+                            FFIcons.kpikerMap,
+                            color: widget!.planoAssinatura != 'gratis'
+                                ? FlutterFlowTheme.of(context).primary
+                                : FlutterFlowTheme.of(context).accent2,
+                            size: 14.0,
+                          ),
+                        ),
+                        AutoSizeText(
+                          widget!.endereco!.maybeHandleOverflow(
+                            maxChars: 24,
+                            replacement: '…',
+                          ),
+                          textAlign: TextAlign.start,
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 4.0, 0.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.whatsapp,
+                            color: widget!.planoAssinatura != 'gratis'
+                                ? FlutterFlowTheme.of(context).primary
+                                : FlutterFlowTheme.of(context).accent2,
+                            size: 14.0,
+                          ),
+                        ),
+                        AutoSizeText(
+                          valueOrDefault<String>(
+                            widget!.whatsapp,
+                            '51 9 87654321',
+                          ).maybeHandleOverflow(
+                            maxChars: 24,
+                            replacement: '…',
+                          ),
+                          textAlign: TextAlign.start,
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ].divide(SizedBox(height: 8.0)),
                 ),
-              ].divide(SizedBox(width: 12.0)),
+              ),
             ),
-          ),
-        );
-      },
+          ].divide(SizedBox(width: 12.0)),
+        ),
+      ),
     );
   }
 }

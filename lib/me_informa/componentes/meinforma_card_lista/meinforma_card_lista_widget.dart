@@ -39,7 +39,7 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
     super.initState();
     _model = createModel(context, () => MeinformaCardListaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -59,7 +59,10 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
       ),
       child: Container(
         width: double.infinity,
-        height: MediaQuery.sizeOf(context).width > 1080.0 ? 250.0 : 130.0,
+        height: valueOrDefault<double>(
+          MediaQuery.sizeOf(context).width > 1080.0 ? 250.0 : 130.0,
+          130.0,
+        ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(12.0),
@@ -72,8 +75,10 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
               Container(
                 width:
                     MediaQuery.sizeOf(context).width > 1080.0 ? 360.0 : 100.0,
-                height:
-                    MediaQuery.sizeOf(context).width > 1080.0 ? 220.0 : 100.0,
+                height: valueOrDefault<double>(
+                  MediaQuery.sizeOf(context).width > 1080.0 ? 220.0 : 100.0,
+                  100.0,
+                ),
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).accent1,
                   borderRadius: BorderRadius.circular(12.0),
@@ -83,13 +88,13 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      widget.parameter1!,
+                      widget!.parameter1!,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: Container(
                   height:
                       MediaQuery.sizeOf(context).width > 1080.0 ? 200.0 : 100.0,
@@ -99,7 +104,7 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(
+                        Flexible(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -107,7 +112,7 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Text(
-                                  widget.parameter2!,
+                                  widget!.parameter2!,
                                   style: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .override(
@@ -129,7 +134,7 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
                                     children: [
                                       Flexible(
                                         child: Text(
-                                          widget.parameter3!,
+                                          widget!.parameter3!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
@@ -164,8 +169,8 @@ class _MeinformaCardListaWidgetState extends State<MeinformaCardListaWidget> {
                                 alignment: AlignmentDirectional(1.0, 0.0),
                                 child: Text(
                                   dateTimeFormat(
-                                    'd/M/y',
-                                    widget.publicado,
+                                    "d/M/y",
+                                    widget!.publicado,
                                     locale: FFLocalizations.of(context)
                                         .languageCode,
                                   ),

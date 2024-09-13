@@ -32,7 +32,7 @@ class _LinkExternoWidgetState extends State<LinkExternoWidget> {
     _model = createModel(context, () => LinkExternoModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'LinkExterno'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,65 +44,67 @@ class _LinkExternoWidgetState extends State<LinkExternoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          leading: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 45.0,
-              icon: Icon(
-                FFIcons.karrowBack,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 30.0,
+    return Title(
+        title: 'LinkExterno',
+        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              automaticallyImplyLeading: false,
+              leading: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                child: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 45.0,
+                  icon: Icon(
+                    Icons.chevron_left_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    logFirebaseEvent(
+                        'LINK_EXTERNO_chevron_left_rounded_ICN_ON');
+                    context.pop();
+                  },
+                ),
               ),
-              onPressed: () async {
-                logFirebaseEvent('LINK_EXTERNO_PAGE_arrowBack_ICN_ON_TAP');
-                context.pop();
-              },
+              title: Text(
+                'meencontra',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      fontSize: 26.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              actions: [],
+              centerTitle: true,
+              elevation: 2.0,
+            ),
+            body: SafeArea(
+              top: true,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    FlutterFlowWebView(
+                      content: widget!.linkExterno!,
+                      bypass: false,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      verticalScroll: false,
+                      horizontalScroll: false,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-          title: Text(
-            'meencontra',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Inter',
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  fontSize: 26.0,
-                  letterSpacing: 0.0,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                FlutterFlowWebView(
-                  content: widget.linkExterno!,
-                  bypass: false,
-                  height: MediaQuery.sizeOf(context).height * 1.0,
-                  verticalScroll: false,
-                  horizontalScroll: false,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'dart:ui';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,10 +54,13 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('CADASTRAR_CATEGORIA_cadastrarCategoria_O');
-      if (widget.editar == true) {
-        setState(() {
+      if (widget!.editar == true) {
+        safeSetState(() {
           _model.nomeCategoriaTextController?.text =
-              widget.editarCategoriaCatalogo!.nomeCategoria;
+              widget!.editarCategoriaCatalogo!.nomeCategoria;
+          _model.nomeCategoriaTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.nomeCategoriaTextController!.text.length);
         });
       }
     });
@@ -173,7 +177,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -229,7 +233,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.editar == true
+                          widget!.editar == true
                               ? 'Editar nome da categoria'
                               : 'Cadastrar nova categoria',
                           style: FlutterFlowTheme.of(context)
@@ -302,7 +306,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: valueOrDefault<Color>(
-                                    widget.categoriaProdutoAnunciante?.cor,
+                                    widget!.categoriaProdutoAnunciante?.cor,
                                     FlutterFlowTheme.of(context).primary,
                                   ),
                                   width: 2.0,
@@ -392,34 +396,33 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                       logFirebaseEvent(
                                           'CADASTRAR_CATEGORIA_CADASTRAR_BTN_ON_TAP');
                                       var _shouldSetState = false;
-                                      if (widget.editar == true) {
+                                      if (widget!.editar == true) {
                                         _model.produtosComCategoriaSelecionada =
                                             await queryProdutoRecordOnce(
-                                          parent: widget
+                                          parent: widget!
                                               .categoriaProdutoAnunciante
                                               ?.reference,
                                           queryBuilder: (produtoRecord) =>
                                               produtoRecord.where(
                                             'NomeDaCategoria',
-                                            isEqualTo: widget
+                                            isEqualTo: widget!
                                                 .editarCategoriaCatalogo
                                                 ?.nomeCategoria,
                                           ),
                                         );
                                         _shouldSetState = true;
-                                        setState(() {
-                                          _model.listaCategoriaRef = _model
-                                              .produtosComCategoriaSelecionada!
-                                              .toList()
-                                              .cast<ProdutoRecord>();
-                                          _model.atualizando = 1;
-                                        });
+                                        _model.listaCategoriaRef = _model
+                                            .produtosComCategoriaSelecionada!
+                                            .toList()
+                                            .cast<ProdutoRecord>();
+                                        _model.atualizando = 1;
+                                        safeSetState(() {});
                                         while (
                                             (_model.listaCategoriaRef.length >
                                                     0) &&
                                                 (_model.listaCategoriaRef.first
                                                         .nomeDaCategoria ==
-                                                    widget
+                                                    widget!
                                                         .editarCategoriaCatalogo
                                                         ?.nomeCategoria)) {
                                           await _model
@@ -429,16 +432,14 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                                 .nomeCategoriaTextController
                                                 .text,
                                           ));
-                                          setState(() {
-                                            _model.removeFromListaCategoriaRef(
-                                                _model.listaCategoriaRef.first);
-                                          });
+                                          _model.removeFromListaCategoriaRef(
+                                              _model.listaCategoriaRef.first);
+                                          safeSetState(() {});
                                         }
-                                        setState(() {
-                                          _model.atualizando = 0;
-                                        });
+                                        _model.atualizando = 0;
+                                        safeSetState(() {});
 
-                                        await widget
+                                        await widget!
                                             .editarCategoriaCatalogo!.reference
                                             .update(createCatalogoRecordData(
                                           nomeCategoria: _model
@@ -464,7 +465,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                         );
                                         Navigator.pop(context);
                                       } else {
-                                        await CatalogoRecord.createDoc(widget
+                                        await CatalogoRecord.createDoc(widget!
                                                 .categoriaProdutoAnunciante!
                                                 .reference)
                                             .set(createCatalogoRecordData(
@@ -498,13 +499,14 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                           ),
                                         );
                                         Navigator.pop(context);
-                                        if (_shouldSetState) setState(() {});
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                     },
-                                    text: widget.editar == true
+                                    text: widget!.editar == true
                                         ? 'Salvar'
                                         : 'Cadastrar',
                                     options: FFButtonOptions(
@@ -516,7 +518,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                           EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: valueOrDefault<Color>(
-                                        widget.categoriaProdutoAnunciante?.cor,
+                                        widget!.categoriaProdutoAnunciante?.cor,
                                         FlutterFlowTheme.of(context).primary,
                                       ),
                                       textStyle: FlutterFlowTheme.of(context)
@@ -530,7 +532,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                       elevation: 2.0,
                                       borderSide: BorderSide(
                                         color: valueOrDefault<Color>(
-                                          widget
+                                          widget!
                                               .categoriaProdutoAnunciante?.cor,
                                           FlutterFlowTheme.of(context).primary,
                                         ),

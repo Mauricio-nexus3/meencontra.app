@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,9 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import '/meencontra_dashboard/componentes/appbar_grupo_me/appbar_grupo_me_widget.dart';
 import 'criar_nova_vaga_widget.dart' show CriarNovaVagaWidget;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -37,9 +36,6 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
-  // Model for AppbarGrupoMe component.
-  late AppbarGrupoMeModel appbarGrupoMeModel;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -103,14 +99,10 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
   String? Function(BuildContext, String?)? urlTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {
-    appbarGrupoMeModel = createModel(context, () => AppbarGrupoMeModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
-    appbarGrupoMeModel.dispose();
     nomeVagaFocusNode?.dispose();
     nomeVagaTextController?.dispose();
 

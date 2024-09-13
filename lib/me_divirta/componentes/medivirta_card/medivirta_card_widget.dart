@@ -44,7 +44,7 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
     super.initState();
     _model = createModel(context, () => MedivirtaCardModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -129,7 +129,7 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12.0),
                           child: Image.network(
-                            widget.fotoCapa!,
+                            widget!.fotoCapa!,
                             width: 100.0,
                             height: 100.0,
                             fit: BoxFit.cover,
@@ -145,7 +145,7 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.tituloEvento!,
+                                widget!.tituloEvento!,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
@@ -169,7 +169,7 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                                     size: 12.0,
                                   ),
                                   Text(
-                                    widget.tipoEvento!,
+                                    widget!.tipoEvento!,
                                     style: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -196,18 +196,18 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                                   ),
                                   Text(
                                     '${dateTimeFormat(
-                                      'E',
-                                      widget.horario,
+                                      "E",
+                                      widget!.horario,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,
                                     )}${dateTimeFormat(
-                                      'd',
-                                      widget.horario,
+                                      "d",
+                                      widget!.horario,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,
                                     )} - ${dateTimeFormat(
-                                      'Hm',
-                                      widget.horario,
+                                      "Hm",
+                                      widget!.horario,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,
                                     )}',
@@ -239,7 +239,7 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                                     ),
                                     Flexible(
                                       child: Text(
-                                        widget.local!.maybeHandleOverflow(
+                                        widget!.local!.maybeHandleOverflow(
                                           maxChars: 16,
                                           replacement: '…',
                                         ),
@@ -282,7 +282,8 @@ class _MedivirtaCardWidgetState extends State<MedivirtaCardWidget> {
                       color: FlutterFlowTheme.of(context).tertiary,
                       size: 24.0,
                     ),
-                    if (widget.ingressoURL != null && widget.ingressoURL != '')
+                    if (widget!.ingressoURL != null &&
+                        widget!.ingressoURL != '')
                       Icon(
                         Icons.confirmation_num_outlined,
                         color: FlutterFlowTheme.of(context).tertiary,

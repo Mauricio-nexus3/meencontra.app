@@ -38,7 +38,7 @@ class _CardPerfilTVGOoficialWidgetState
     super.initState();
     _model = createModel(context, () => CardPerfilTVGOoficialModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,7 +72,7 @@ class _CardPerfilTVGOoficialWidgetState
               ),
               Text(
                 valueOrDefault<String>(
-                  widget.numeroMaterias?.toString(),
+                  widget!.numeroMaterias?.toString(),
                   '0',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -89,7 +89,8 @@ class _CardPerfilTVGOoficialWidgetState
             decoration: BoxDecoration(),
             child: Builder(
               builder: (context) {
-                final materia = widget.materiaRef?.toList() ?? [];
+                final materia = widget!.materiaRef?.toList() ?? [];
+
                 return ListView.separated(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                   primary: false,
@@ -137,7 +138,7 @@ class _CardPerfilTVGOoficialWidgetState
                                   ),
                                   Text(
                                     dateTimeFormat(
-                                      'd/M/y',
+                                      "d/M/y",
                                       materiaItem.dataPublicacaoMateria!,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,

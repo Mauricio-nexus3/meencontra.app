@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/place.dart';
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui';
 import 'endereco_google_maps_widget.dart' show EnderecoGoogleMapsWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,7 +33,7 @@ class EnderecoGoogleMapsModel
   LatLng? googleMapObrigatoriosCenter;
   final googleMapObrigatoriosController = Completer<GoogleMapController>();
   // State field(s) for PickerBTNConfirmacao widget.
-  var pickerBTNConfirmacaoValue = FFPlace();
+  FFPlace pickerBTNConfirmacaoValue = FFPlace();
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
   EnderecoRecord? enderecoRef;
 

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -102,7 +103,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
         sigmaY: 4.0,
       ),
       child: StreamBuilder<AnuncianteRecord>(
-        stream: AnuncianteRecord.getDocument(widget.anuncianteRef!),
+        stream: AnuncianteRecord.getDocument(widget!.anuncianteRef!),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -118,7 +119,9 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
               ),
             );
           }
+
           final containerAnuncianteRecord = snapshot.data!;
+
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(),
@@ -287,7 +290,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                                                           validateFileFormat(
                                                               m.storagePath,
                                                               context))) {
-                                                    setState(() =>
+                                                    safeSetState(() =>
                                                         _model.isDataUploading =
                                                             true);
                                                     var selectedUploadedFiles =
@@ -342,7 +345,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                                                         downloadUrls.length ==
                                                             selectedMedia
                                                                 .length) {
-                                                      setState(() {
+                                                      safeSetState(() {
                                                         _model.uploadedLocalFile =
                                                             selectedUploadedFiles
                                                                 .first;
@@ -350,7 +353,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                                                             downloadUrls.first;
                                                       });
                                                     } else {
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                       return;
                                                     }
                                                   }
@@ -489,7 +492,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                                         logFirebaseEvent(
                                             'LOGO_NOME_FANTASIA_ATUALIZAR_BTN_ON_TAP');
 
-                                        await widget.anuncianteRef!
+                                        await widget!.anuncianteRef!
                                             .update(createAnuncianteRecordData(
                                           logo: _model.uploadedFileUrl !=
                                                       null &&

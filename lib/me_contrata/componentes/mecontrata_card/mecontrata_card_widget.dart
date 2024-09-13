@@ -43,7 +43,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
     super.initState();
     _model = createModel(context, () => MecontrataCardModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -107,7 +107,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(200.0),
                           child: Image.network(
-                            widget.logoEmpresa!,
+                            widget!.logoEmpresa!,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -122,7 +122,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                             children: [
                               Text(
                                 valueOrDefault<String>(
-                                  widget.nomeVaga,
+                                  widget!.nomeVaga,
                                   'nome da vaga',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -138,7 +138,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                                     ),
                               ),
                               Text(
-                                widget.nomeEmpresa!,
+                                widget!.nomeEmpresa!,
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -154,7 +154,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                                     ),
                               ),
                               Text(
-                                widget.contrato!,
+                                widget!.contrato!,
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -182,7 +182,7 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                                         size: 12.0,
                                       ),
                                       Text(
-                                        widget.cidade!,
+                                        widget!.cidade!,
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(
@@ -212,8 +212,8 @@ class _MecontrataCardWidgetState extends State<MecontrataCardWidget> {
                                       ),
                                       Text(
                                         dateTimeFormat(
-                                          'relative',
-                                          widget.publicado,
+                                          "relative",
+                                          widget!.publicado,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         ),

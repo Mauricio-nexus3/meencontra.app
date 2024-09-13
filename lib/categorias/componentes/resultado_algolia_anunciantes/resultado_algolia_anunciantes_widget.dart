@@ -1,4 +1,4 @@
-import '/anunciante/assinatura/selos_anunciante/selos_anunciante_widget.dart';
+import '/assinatura/selos_anunciante/selos_anunciante_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -51,7 +51,7 @@ class _ResultadoAlgoliaAnunciantesWidgetState
     super.initState();
     _model = createModel(context, () => ResultadoAlgoliaAnunciantesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -79,12 +79,12 @@ class _ResultadoAlgoliaAnunciantesWidgetState
               'AnunciantePage',
               queryParameters: {
                 'documentoRefAnunciante': serializeParam(
-                  widget.parameter7,
+                  widget!.parameter7,
                   ParamType.Document,
                 ),
               }.withoutNulls,
               extra: <String, dynamic>{
-                'documentoRefAnunciante': widget.parameter7,
+                'documentoRefAnunciante': widget!.parameter7,
               },
             );
           },
@@ -108,7 +108,7 @@ class _ResultadoAlgoliaAnunciantesWidgetState
                     shape: BoxShape.circle,
                   ),
                   child: Image.network(
-                    widget.logo!,
+                    widget!.logo!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -128,7 +128,7 @@ class _ResultadoAlgoliaAnunciantesWidgetState
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             child: Text(
-                              widget.nome!.maybeHandleOverflow(maxChars: 22),
+                              widget!.nome!.maybeHandleOverflow(maxChars: 22),
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
@@ -139,11 +139,11 @@ class _ResultadoAlgoliaAnunciantesWidgetState
                           ),
                           wrapWithModel(
                             model: _model.selosAnuncianteModel,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: SelosAnuncianteWidget(
-                              planoAnunciante: widget.planoAssinatura!,
+                              planoAnunciante: widget!.planoAssinatura!,
                               tamanhoPequenoNormalGrande: 'Pequeno',
-                              resgatado: widget.resgatado!,
+                              resgatado: widget!.resgatado!,
                             ),
                           ),
                         ],
@@ -152,7 +152,7 @@ class _ResultadoAlgoliaAnunciantesWidgetState
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            '${widget.categoria}, ${widget.subCategoria}',
+                            '${widget!.categoria}, ${widget!.subCategoria}',
                             style: FlutterFlowTheme.of(context)
                                 .labelSmall
                                 .override(

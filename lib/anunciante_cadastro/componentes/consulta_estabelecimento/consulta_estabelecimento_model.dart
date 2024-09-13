@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'dart:ui';
 import 'consulta_estabelecimento_widget.dart'
     show ConsultaEstabelecimentoWidget;
@@ -24,6 +25,8 @@ class ConsultaEstabelecimentoModel
   ///  Local state fields for this component.
 
   int? visible = 1;
+
+  AnuncianteRecord? anuncianteSelecionado;
 
   ///  State fields for stateful widgets in this component.
 

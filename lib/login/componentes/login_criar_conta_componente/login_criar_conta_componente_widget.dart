@@ -45,9 +45,8 @@ class _LoginCriarContaComponenteWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('LOGIN_CRIAR_CONTA_COMPONENTE_Login_Criar');
-      setState(() {
-        _model.tela = widget.login!;
-      });
+      _model.tela = widget!.login!;
+      safeSetState(() {});
     });
 
     _model.emailCriarContaTextController ??= TextEditingController();
@@ -65,7 +64,7 @@ class _LoginCriarContaComponenteWidgetState
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -362,7 +361,7 @@ class _LoginCriarContaComponenteWidgetState
                                                               context)
                                                           .primaryBackground,
                                                   suffixIcon: InkWell(
-                                                    onTap: () => setState(
+                                                    onTap: () => safeSetState(
                                                       () => _model
                                                               .passwordCriarContaVisibility =
                                                           !_model
@@ -473,7 +472,7 @@ class _LoginCriarContaComponenteWidgetState
                                                               context)
                                                           .primaryBackground,
                                                   suffixIcon: InkWell(
-                                                    onTap: () => setState(
+                                                    onTap: () => safeSetState(
                                                       () => _model
                                                               .passwordConfirmCriarContaVisibility =
                                                           !_model
@@ -625,9 +624,8 @@ class _LoginCriarContaComponenteWidgetState
                                         onTap: () async {
                                           logFirebaseEvent(
                                               'LOGIN_CRIAR_CONTA_COMPONENTE_JatemConta_');
-                                          setState(() {
-                                            _model.tela = 'Login';
-                                          });
+                                          _model.tela = 'Login';
+                                          safeSetState(() {});
                                         },
                                         child: RichText(
                                           textScaler:
@@ -903,10 +901,10 @@ class _LoginCriarContaComponenteWidgetState
                                                                     () async {
                                                                   logFirebaseEvent(
                                                                       'LOGIN_CRIAR_CONTA_COMPONENTE_Text_7newr3');
-                                                                  setState(() {
-                                                                    _model.passo =
-                                                                        0;
-                                                                  });
+                                                                  _model.passo =
+                                                                      0;
+                                                                  safeSetState(
+                                                                      () {});
                                                                 },
                                                                 child: Text(
                                                                   'Voltar',
@@ -1047,7 +1045,7 @@ class _LoginCriarContaComponenteWidgetState
                                                                 .primaryBackground,
                                                             suffixIcon: InkWell(
                                                               onTap: () =>
-                                                                  setState(
+                                                                  safeSetState(
                                                                 () => _model
                                                                         .passwordVisibility =
                                                                     !_model
@@ -1174,9 +1172,8 @@ class _LoginCriarContaComponenteWidgetState
                                                         .text ==
                                                     _model.autenticaoUser
                                                         ?.email) {
-                                                  setState(() {
-                                                    _model.passo = 1;
-                                                  });
+                                                  _model.passo = 1;
+                                                  safeSetState(() {});
                                                 } else {
                                                   await showDialog(
                                                     context: context,
@@ -1202,7 +1199,7 @@ class _LoginCriarContaComponenteWidgetState
                                                   );
                                                 }
 
-                                                setState(() {});
+                                                safeSetState(() {});
                                               },
                                               text: 'Avançar',
                                               options: FFButtonOptions(
@@ -1308,9 +1305,8 @@ class _LoginCriarContaComponenteWidgetState
                                         onTap: () async {
                                           logFirebaseEvent(
                                               'LOGIN_CRIAR_CONTA_COMPONENTE_RichText_2l');
-                                          setState(() {
-                                            _model.tela = 'CriarConta';
-                                          });
+                                          _model.tela = 'CriarConta';
+                                          safeSetState(() {});
                                         },
                                         child: RichText(
                                           textScaler:

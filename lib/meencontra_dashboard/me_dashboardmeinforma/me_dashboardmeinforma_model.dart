@@ -1,11 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
+import '/backend/schema/enums/enums.dart';
+import '/componentes_globais/menus/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
+import '/componentes_globais/pop_up/acao_tabale/acao_tabale_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/meencontra_dashboard/componentes/acao_tabale/acao_tabale_widget.dart';
-import '/meencontra_dashboard/componentes/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
 import 'me_dashboardmeinforma_widget.dart' show MeDashboardmeinformaWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +23,6 @@ class MeDashboardmeinformaModel
     extends FlutterFlowModel<MeDashboardmeinformaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for MenuLateralDashboard component.
   late MenuLateralDashboardModel menuLateralDashboardModel1;
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
@@ -30,6 +31,8 @@ class MeDashboardmeinformaModel
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Firestore Query - Query a collection] action in IconButton widget.
+  List<UsersRecord>? contultaUsuariosRef;
   // Model for MenuLateralDashboard component.
   late MenuLateralDashboardModel menuLateralDashboardModel2;
 
@@ -43,7 +46,6 @@ class MeDashboardmeinformaModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     menuLateralDashboardModel1.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

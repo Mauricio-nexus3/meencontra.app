@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
@@ -23,9 +24,11 @@ class ConsultaEstabelecimentoWidget extends StatefulWidget {
   const ConsultaEstabelecimentoWidget({
     super.key,
     required this.visible,
+    this.anuncianteSelecionado,
   });
 
   final int? visible;
+  final Future Function()? anuncianteSelecionado;
 
   @override
   State<ConsultaEstabelecimentoWidget> createState() =>
@@ -52,9 +55,8 @@ class _ConsultaEstabelecimentoWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('CONSULTA_ESTABELECIMENTO_consultaEstabel');
-      setState(() {
-        _model.visible = widget.visible;
-      });
+      _model.visible = widget!.visible;
+      _model.updatePage(() {});
     });
 
     _model.allAppTextController ??= TextEditingController();
@@ -208,7 +210,7 @@ class _ConsultaEstabelecimentoWidgetState
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -245,7 +247,7 @@ class _ConsultaEstabelecimentoWidgetState
                       maxWidth: 530.0,
                     ),
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4.0,
@@ -302,9 +304,8 @@ class _ConsultaEstabelecimentoWidgetState
                                       onPressed: () async {
                                         logFirebaseEvent(
                                             'CONSULTA_ESTABELECIMENTO_ENTENDI_BTN_ON_');
-                                        setState(() {
-                                          _model.visible = 2;
-                                        });
+                                        _model.visible = 2;
+                                        safeSetState(() {});
                                       },
                                       text: 'Entendi',
                                       options: FFButtonOptions(
@@ -342,7 +343,7 @@ class _ConsultaEstabelecimentoWidgetState
                     ),
                   ),
                 ),
-              if (_model.visible == 2)
+              if (_model.visible != 1)
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
@@ -445,7 +446,7 @@ class _ConsultaEstabelecimentoWidgetState
                                         );
                                       },
                                       onSelected: (String selection) {
-                                        setState(() => _model
+                                        safeSetState(() => _model
                                             .allAppSelectedOption = selection);
                                         FocusScope.of(context).unfocus();
                                       },
@@ -476,15 +477,15 @@ class _ConsultaEstabelecimentoWidgetState
                                               await AnuncianteRecord.search(
                                                 term: _model
                                                     .allAppTextController.text,
-                                                maxResults: 5,
+                                                maxResults: 4,
                                               )
                                                   .then((r) => _model
                                                       .algoliaSearchResults = r)
                                                   .onError((_, __) => _model
                                                           .algoliaSearchResults =
                                                       [])
-                                                  .whenComplete(
-                                                      () => setState(() {}));
+                                                  .whenComplete(() =>
+                                                      safeSetState(() {}));
                                             },
                                           ),
                                           autofocus: false,
@@ -579,7 +580,7 @@ class _ConsultaEstabelecimentoWidgetState
                                                         term: _model
                                                             .allAppTextController
                                                             .text,
-                                                        maxResults: 5,
+                                                        maxResults: 4,
                                                       )
                                                           .then((r) => _model
                                                                   .algoliaSearchResults =
@@ -588,9 +589,10 @@ class _ConsultaEstabelecimentoWidgetState
                                                               _model.algoliaSearchResults =
                                                                   [])
                                                           .whenComplete(() =>
-                                                              setState(() {}));
+                                                              safeSetState(
+                                                                  () {}));
 
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: Icon(
                                                       Icons.clear,
@@ -649,6 +651,7 @@ class _ConsultaEstabelecimentoWidgetState
                                             [])
                                         .take(4)
                                         .toList();
+
                                 return ListView.separated(
                                   padding: EdgeInsets.symmetric(vertical: 12.0),
                                   primary: false,
@@ -668,15 +671,25 @@ class _ConsultaEstabelecimentoWidgetState
                                       onTap: () async {
                                         logFirebaseEvent(
                                             'CONSULTA_ESTABELECIMENTO_Row_gk6x8j8b_ON');
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.allAppTextController?.clear();
                                         });
                                         await Future.delayed(
                                             const Duration(milliseconds: 500));
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.allAppTextController?.text =
                                               resultadoAlgoliaItem.nomeFantasia;
+                                          _model.allAppTextController
+                                                  ?.selection =
+                                              TextSelection.collapsed(
+                                                  offset: _model
+                                                      .allAppTextController!
+                                                      .text
+                                                      .length);
                                         });
+                                        _model.anuncianteSelecionado =
+                                            resultadoAlgoliaItem;
+                                        _model.updatePage(() {});
                                       },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -806,7 +819,7 @@ class _ConsultaEstabelecimentoWidgetState
                                           ).then((s) => s.firstOrNull);
 
                                           context.pushNamed(
-                                            'AnunciantePage',
+                                            'painelAdministrativo',
                                             queryParameters: {
                                               'documentoRefAnunciante':
                                                   serializeParam(
@@ -823,7 +836,7 @@ class _ConsultaEstabelecimentoWidgetState
                                           Navigator.pop(context);
                                         }
 
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: _model.allAppTextController.text !=
                                                   null &&

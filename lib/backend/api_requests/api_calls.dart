@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 import '../schema/structs/index.dart';
 
+import 'package:flutter/foundation.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
@@ -12,7 +14,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start MercadoPago Group Code
 
 class MercadoPagoGroup {
-  static String baseUrl = 'https://api.mercadopago.com/v1';
+  static String getBaseUrl() => 'https://api.mercadopago.com/v1';
   static Map<String, String> headers = {
     'Authorization':
         'Bearer APP_USR-4780078497213161-102612-898b4fdbb2fb19ea993ee1a0863de558-1526092524',
@@ -33,6 +35,8 @@ class PixCall {
     String? identificationType = '',
     String? numberDocumento = '',
   }) async {
+    final baseUrl = MercadoPagoGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
 "transaction_amount":${amount},
@@ -49,7 +53,7 @@ class PixCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Pix',
-      apiUrl: '${MercadoPagoGroup.baseUrl}/payments',
+      apiUrl: '${baseUrl}/payments',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -62,6 +66,7 @@ class PixCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -92,9 +97,11 @@ class StatusPixCall {
   Future<ApiCallResponse> call({
     int? idPix,
   }) async {
+    final baseUrl = MercadoPagoGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'statusPix',
-      apiUrl: '${MercadoPagoGroup.baseUrl}/payments/${idPix}',
+      apiUrl: '${baseUrl}/payments/${idPix}',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
@@ -105,6 +112,7 @@ class StatusPixCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -127,6 +135,8 @@ class CriarTokenCall {
     String? accessToken = '',
     String? publicKey = '',
   }) async {
+    final baseUrl = MercadoPagoGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
  "card_number":"${cardNumber}",
@@ -143,7 +153,7 @@ class CriarTokenCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Criar token',
-      apiUrl: '${MercadoPagoGroup.baseUrl}/card_tokens?public_key=${publicKey}',
+      apiUrl: '${baseUrl}/card_tokens?public_key=${publicKey}',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -156,6 +166,7 @@ class CriarTokenCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -185,6 +196,8 @@ class PagamentoCartaoCall {
     int? installments,
     String? streetNumber = '',
   }) async {
+    final baseUrl = MercadoPagoGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "transaction_amount": ${transactionAmount},
@@ -212,7 +225,7 @@ class PagamentoCartaoCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Pagamento Cartao',
-      apiUrl: '${MercadoPagoGroup.baseUrl}/payments',
+      apiUrl: '${baseUrl}/payments',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -226,6 +239,7 @@ class PagamentoCartaoCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -233,19 +247,20 @@ class PagamentoCartaoCall {
 
 /// End MercadoPago Group Code
 
-/// Start Stripe Group Code
+/// Start openweather Group Code
 
-class StripeGroup {
-  static String baseUrl = 'https://api.stripe.com/v1';
-  static Map<String, String> headers = {
-    'Authorization':
-        'Bearer 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',
-    'Stripe-Version': '2020-03-02',
-  };
-  static RetrieveBalanceBuscarSaldoCall retrieveBalanceBuscarSaldoCall =
-      RetrieveBalanceBuscarSaldoCall();
-  static CreateCheckoutSessionCall createCheckoutSessionCall =
-      CreateCheckoutSessionCall();
+class OpenweatherGroup {
+  static String getBaseUrl({
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
+  }) =>
+      'https://api.openweathermap.org/data/2.5';
+  static Map<String, String> headers = {};
+  static LongitudeLatitudeDiaCall longitudeLatitudeDiaCall =
+      LongitudeLatitudeDiaCall();
+  static LongitudeLatitudeSemanaCall longitudeLatitudeSemanaCall =
+      LongitudeLatitudeSemanaCall();
   static RetrievePaymentIntentCall retrievePaymentIntentCall =
       RetrievePaymentIntentCall();
   static RetrieveCheckoutSessionCall retrieveCheckoutSessionCall =
@@ -254,79 +269,162 @@ class StripeGroup {
       ListCustomersUsuariosAtivoCall();
 }
 
-class RetrieveBalanceBuscarSaldoCall {
-  Future<ApiCallResponse> call() async {
+class LongitudeLatitudeDiaCall {
+  Future<ApiCallResponse> call({
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
+  }) async {
+    final baseUrl = OpenweatherGroup.getBaseUrl(
+      apiKey: apiKey,
+      idioma: idioma,
+      graus: graus,
+    );
+
     return ApiManager.instance.makeApiCall(
-      callName: 'Retrieve balance Buscar Saldo',
-      apiUrl: '${StripeGroup.baseUrl}/balance',
+      callName: 'longitude latitude dia',
+      apiUrl:
+          '${baseUrl}/weather?lat=-30.1260869&lon=-51.3636263&appid=8275df55a0c4d5e00e834df871234e80&cnt=7&units=metric&lang=pt',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization':
-            'Bearer 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',
-        'Stripe-Version': '2020-03-02',
-      },
+      headers: {},
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
+
+  String? cidade(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.name''',
+      ));
+  String? tempo(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].main''',
+      ));
+  String? descricao(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].description''',
+      ));
+  double? temperatura(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp''',
+      ));
+  double? minima(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp_min''',
+      ));
+  double? maxima(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp_max''',
+      ));
+  double? sensacao(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.feels_like''',
+      ));
+  int? umidade(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.main.humidity''',
+      ));
+  String? img(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].icon''',
+      ));
 }
 
-class CreateCheckoutSessionCall {
+class LongitudeLatitudeSemanaCall {
   Future<ApiCallResponse> call({
-    String? lineItemsPrice = 'price_1OvhDVASe7GrgGs5kbIuALws',
-    int? lineItemsQtd = 1,
-    String? mode = 'payment',
-    String? successUrl = 'https://meencontra.com.br/pagamento/',
-    String? customerEmail = '',
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
   }) async {
+    final baseUrl = OpenweatherGroup.getBaseUrl(
+      apiKey: apiKey,
+      idioma: idioma,
+      graus: graus,
+    );
+
     return ApiManager.instance.makeApiCall(
-      callName: 'Create Checkout Session',
-      apiUrl: '${StripeGroup.baseUrl}/checkout/sessions',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization':
-            'Bearer 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',
-        'Stripe-Version': '2020-03-02',
-      },
-      params: {
-        'line_items[0][price]': lineItemsPrice,
-        'line_items[0][quantity]': lineItemsQtd,
-        'mode': mode,
-        'success_url': successUrl,
-        'customer_email': customerEmail,
-      },
-      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      callName: 'longitude latitude semana',
+      apiUrl:
+          '${baseUrl}/weather?lat=-30.1260869&lon=-51.3636263&appid=8275df55a0c4d5e00e834df871234e80&cnt=7&units=metric&lang=pt',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
+
+  String? cidade(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.name''',
+      ));
+  String? tempo(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].main''',
+      ));
+  String? descricao(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].description''',
+      ));
+  double? temperatura(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp''',
+      ));
+  double? minima(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp_min''',
+      ));
+  double? maxima(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.temp_max''',
+      ));
+  double? sensacao(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.main.feels_like''',
+      ));
+  int? umidade(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.main.humidity''',
+      ));
+  String? img(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.weather[:].icon''',
+      ));
 }
 
 class RetrievePaymentIntentCall {
   Future<ApiCallResponse> call({
     String? idPaymentIntent = '',
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
   }) async {
+    final baseUrl = OpenweatherGroup.getBaseUrl(
+      apiKey: apiKey,
+      idioma: idioma,
+      graus: graus,
+    );
+
     return ApiManager.instance.makeApiCall(
       callName: 'Retrieve PaymentIntent',
-      apiUrl: '${StripeGroup.baseUrl}/payment_intents/${idPaymentIntent}',
+      apiUrl: '${baseUrl}/payment_intents/${idPaymentIntent}',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization':
-            'Bearer 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',
-        'Stripe-Version': '2020-03-02',
-      },
+      headers: {},
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -336,21 +434,27 @@ class RetrieveCheckoutSessionCall {
   Future<ApiCallResponse> call({
     String? idsessionCheckout = '',
     String? status = '',
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
   }) async {
+    final baseUrl = OpenweatherGroup.getBaseUrl(
+      apiKey: apiKey,
+      idioma: idioma,
+      graus: graus,
+    );
+
     return ApiManager.instance.makeApiCall(
       callName: 'Retrieve Checkout Session',
-      apiUrl: '${StripeGroup.baseUrl}/checkout/sessions/${idsessionCheckout}',
+      apiUrl: '${baseUrl}/checkout/sessions/${idsessionCheckout}',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization':
-            'Bearer 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',
-        'Stripe-Version': '2020-03-02',
-      },
+      headers: {},
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -365,16 +469,21 @@ class ListCustomersUsuariosAtivoCall {
   Future<ApiCallResponse> call({
     String? email = '',
     String? status = 'complete',
+    String? apiKey = '8275df55a0c4d5e00e834df871234e80',
+    String? idioma = 'imperial',
+    String? graus = 'lang=pt',
   }) async {
+    final baseUrl = OpenweatherGroup.getBaseUrl(
+      apiKey: apiKey,
+      idioma: idioma,
+      graus: graus,
+    );
+
     return ApiManager.instance.makeApiCall(
       callName: 'List Customers UsuariosAtivo',
-      apiUrl: '${StripeGroup.baseUrl}/customers',
+      apiUrl: '${baseUrl}/customers',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization':
-            'Bearer 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',
-        'Stripe-Version': '2020-03-02',
-      },
+      headers: {},
       params: {
         'email': email,
       },
@@ -382,6 +491,7 @@ class ListCustomersUsuariosAtivoCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -414,7 +524,50 @@ class ListCustomersUsuariosAtivoCall {
       ));
 }
 
-/// End Stripe Group Code
+/// End openweather Group Code
+
+class GeminiaiCall {
+  static Future<ApiCallResponse> call({
+    String? textfildPrompt = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "contents": [
+    {
+      "parts": [
+        {
+          "text": "${textfildPrompt}"
+        }
+      ]
+    }
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Geminiai',
+      apiUrl:
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyC86urKfOutTVTWj2SpOBWYihcnzDwwp8I',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? textGeminai(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.candidates[:].content.parts[:].text''',
+      ));
+}
 
 class ApiPagingParams {
   int nextPageNumber = 0;
@@ -432,11 +585,21 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -444,8 +607,11 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
 }

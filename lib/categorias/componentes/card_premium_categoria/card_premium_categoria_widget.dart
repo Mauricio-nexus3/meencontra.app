@@ -49,7 +49,7 @@ class _CardPremiumCategoriaWidgetState
     super.initState();
     _model = createModel(context, () => CardPremiumCategoriaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -71,7 +71,7 @@ class _CardPremiumCategoriaWidgetState
         _model.anunciante = await queryAnuncianteRecordOnce(
           queryBuilder: (anuncianteRecord) => anuncianteRecord.where(
             'aid',
-            isEqualTo: widget.auncianteREF?.id,
+            isEqualTo: widget!.auncianteREF?.id,
           ),
           singleRecord: true,
         ).then((s) => s.firstOrNull);
@@ -89,7 +89,7 @@ class _CardPremiumCategoriaWidgetState
           },
         );
 
-        setState(() {});
+        safeSetState(() {});
       },
       child: Container(
         decoration: BoxDecoration(),
@@ -101,7 +101,7 @@ class _CardPremiumCategoriaWidgetState
                 fadeInDuration: Duration(milliseconds: 500),
                 fadeOutDuration: Duration(milliseconds: 500),
                 imageUrl: valueOrDefault<String>(
-                  widget.fotoDestaquePremium,
+                  widget!.fotoDestaquePremium,
                   'https://picsum.photos/seed/619/600',
                 ),
                 width: double.infinity,
@@ -137,7 +137,7 @@ class _CardPremiumCategoriaWidgetState
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 12.0),
+                                0.0, 0.0, 0.0, 24.0),
                             child: Container(
                               width: 300.0,
                               decoration: BoxDecoration(),
@@ -147,7 +147,7 @@ class _CardPremiumCategoriaWidgetState
                                 children: [
                                   Text(
                                     valueOrDefault<String>(
-                                      widget.nomeFantasia,
+                                      widget!.nomeFantasia,
                                       'nome',
                                     ),
                                     style: FlutterFlowTheme.of(context)

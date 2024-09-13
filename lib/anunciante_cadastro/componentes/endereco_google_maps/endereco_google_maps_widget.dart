@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/place.dart';
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
@@ -86,7 +87,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -270,7 +271,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                     webGoogleMapsApiKey:
                                         'AIzaSyDbiwZY1UrW9FZoJOmJDn7U4w0ALq0-XJM',
                                     onSelect: (place) async {
-                                      setState(() => _model
+                                      safeSetState(() => _model
                                           .pickerBTNConfirmacaoValue = place);
                                       (await _model
                                               .googleMapObrigatoriosController
@@ -324,7 +325,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                           'ENDERECO_GOOGLE_MAPS_ATUALIZAR_BTN_ON_TA');
                                       _model.enderecoRef =
                                           await queryEnderecoRecordOnce(
-                                        parent: widget.anuncianteRef,
+                                        parent: widget!.anuncianteRef,
                                         singleRecord: true,
                                       ).then((s) => s.firstOrNull);
 
@@ -338,7 +339,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                           _model
                                               .pickerBTNConfirmacaoValue.name);
 
-                                      setState(() {});
+                                      safeSetState(() {});
                                     },
                                     text: 'Atualizar',
                                     options: FFButtonOptions(
@@ -420,7 +421,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(

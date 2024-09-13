@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -27,7 +28,6 @@ class CriarPerfilModel extends FlutterFlowModel<CriarPerfilWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -65,7 +65,6 @@ class CriarPerfilModel extends FlutterFlowModel<CriarPerfilWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     nomeFocusNode?.dispose();
     nomeTextController?.dispose();
 

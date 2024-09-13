@@ -39,7 +39,7 @@ class _CardRightMeinformaWidgetState extends State<CardRightMeinformaWidget> {
     super.initState();
     _model = createModel(context, () => CardRightMeinformaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -59,7 +59,7 @@ class _CardRightMeinformaWidgetState extends State<CardRightMeinformaWidget> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
@@ -74,7 +74,7 @@ class _CardRightMeinformaWidgetState extends State<CardRightMeinformaWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget.tituloCategoria,
+                      widget!.tituloCategoria,
                       'Titulo',
                     ),
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -97,7 +97,8 @@ class _CardRightMeinformaWidgetState extends State<CardRightMeinformaWidget> {
                 child: Builder(
                   builder: (context) {
                     final comunidade =
-                        (widget.parameter1?.toList() ?? []).take(5).toList();
+                        (widget!.parameter1?.toList() ?? []).take(5).toList();
+
                     return Column(
                       mainAxisSize: MainAxisSize.max,
                       children:

@@ -52,8 +52,8 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
     _model = createModel(context, () => ResultadoCardModel());
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -121,7 +121,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(200.0),
                     child: Image.network(
-                      widget.logo!,
+                      widget!.logo!,
                       width: 60.0,
                       height: 60.0,
                       fit: BoxFit.cover,
@@ -138,7 +138,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.nomeFantasia!,
+                        widget!.nomeFantasia!,
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily: 'Inter',
                               letterSpacing: 0.0,
@@ -162,13 +162,13 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                             ),
                             AutoSizeText(
                               '${dateTimeFormat(
-                                'Hm',
-                                widget.horaAbre,
+                                "Hm",
+                                widget!.horaAbre,
                                 locale:
                                     FFLocalizations.of(context).languageCode,
                               )}-${dateTimeFormat(
-                                'Hm',
-                                widget.horaAbre,
+                                "Hm",
+                                widget!.horaAbre,
                                 locale:
                                     FFLocalizations.of(context).languageCode,
                               )}'
@@ -204,7 +204,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                               ),
                             ),
                             AutoSizeText(
-                              widget.enderecoBairro!.maybeHandleOverflow(
+                              widget!.enderecoBairro!.maybeHandleOverflow(
                                 maxChars: 70,
                                 replacement: '…',
                               ),
@@ -267,7 +267,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 8.0),
                         child: Text(
                           formatNumber(
-                            widget.notaMedia,
+                            widget!.notaMedia,
                             formatType: FormatType.custom,
                             format: '0.0',
                             locale: 'br',
@@ -305,7 +305,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                         child: Text(
                           '${formatNumber(
                             functions.distanceBetweenTwoPoints(
-                                widget.km!.latLng, currentUserLocationValue),
+                                widget!.km!.latLng, currentUserLocationValue),
                             formatType: FormatType.custom,
                             format: '0.0',
                             locale: '',

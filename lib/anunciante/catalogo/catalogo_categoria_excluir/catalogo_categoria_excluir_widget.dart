@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
@@ -139,7 +140,7 @@ class _CatalogoCategoriaExcluirWidgetState
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -272,44 +273,41 @@ class _CatalogoCategoriaExcluirWidgetState
                                           'CATALOGO_CATEGORIA_EXCLUIR_EXCLUIR_BTN_O');
                                       _model.produtosComCategoriaSelecionada =
                                           await queryProdutoRecordOnce(
-                                        parent: widget
+                                        parent: widget!
                                             .categoriaProdutoAnunciante
                                             ?.reference,
                                         queryBuilder: (produtoRecord) =>
                                             produtoRecord.where(
                                           'NomeDaCategoria',
-                                          isEqualTo: widget
+                                          isEqualTo: widget!
                                               .editarCategoriaCatalogo
                                               ?.nomeCategoria,
                                         ),
                                       );
-                                      setState(() {
-                                        _model.listaCategoriaRef = _model
-                                            .produtosComCategoriaSelecionada!
-                                            .toList()
-                                            .cast<ProdutoRecord>();
-                                        _model.atualizando = 1;
-                                      });
+                                      _model.listaCategoriaRef = _model
+                                          .produtosComCategoriaSelecionada!
+                                          .toList()
+                                          .cast<ProdutoRecord>();
+                                      _model.atualizando = 1;
+                                      safeSetState(() {});
                                       while ((_model.listaCategoriaRef.length >
                                               0) &&
                                           (_model.listaCategoriaRef.first
                                                   .nomeDaCategoria ==
-                                              widget.editarCategoriaCatalogo
+                                              widget!.editarCategoriaCatalogo
                                                   ?.nomeCategoria)) {
                                         await _model
                                             .listaCategoriaRef.first.reference
                                             .update(createProdutoRecordData(
                                           nomeDaCategoria: 'Não categorizado',
                                         ));
-                                        setState(() {
-                                          _model.removeFromListaCategoriaRef(
-                                              _model.listaCategoriaRef.first);
-                                        });
+                                        _model.removeFromListaCategoriaRef(
+                                            _model.listaCategoriaRef.first);
+                                        safeSetState(() {});
                                       }
-                                      setState(() {
-                                        _model.atualizando = 0;
-                                      });
-                                      await widget
+                                      _model.atualizando = 0;
+                                      safeSetState(() {});
+                                      await widget!
                                           .editarCategoriaCatalogo!.reference
                                           .delete();
                                       ScaffoldMessenger.of(context)
@@ -332,7 +330,7 @@ class _CatalogoCategoriaExcluirWidgetState
                                       );
                                       Navigator.pop(context);
 
-                                      setState(() {});
+                                      safeSetState(() {});
                                     },
                                     text: 'Excluir',
                                     options: FFButtonOptions(

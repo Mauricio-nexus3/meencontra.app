@@ -33,7 +33,7 @@ class _CardBasicoWidgetState extends State<CardBasicoWidget> {
     super.initState();
     _model = createModel(context, () => CardBasicoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -61,7 +61,7 @@ class _CardBasicoWidgetState extends State<CardBasicoWidget> {
             child: CachedNetworkImage(
               fadeInDuration: Duration(milliseconds: 500),
               fadeOutDuration: Duration(milliseconds: 500),
-              imageUrl: widget.fotoBasico!,
+              imageUrl: widget!.fotoBasico!,
               width: 70.0,
               height: 100.0,
               fit: BoxFit.cover,

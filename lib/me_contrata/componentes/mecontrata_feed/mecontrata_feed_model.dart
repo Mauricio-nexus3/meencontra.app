@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/login/componentes/usar_deslogado_uso_exclusivo_comp/usar_deslogado_uso_exclusivo_comp_widget.dart';
+import 'dart:math';
 import 'mecontrata_feed_widget.dart' show MecontrataFeedWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

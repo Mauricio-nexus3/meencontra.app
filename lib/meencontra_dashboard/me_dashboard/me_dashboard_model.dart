@@ -1,11 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/componentes_globais/menus/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/meencontra_dashboard/componentes/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
+import 'dart:math';
 import 'me_dashboard_widget.dart' show MeDashboardWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +23,6 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 class MeDashboardModel extends FlutterFlowModel<MeDashboardWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in meDashboard widget.
   int? queryAnunciantes;
   // Stores action output result for [Firestore Query - Query a collection] action in meDashboard widget.
@@ -48,7 +48,6 @@ class MeDashboardModel extends FlutterFlowModel<MeDashboardWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     menuLateralDashboardModel1.dispose();
     menuLateralDashboardModel2.dispose();
   }

@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,10 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'teste_atual_widget.dart' show TesteAtualWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -53,42 +49,23 @@ class TesteAtualModel extends FlutterFlowModel<TesteAtualWidget> {
           int index, Function(EnderecoRecord) updateFn) =>
       updateEndereco[index] = updateFn(updateEndereco[index]);
 
-  List<AnuncianteRecord> listaAnuciantesDoc = [];
-  void addToListaAnuciantesDoc(AnuncianteRecord item) =>
-      listaAnuciantesDoc.add(item);
-  void removeFromListaAnuciantesDoc(AnuncianteRecord item) =>
-      listaAnuciantesDoc.remove(item);
-  void removeAtIndexFromListaAnuciantesDoc(int index) =>
-      listaAnuciantesDoc.removeAt(index);
-  void insertAtIndexInListaAnuciantesDoc(int index, AnuncianteRecord item) =>
-      listaAnuciantesDoc.insert(index, item);
-  void updateListaAnuciantesDocAtIndex(
-          int index, Function(AnuncianteRecord) updateFn) =>
-      listaAnuciantesDoc[index] = updateFn(listaAnuciantesDoc[index]);
+  List<MateriasRecord> listaMateriasDoc = [];
+  void addToListaMateriasDoc(MateriasRecord item) => listaMateriasDoc.add(item);
+  void removeFromListaMateriasDoc(MateriasRecord item) =>
+      listaMateriasDoc.remove(item);
+  void removeAtIndexFromListaMateriasDoc(int index) =>
+      listaMateriasDoc.removeAt(index);
+  void insertAtIndexInListaMateriasDoc(int index, MateriasRecord item) =>
+      listaMateriasDoc.insert(index, item);
+  void updateListaMateriasDocAtIndex(
+          int index, Function(MateriasRecord) updateFn) =>
+      listaMateriasDoc[index] = updateFn(listaMateriasDoc[index]);
 
-  AnuncianteRecord? anuncianteEmExecucaoDoc;
-
-  EnderecoRecord? enderEmExecucaoDoc;
-
-  String? testeAAAAAString;
-
-  double? testeAAAAADouble;
-
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-  // State field(s) for TextFieldAAAA widget.
-  FocusNode? textFieldAAAAFocusNode;
-  TextEditingController? textFieldAAAATextController;
-  String? Function(BuildContext, String?)? textFieldAAAATextControllerValidator;
+  MateriasRecord? listaMateriasExecutando;
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-    textFieldAAAAFocusNode?.dispose();
-    textFieldAAAATextController?.dispose();
-  }
+  void dispose() {}
 }

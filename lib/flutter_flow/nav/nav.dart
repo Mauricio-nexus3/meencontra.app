@@ -114,11 +114,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'resultado',
               requireAuth: true,
               builder: (context, params) => ResultadoWidget(
-                subCategoriasResultRef: params.getParam(
-                  'subCategoriasResultRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['SubCategorias'],
+                total: params.getParam(
+                  'total',
+                  ParamType.double,
+                ),
+                subCategoria: params.getParam(
+                  'subCategoria',
+                  ParamType.String,
                 ),
               ),
             ),
@@ -130,8 +132,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 subCategoria: params.getParam(
                   'subCategoria',
                   ParamType.DocumentReference,
-                  false,
-                  ['Categorias'],
+                  isList: false,
+                  collectionNamePath: ['Categorias'],
                 ),
               ),
             ),
@@ -155,8 +157,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 usuarioRef: params.getParam(
                   'usuarioRef',
                   ParamType.DocumentReference,
-                  false,
-                  ['users'],
+                  isList: false,
+                  collectionNamePath: ['users'],
                 ),
               ),
             ),
@@ -168,8 +170,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 usuarioREF: params.getParam(
                   'usuarioREF',
                   ParamType.DocumentReference,
-                  false,
-                  ['users'],
+                  isList: false,
+                  collectionNamePath: ['users'],
                 ),
               ),
             ),
@@ -202,8 +204,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 anuncianteREF: params.getParam(
                   'anuncianteREF',
                   ParamType.DocumentReference,
-                  false,
-                  ['Anunciante'],
+                  isList: false,
+                  collectionNamePath: ['Anunciante'],
                 ),
               ),
             ),
@@ -223,15 +225,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'TVGON',
-              path: 'tvgon',
+              name: 'Imprensa',
+              path: 'imprensa',
               requireAuth: true,
-              builder: (context, params) => TvgonWidget(
+              builder: (context, params) => ImprensaWidget(
                 imprensaRef: params.getParam(
                   'imprensaRef',
                   ParamType.DocumentReference,
-                  false,
-                  ['meInforma'],
+                  isList: false,
+                  collectionNamePath: ['meInforma'],
                 ),
               ),
             ),
@@ -240,19 +242,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'cadastroInicial',
               requireAuth: true,
               builder: (context, params) => CadastroInicialWidget(),
-            ),
-            FFRoute(
-              name: 'ConcluirCadastro',
-              path: 'concluirCadastro',
-              requireAuth: true,
-              builder: (context, params) => ConcluirCadastroWidget(
-                anuncianteRef: params.getParam(
-                  'anuncianteRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['Anunciante'],
-                ),
-              ),
             ),
             FFRoute(
               name: 'ValidarEmail',
@@ -312,15 +301,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'CriarNovaMateria',
-              path: 'criarNovaMateria',
+              name: 'Materia',
+              path: 'materia',
               requireAuth: true,
-              builder: (context, params) => CriarNovaMateriaWidget(
-                goRef: params.getParam(
-                  'goRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['meInforma'],
+              asyncParams: {
+                'materiaDoc': getDoc(
+                    ['meInforma', 'Materias'], MateriasRecord.fromSnapshot),
+              },
+              builder: (context, params) => MateriaWidget(
+                status: params.getParam(
+                  'status',
+                  ParamType.String,
+                ),
+                materiaDoc: params.getParam(
+                  'materiaDoc',
+                  ParamType.Document,
                 ),
               ),
             ),
@@ -328,50 +323,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'CriarNovaVaga',
               path: 'criarNovaVaga',
               requireAuth: true,
-              builder: (context, params) => CriarNovaVagaWidget(),
+              asyncParams: {
+                'vagaDoc': getDoc(
+                    ['meContrataVAGAS'], MeContrataVAGASRecord.fromSnapshot),
+              },
+              builder: (context, params) => CriarNovaVagaWidget(
+                status: params.getParam(
+                  'status',
+                  ParamType.String,
+                ),
+                vagaDoc: params.getParam(
+                  'vagaDoc',
+                  ParamType.Document,
+                ),
+              ),
             ),
             FFRoute(
               name: 'CriarNovoEvento',
               path: 'criarNovoEvento',
               requireAuth: true,
-              builder: (context, params) => CriarNovoEventoWidget(),
-            ),
-            FFRoute(
-              name: 'EditarMateria',
-              path: 'editarMateria',
-              requireAuth: true,
-              builder: (context, params) => EditarMateriaWidget(
-                materiaRef: params.getParam(
-                  'materiaRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['meInforma', 'Materias'],
+              asyncParams: {
+                'eventoDoc':
+                    getDoc(['meDiverte'], MeDiverteRecord.fromSnapshot),
+              },
+              builder: (context, params) => CriarNovoEventoWidget(
+                status: params.getParam(
+                  'status',
+                  ParamType.String,
                 ),
-              ),
-            ),
-            FFRoute(
-              name: 'EditarVaga',
-              path: 'editarVaga',
-              requireAuth: true,
-              builder: (context, params) => EditarVagaWidget(
-                editarVaga: params.getParam(
-                  'editarVaga',
-                  ParamType.DocumentReference,
-                  false,
-                  ['meContrataVAGAS'],
-                ),
-              ),
-            ),
-            FFRoute(
-              name: 'EditarEvento',
-              path: 'editarEvento',
-              requireAuth: true,
-              builder: (context, params) => EditarEventoWidget(
-                eventoRef: params.getParam(
-                  'eventoRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['meDiverte'],
+                eventoDoc: params.getParam(
+                  'eventoDoc',
+                  ParamType.Document,
                 ),
               ),
             ),
@@ -383,16 +365,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 userRef: params.getParam(
                   'userRef',
                   ParamType.DocumentReference,
-                  false,
-                  ['users'],
+                  isList: false,
+                  collectionNamePath: ['users'],
                 ),
               ),
-            ),
-            FFRoute(
-              name: 'testemarkdown',
-              path: 'testemarkdown',
-              requireAuth: true,
-              builder: (context, params) => TestemarkdownWidget(),
             ),
             FFRoute(
               name: 'meDashboardAnunciantes',
@@ -437,56 +413,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => MeDashboardmeinformaWidget(),
             ),
             FFRoute(
-              name: 'DetalhesProduto',
-              path: 'detalhesProduto',
-              requireAuth: true,
-              asyncParams: {
-                'detalhesProduto': getDoc(
-                    ['Anunciante', 'Produto'], ProdutoRecord.fromSnapshot),
-                'anunciante':
-                    getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
-                'carrinhoDeComprasUsuarioDoc': getDoc(
-                    ['users', 'CarrinhoDeComprasUsuario'],
-                    CarrinhoDeComprasUsuarioRecord.fromSnapshot),
-                'moreProdutos': getDocList(
-                    ['Anunciante', 'Produto'], ProdutoRecord.fromSnapshot),
-              },
-              builder: (context, params) => DetalhesProdutoWidget(
-                detalhesProduto: params.getParam(
-                  'detalhesProduto',
-                  ParamType.Document,
-                ),
-                anunciante: params.getParam(
-                  'anunciante',
-                  ParamType.Document,
-                ),
-                carrinhoDeComprasUsuarioDoc: params.getParam(
-                  'carrinhoDeComprasUsuarioDoc',
-                  ParamType.Document,
-                ),
-                moreProdutos: params.getParam<ProdutoRecord>(
-                  'moreProdutos',
-                  ParamType.Document,
-                  true,
-                ),
-              ),
-            ),
-            FFRoute(
-              name: 'DashAnunciantePainelAdm',
-              path: 'dashAnunciantePainelAdm',
-              requireAuth: true,
-              asyncParams: {
-                'anuncianteDoc':
-                    getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
-              },
-              builder: (context, params) => DashAnunciantePainelAdmWidget(
-                anuncianteDoc: params.getParam(
-                  'anuncianteDoc',
-                  ParamType.Document,
-                ),
-              ),
-            ),
-            FFRoute(
               name: 'testeAtual',
               path: 'testeAtual',
               requireAuth: true,
@@ -507,21 +433,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'DashAnuncianteProdutos',
-              path: 'dashAnuncianteProdutos',
-              requireAuth: true,
-              asyncParams: {
-                'anuncianteDoc':
-                    getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
-              },
-              builder: (context, params) => DashAnuncianteProdutosWidget(
-                anuncianteDoc: params.getParam(
-                  'anuncianteDoc',
-                  ParamType.Document,
-                ),
-              ),
-            ),
-            FFRoute(
               name: 'DashAnuncianteCatalogo',
               path: 'dashAnuncianteCatalogo',
               requireAuth: true,
@@ -530,21 +441,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
               },
               builder: (context, params) => DashAnuncianteCatalogoWidget(
-                anuncianteDoc: params.getParam(
-                  'anuncianteDoc',
-                  ParamType.Document,
-                ),
-              ),
-            ),
-            FFRoute(
-              name: 'DashAnuncianteAnuncios',
-              path: 'dashAnuncianteAnuncios',
-              requireAuth: true,
-              asyncParams: {
-                'anuncianteDoc':
-                    getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
-              },
-              builder: (context, params) => DashAnuncianteAnunciosWidget(
                 anuncianteDoc: params.getParam(
                   'anuncianteDoc',
                   ParamType.Document,
@@ -589,13 +485,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : FeedWidget(),
             ),
             FFRoute(
-              name: 'DashAnunciantePerfil',
-              path: 'dashAnunciantePerfil',
+              name: 'painelAdministrativo',
+              path: 'painelAdministrativo',
               asyncParams: {
                 'documentoRefAnunciante':
                     getDoc(['Anunciante'], AnuncianteRecord.fromSnapshot),
               },
-              builder: (context, params) => DashAnunciantePerfilWidget(
+              builder: (context, params) => PainelAdministrativoWidget(
                 documentoRefAnunciante: params.getParam(
                   'documentoRefAnunciante',
                   ParamType.Document,
@@ -606,17 +502,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'notificacoes',
               path: 'notificacoes',
               requireAuth: true,
-              asyncParams: {
-                'notificacoes':
-                    getDocList(['notificacao'], NotificacaoRecord.fromSnapshot),
-              },
-              builder: (context, params) => NotificacoesWidget(
-                notificacoes: params.getParam<NotificacaoRecord>(
-                  'notificacoes',
-                  ParamType.Document,
-                  true,
-                ),
-              ),
+              builder: (context, params) => NotificacoesWidget(),
             ),
             FFRoute(
               name: 'DashAnuncianteAssinatura',
@@ -634,31 +520,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Pagamento',
-              path: 'pagamento',
+              name: 'meDashboardSuporte',
+              path: 'meDashboardSuporte',
               requireAuth: true,
-              builder: (context, params) => PagamentoWidget(
-                anuncianteRef: params.getParam(
-                  'anuncianteRef',
-                  ParamType.DocumentReference,
-                  false,
-                  ['Anunciante'],
-                ),
-                planoAssinatura: params.getParam(
-                  'planoAssinatura',
-                  ParamType.String,
-                ),
-                nomeFantasia: params.getParam(
-                  'nomeFantasia',
+              builder: (context, params) => MeDashboardSuporteWidget(),
+            ),
+            FFRoute(
+              name: 'configuracoes',
+              path: 'configuracoes',
+              requireAuth: true,
+              builder: (context, params) => ConfiguracoesWidget(),
+            ),
+            FFRoute(
+              name: 'impreendimentos',
+              path: 'impreendimentos',
+              requireAuth: true,
+              builder: (context, params) => ImpreendimentosWidget(),
+            ),
+            FFRoute(
+              name: 'webView',
+              path: 'webView',
+              builder: (context, params) => WebViewWidget(
+                url: params.getParam(
+                  'url',
                   ParamType.String,
                 ),
               ),
             ),
             FFRoute(
-              name: 'meDashboardFinanceiro',
-              path: 'meDashboardFinanceiro',
+              name: 'TonyAssist',
+              path: 'tonyAssist',
               requireAuth: true,
-              builder: (context, params) => MeDashboardFinanceiroWidget(),
+              builder: (context, params) => TonyAssistWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -757,7 +650,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -778,11 +671,11 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
     StructBuilder<T>? structBuilder,
-  ]) {
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -956,4 +849,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

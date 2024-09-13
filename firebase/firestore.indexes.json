@@ -5,7 +5,11 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "Categoria",
+          "fieldPath": "NomeSubCategoria01",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "NomeSubCategoria02",
           "order": "ASCENDING"
         },
         {
@@ -76,26 +80,6 @@
       "indexes": [
         {
           "order": "DESCENDING",
-          "queryScope": "COLLECTION_GROUP"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "Anuncios",
-      "fieldPath": "Anunciado",
-      "indexes": [
-        {
-          "order": "ASCENDING",
-          "queryScope": "COLLECTION_GROUP"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "Produto",
-      "fieldPath": "ProdutoAnunciado",
-      "indexes": [
-        {
-          "order": "ASCENDING",
           "queryScope": "COLLECTION_GROUP"
         }
       ]

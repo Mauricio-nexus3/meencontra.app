@@ -1,4 +1,4 @@
-import '/anunciante/assinatura/selos_anunciante/selos_anunciante_widget.dart';
+import '/assinatura/selos_anunciante/selos_anunciante_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

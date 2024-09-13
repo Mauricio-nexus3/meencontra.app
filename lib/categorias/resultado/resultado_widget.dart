@@ -4,9 +4,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'resultado_model.dart';
 export 'resultado_model.dart';
@@ -14,10 +14,12 @@ export 'resultado_model.dart';
 class ResultadoWidget extends StatefulWidget {
   const ResultadoWidget({
     super.key,
-    required this.subCategoriasResultRef,
+    this.total,
+    required this.subCategoria,
   });
 
-  final DocumentReference? subCategoriasResultRef;
+  final double? total;
+  final String? subCategoria;
 
   @override
   State<ResultadoWidget> createState() => _ResultadoWidgetState();
@@ -34,7 +36,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
     _model = createModel(context, () => ResultadoModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Resultado'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,285 +48,194 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SubCategoriasRecord>(
-      future:
-          SubCategoriasRecord.getDocumentOnce(widget.subCategoriasResultRef!),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Center(
-              child: SizedBox(
-                width: 30.0,
-                height: 30.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Color(0xFF622AE2),
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
-        final resultadoSubCategoriasRecord = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+    return Title(
+        title: 'Resultado',
+        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 54.0,
+                icon: Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  logFirebaseEvent('RESULTADO_arrow_back_ios_rounded_ICN_ON_');
+                  context.pop();
+                },
+              ),
+              title: Text(
+                valueOrDefault<String>(
+                  widget!.subCategoria,
+                  'Nome',
+                ),
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      fontSize: 22.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              actions: [],
+              centerTitle: true,
+              elevation: 2.0,
+            ),
             body: SafeArea(
               top: true,
-              child: StreamBuilder<List<AnuncianteRecord>>(
-                stream: _model.resultadoSub(
-                  requestFn: () => queryAnuncianteRecord(
-                    queryBuilder: (anuncianteRecord) => anuncianteRecord
-                        .where(
-                          'Categoria',
-                          isEqualTo: resultadoSubCategoriasRecord
-                                      .nomeCategoriaPai !=
-                                  ''
-                              ? resultadoSubCategoriasRecord.nomeCategoriaPai
-                              : null,
-                        )
-                        .orderBy('PlanoAssinatura', descending: true),
-                  ),
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 30.0,
-                        height: 30.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Color(0xFF622AE2),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(
+                        valueOrDefault<double>(
+                          FFAppConstants.paddingMobile,
+                          0.0,
+                        ),
+                        0.0,
+                        0.0,
+                        0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Total',
+                          style:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        Text(
+                          valueOrDefault<String>(
+                            widget!.total?.toString(),
+                            '1',
                           ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ].divide(SizedBox(width: 2.0)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(),
+                      child: PagedListView<DocumentSnapshot<Object?>?,
+                          AnuncianteRecord>(
+                        pagingController: _model.setListViewController(
+                          AnuncianteRecord.collection
+                              .where(Filter.or(
+                                Filter(
+                                  'NomeSubCategoria01',
+                                  isEqualTo: widget!.subCategoria != ''
+                                      ? widget!.subCategoria
+                                      : null,
+                                ),
+                                Filter(
+                                  'NomeSubCategoria02',
+                                  isEqualTo: widget!.subCategoria != ''
+                                      ? widget!.subCategoria
+                                      : null,
+                                ),
+                              ))
+                              .orderBy('PlanoAssinatura', descending: true),
+                        ),
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        reverse: false,
+                        scrollDirection: Axis.vertical,
+                        builderDelegate:
+                            PagedChildBuilderDelegate<AnuncianteRecord>(
+                          // Customize what your widget looks like when it's loading the first page.
+                          firstPageProgressIndicatorBuilder: (_) => Center(
+                            child: SizedBox(
+                              width: 30.0,
+                              height: 30.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF622AE2),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Customize what your widget looks like when it's loading another page.
+                          newPageProgressIndicatorBuilder: (_) => Center(
+                            child: SizedBox(
+                              width: 30.0,
+                              height: 30.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF622AE2),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          itemBuilder: (context, _, listViewIndex) {
+                            final listViewAnuncianteRecord = _model
+                                .listViewPagingController!
+                                .itemList![listViewIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'RESULTADO_PAGE_Container_pop14iua_ON_TAP');
+
+                                context.pushNamed(
+                                  'AnunciantePage',
+                                  queryParameters: {
+                                    'documentoRefAnunciante': serializeParam(
+                                      listViewAnuncianteRecord,
+                                      ParamType.Document,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'documentoRefAnunciante':
+                                        listViewAnuncianteRecord,
+                                  },
+                                );
+                              },
+                              child: CardListaSubCategoriaWidget(
+                                key: Key(
+                                    'Keypop_${listViewIndex}_of_${_model.listViewPagingController!.itemList!.length}'),
+                                logo: listViewAnuncianteRecord.logo,
+                                nome: listViewAnuncianteRecord.nomeFantasia,
+                                endereco:
+                                    listViewAnuncianteRecord.enderecoCompleto,
+                                planoAssinatura:
+                                    listViewAnuncianteRecord.planoAssinatura,
+                                nota: listViewAnuncianteRecord.notaMedia,
+                                parameter3: listViewAnuncianteRecord.reference,
+                                regatado: listViewAnuncianteRecord.resgatado,
+                                whatsapp:
+                                    listViewAnuncianteRecord.whatsComercial,
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    );
-                  }
-                  List<AnuncianteRecord> containerAnuncianteRecordList =
-                      snapshot.data!;
-                  return Container(
-                    decoration: BoxDecoration(),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Material(
-                            color: Colors.transparent,
-                            elevation: 2.0,
-                            child: Container(
-                              height: 44.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).accent4,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    FlutterFlowIconButton(
-                                      borderRadius: 20.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 40.0,
-                                      icon: Icon(
-                                        Icons.arrow_back_ios,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 28.0,
-                                      ),
-                                      onPressed: () async {
-                                        logFirebaseEvent(
-                                            'RESULTADO_PAGE_arrow_back_ios_ICN_ON_TAP');
-                                        context.safePop();
-                                      },
-                                    ),
-                                    Text(
-                                      resultadoSubCategoriasRecord
-                                          .nomeSubCategoria,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Container(
-                                      width: 40.0,
-                                      height: 40.0,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            constraints: BoxConstraints(
-                              maxWidth: 1020.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'Total',
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          (valueOrDefault<int>(
-                                                    containerAnuncianteRecordList
-                                                        .where((e) =>
-                                                            e.nomeSubCategoria01 ==
-                                                            resultadoSubCategoriasRecord
-                                                                .nomeSubCategoria)
-                                                        .toList()
-                                                        .length,
-                                                    0,
-                                                  ) +
-                                                  valueOrDefault<int>(
-                                                    containerAnuncianteRecordList
-                                                        .where((e) =>
-                                                            e.nomeSubCategoria02 ==
-                                                            resultadoSubCategoriasRecord
-                                                                .nomeSubCategoria)
-                                                        .toList()
-                                                        .length,
-                                                    0,
-                                                  ))
-                                              .toString(),
-                                          '0',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(width: 2.0)),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 12.0, 0.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final planoPago = containerAnuncianteRecordList
-                                            .where((e) =>
-                                                (e.nomeSubCategoria01 ==
-                                                    resultadoSubCategoriasRecord
-                                                        .nomeSubCategoria) ||
-                                                (e.nomeSubCategoria02 ==
-                                                    resultadoSubCategoriasRecord
-                                                        .nomeSubCategoria))
-                                            .toList();
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: List.generate(
-                                                  planoPago.length,
-                                                  (planoPagoIndex) {
-                                            final planoPagoItem =
-                                                planoPago[planoPagoIndex];
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'RESULTADO_PAGE_Container_5hta4rac_ON_TAP');
-
-                                                context.pushNamed(
-                                                  'AnunciantePage',
-                                                  queryParameters: {
-                                                    'documentoRefAnunciante':
-                                                        serializeParam(
-                                                      planoPagoItem,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'documentoRefAnunciante':
-                                                        planoPagoItem,
-                                                  },
-                                                );
-                                              },
-                                              child:
-                                                  CardListaSubCategoriaWidget(
-                                                key: Key(
-                                                    'Key5ht_${planoPagoIndex}_of_${planoPago.length}'),
-                                                logo: planoPagoItem.logo,
-                                                nome:
-                                                    planoPagoItem.nomeFantasia,
-                                                endereco: planoPagoItem
-                                                    .enderecoCompleto,
-                                                planoAssinatura: planoPagoItem
-                                                    .planoAssinatura,
-                                                nota: planoPagoItem.notaMedia,
-                                                parameter3:
-                                                    planoPagoItem.reference,
-                                                regatado:
-                                                    planoPagoItem.resgatado,
-                                              ),
-                                            );
-                                          })
-                                              .divide(SizedBox(height: 12.0))
-                                              .around(SizedBox(height: 12.0)),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ]
-                                  .divide(SizedBox(height: 12.0))
-                                  .around(SizedBox(height: 12.0)),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                  );
-                },
+                  ),
+                ].divide(SizedBox(height: 16.0)).around(SizedBox(height: 16.0)),
               ),
             ),
           ),
-        );
-      },
-    );
+        ));
   }
 }

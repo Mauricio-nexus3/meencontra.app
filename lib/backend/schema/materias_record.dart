@@ -87,6 +87,41 @@ class MateriasRecord extends FirestoreRecord {
   bool get notificacaoEnviada => _notificacaoEnviada ?? false;
   bool hasNotificacaoEnviada() => _notificacaoEnviada != null;
 
+  // "nomeLeitor" field.
+  String? _nomeLeitor;
+  String get nomeLeitor => _nomeLeitor ?? '';
+  bool hasNomeLeitor() => _nomeLeitor != null;
+
+  // "emailLeitor" field.
+  String? _emailLeitor;
+  String get emailLeitor => _emailLeitor ?? '';
+  bool hasEmailLeitor() => _emailLeitor != null;
+
+  // "videoMateria" field.
+  String? _videoMateria;
+  String get videoMateria => _videoMateria ?? '';
+  bool hasVideoMateria() => _videoMateria != null;
+
+  // "fonteImprensa" field.
+  String? _fonteImprensa;
+  String get fonteImprensa => _fonteImprensa ?? '';
+  bool hasFonteImprensa() => _fonteImprensa != null;
+
+  // "logoUrl" field.
+  String? _logoUrl;
+  String get logoUrl => _logoUrl ?? '';
+  bool hasLogoUrl() => _logoUrl != null;
+
+  // "instagram" field.
+  String? _instagram;
+  String get instagram => _instagram ?? '';
+  bool hasInstagram() => _instagram != null;
+
+  // "site" field.
+  String? _site;
+  String get site => _site ?? '';
+  bool hasSite() => _site != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -106,6 +141,13 @@ class MateriasRecord extends FirestoreRecord {
         castToType<double>(snapshotData['numTotalLeitoresMateria']);
     _html = snapshotData['html'] as String?;
     _notificacaoEnviada = snapshotData['notificacaoEnviada'] as bool?;
+    _nomeLeitor = snapshotData['nomeLeitor'] as String?;
+    _emailLeitor = snapshotData['emailLeitor'] as String?;
+    _videoMateria = snapshotData['videoMateria'] as String?;
+    _fonteImprensa = snapshotData['fonteImprensa'] as String?;
+    _logoUrl = snapshotData['logoUrl'] as String?;
+    _instagram = snapshotData['instagram'] as String?;
+    _site = snapshotData['site'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -160,6 +202,13 @@ Map<String, dynamic> createMateriasRecordData({
   double? numTotalLeitoresMateria,
   String? html,
   bool? notificacaoEnviada,
+  String? nomeLeitor,
+  String? emailLeitor,
+  String? videoMateria,
+  String? fonteImprensa,
+  String? logoUrl,
+  String? instagram,
+  String? site,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -175,6 +224,13 @@ Map<String, dynamic> createMateriasRecordData({
       'numTotalLeitoresMateria': numTotalLeitoresMateria,
       'html': html,
       'notificacaoEnviada': notificacaoEnviada,
+      'nomeLeitor': nomeLeitor,
+      'emailLeitor': emailLeitor,
+      'videoMateria': videoMateria,
+      'fonteImprensa': fonteImprensa,
+      'logoUrl': logoUrl,
+      'instagram': instagram,
+      'site': site,
     }.withoutNulls,
   );
 
@@ -201,7 +257,14 @@ class MateriasRecordDocumentEquality implements Equality<MateriasRecord> {
         listEquality.equals(e1?.imagens, e2?.imagens) &&
         e1?.numTotalLeitoresMateria == e2?.numTotalLeitoresMateria &&
         e1?.html == e2?.html &&
-        e1?.notificacaoEnviada == e2?.notificacaoEnviada;
+        e1?.notificacaoEnviada == e2?.notificacaoEnviada &&
+        e1?.nomeLeitor == e2?.nomeLeitor &&
+        e1?.emailLeitor == e2?.emailLeitor &&
+        e1?.videoMateria == e2?.videoMateria &&
+        e1?.fonteImprensa == e2?.fonteImprensa &&
+        e1?.logoUrl == e2?.logoUrl &&
+        e1?.instagram == e2?.instagram &&
+        e1?.site == e2?.site;
   }
 
   @override
@@ -219,7 +282,14 @@ class MateriasRecordDocumentEquality implements Equality<MateriasRecord> {
         e?.imagens,
         e?.numTotalLeitoresMateria,
         e?.html,
-        e?.notificacaoEnviada
+        e?.notificacaoEnviada,
+        e?.nomeLeitor,
+        e?.emailLeitor,
+        e?.videoMateria,
+        e?.fonteImprensa,
+        e?.logoUrl,
+        e?.instagram,
+        e?.site
       ]);
 
   @override

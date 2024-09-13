@@ -20,6 +20,7 @@ class IconRedeSociaisStruct extends FFFirebaseStruct {
   String? _instagram;
   String get instagram => _instagram ?? '';
   set instagram(String? val) => _instagram = val;
+
   bool hasInstagram() => _instagram != null;
 
   static IconRedeSociaisStruct fromMap(Map<String, dynamic> data) =>

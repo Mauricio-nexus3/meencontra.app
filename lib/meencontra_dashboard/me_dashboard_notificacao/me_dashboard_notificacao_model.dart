@@ -1,14 +1,17 @@
+import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
+import '/componentes_globais/menus/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/meencontra_dashboard/componentes/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
 import 'me_dashboard_notificacao_widget.dart' show MeDashboardNotificacaoWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,11 +20,21 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 
 class MeDashboardNotificacaoModel
     extends FlutterFlowModel<MeDashboardNotificacaoWidget> {
+  ///  Local state fields for this page.
+
+  AnuncianteRecord? anuncianteSelecionado;
+
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for MenuLateralDashboard component.
   late MenuLateralDashboardModel menuLateralDashboardModel1;
+  // Model for MenuLateralDashboard component.
+  late MenuLateralDashboardModel menuLateralDashboardModel2;
+  // State field(s) for TabBar widget.
+  TabController? tabBarController;
+  int get tabBarCurrentIndex =>
+      tabBarController != null ? tabBarController!.index : 0;
+
   // State field(s) for tituloNotificacao widget.
   FocusNode? tituloNotificacaoFocusNode;
   TextEditingController? tituloNotificacaoTextController;
@@ -37,7 +50,7 @@ class MeDashboardNotificacaoModel
   TextEditingController? uRLNotificacaoTextController;
   String? Function(BuildContext, String?)?
       uRLNotificacaoTextControllerValidator;
-  DateTime? datePicked;
+  DateTime? datePicked1;
   // State field(s) for TituloComunicado widget.
   FocusNode? tituloComunicadoFocusNode;
   TextEditingController? tituloComunicadoTextController;
@@ -56,8 +69,20 @@ class MeDashboardNotificacaoModel
   TextEditingController? uRLDestinoComunicadoTextController;
   String? Function(BuildContext, String?)?
       uRLDestinoComunicadoTextControllerValidator;
-  // Model for MenuLateralDashboard component.
-  late MenuLateralDashboardModel menuLateralDashboardModel2;
+  // State field(s) for allApp widget.
+  final allAppKey = GlobalKey();
+  FocusNode? allAppFocusNode;
+  TextEditingController? allAppTextController;
+  String? allAppSelectedOption;
+  String? Function(BuildContext, String?)? allAppTextControllerValidator;
+  // Algolia Search Results from action on allApp
+  List<AnuncianteRecord>? algoliaSearchResults = [];
+  // State field(s) for textoNotificacaoAnunciante widget.
+  FocusNode? textoNotificacaoAnuncianteFocusNode;
+  TextEditingController? textoNotificacaoAnuncianteTextController;
+  String? Function(BuildContext, String?)?
+      textoNotificacaoAnuncianteTextControllerValidator;
+  DateTime? datePicked2;
 
   @override
   void initState(BuildContext context) {
@@ -69,8 +94,9 @@ class MeDashboardNotificacaoModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     menuLateralDashboardModel1.dispose();
+    menuLateralDashboardModel2.dispose();
+    tabBarController?.dispose();
     tituloNotificacaoFocusNode?.dispose();
     tituloNotificacaoTextController?.dispose();
 
@@ -92,6 +118,9 @@ class MeDashboardNotificacaoModel
     uRLDestinoComunicadoFocusNode?.dispose();
     uRLDestinoComunicadoTextController?.dispose();
 
-    menuLateralDashboardModel2.dispose();
+    allAppFocusNode?.dispose();
+
+    textoNotificacaoAnuncianteFocusNode?.dispose();
+    textoNotificacaoAnuncianteTextController?.dispose();
   }
 }

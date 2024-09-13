@@ -1,11 +1,12 @@
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
+import '/componentes_globais/menus/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
+import '/componentes_globais/pop_up/acao_tabale/acao_tabale_widget.dart';
+import '/componentes_globais/pop_up/componente_geral/componente_geral_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/meencontra_dashboard/componentes/acao_tabale/acao_tabale_widget.dart';
-import '/meencontra_dashboard/componentes/componente_geral/componente_geral_widget.dart';
-import '/meencontra_dashboard/componentes/menu_lateral_dashboard/menu_lateral_dashboard_widget.dart';
 import 'me_dashboardmecontrata_widget.dart' show MeDashboardmecontrataWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -19,7 +20,6 @@ class MeDashboardmecontrataModel
     extends FlutterFlowModel<MeDashboardmecontrataWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for MenuLateralDashboard component.
   late MenuLateralDashboardModel menuLateralDashboardModel1;
   // State field(s) for TextField widget.
@@ -39,7 +39,6 @@ class MeDashboardmecontrataModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     menuLateralDashboardModel1.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
