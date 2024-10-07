@@ -147,7 +147,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                     'Inter',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryText,
+                                                                    .white,
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
@@ -295,7 +295,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                         'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
+                                                                        .white,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -588,7 +588,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                         'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
+                                                                        .white,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -881,7 +881,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                         'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
+                                                                        .white,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -1174,7 +1174,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                         'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
+                                                                        .white,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -1689,9 +1689,12 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                         'Inter',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryText,
+                                                                        .white,
                                                                     letterSpacing:
                                                                         0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
                                                                   ),
                                                             ),
                                                           ],
@@ -1815,7 +1818,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                                           'Inter',
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
+                                                                          .white,
                                                                       letterSpacing:
                                                                           0.0,
                                                                     ),

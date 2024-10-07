@@ -1,7 +1,7 @@
 import '/anunciante/catalogo/cadastrar_categoria/cadastrar_categoria_widget.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -119,50 +119,39 @@ class _DashAnuncianteCatalogoWidgetState
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                drawer: Drawer(
-                  elevation: 16.0,
-                  child: WebViewAware(
-                    child: wrapWithModel(
-                      model: _model.menuDrawerModel2,
-                      updateCallback: () => safeSetState(() {}),
-                      child: MenuDrawerWidget(
-                        paginaAtual: TelasMenuDrawer.Catalogo.name,
-                      ),
-                    ),
-                  ),
-                ),
                 appBar: AppBar(
                   backgroundColor: FlutterFlowTheme.of(context).primary,
                   automaticallyImplyLeading: false,
-                  leading: FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30.0,
-                    borderWidth: 1.0,
-                    buttonSize: 54.0,
-                    icon: Icon(
-                      Icons.menu_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      size: 24.0,
+                  leading: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 24.0,
+                      buttonSize: 48.0,
+                      fillColor: Color(0x15FFFFFF),
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: FlutterFlowTheme.of(context).white,
+                        size: 24.0,
+                      ),
+                      onPressed: () async {
+                        logFirebaseEvent(
+                            'DASH_ANUNCIANTE_CATALOGO_arrow_back_ios_');
+                        context.safePop();
+                      },
                     ),
-                    onPressed: () async {
-                      logFirebaseEvent(
-                          'DASH_ANUNCIANTE_CATALOGO_menu_rounded_IC');
-                      scaffoldKey.currentState!.openDrawer();
-                    },
                   ),
                   title: Text(
                     'Categorias do catálogo',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Inter',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).white,
                           fontSize: 22.0,
                           letterSpacing: 0.0,
                         ),
                   ),
                   actions: [],
                   centerTitle: true,
-                  elevation: 2.0,
+                  elevation: 1.0,
                 ),
                 body: SafeArea(
                   top: true,
@@ -193,7 +182,7 @@ class _DashAnuncianteCatalogoWidgetState
                                     ),
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.menuDrawerModel1,
+                                      model: _model.menuDrawerModel,
                                       updateCallback: () => safeSetState(() {}),
                                       child: MenuDrawerWidget(
                                         paginaAtual:

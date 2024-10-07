@@ -86,8 +86,7 @@ class _BloqueioWidgetState extends State<BloqueioWidget> {
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
                                 fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                color: FlutterFlowTheme.of(context).white,
                                 letterSpacing: 0.0,
                               ),
                     ),
@@ -100,246 +99,242 @@ class _BloqueioWidgetState extends State<BloqueioWidget> {
                   top: true,
                   child: Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: 700.0,
                       ),
-                      child: Container(
-                        constraints: BoxConstraints(
-                          maxWidth: 700.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).accent4,
                         ),
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).accent4,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(24.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Flexible(
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 1.0,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 1.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          offset: Offset(
+                                            0.0,
+                                            0.0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: 70.0,
+                                          height: 70.0,
+                                          decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            offset: Offset(
-                                              0.0,
-                                              0.0,
+                                                .primary,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(2.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              child: Image.network(
+                                                bloqueioAnuncianteRecord.logo,
+                                                width: 100.0,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          )
-                                        ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 0.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                bloqueioAnuncianteRecord
+                                                    .nomeFantasia,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 4.0, 0.0, 0.0),
+                                                child: Text(
+                                                  bloqueioAnuncianteRecord
+                                                      .whatsComercial,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Renove Sua Experiência ',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
                                       ),
+                                ),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                ),
+                                Text(
+                                  'Seu plano expirou, mas isso não significa o fim da sua jornada de divulgação. \n\nÉ hora de renovar sua experiência e continuar aproveitando todos os benefícios da nossa plataforma. Mantenha seu perfil ativo, alcance um público maior e não perca oportunidades de negócio. ',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ].divide(SizedBox(height: 8.0)),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'BLOQUEIO_PAGE_Container_y960gu5w_ON_TAP');
+                                    await launchURL(
+                                        '${FFAppConstants.whatsapp}${FFAppConstants.WhatsSuporte}');
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 60.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 5.0,
+                                          color: Color(0x3416202A),
+                                          offset: Offset(
+                                            0.0,
+                                            2.0,
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Container(
-                                            width: 70.0,
-                                            height: 70.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(2.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: Image.network(
-                                                  bloqueioAnuncianteRecord.logo,
-                                                  width: 100.0,
-                                                  height: 100.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  bloqueioAnuncianteRecord
-                                                      .nomeFantasia,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .headlineSmall
+                                                    12.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Fale com nossa Equipe',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
                                                       .override(
                                                         fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .white,
+                                                        fontSize: 16.0,
                                                         letterSpacing: 0.0,
                                                       ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 4.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    bloqueioAnuncianteRecord
-                                                        .whatsComercial,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.9, 0.0),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 18.0,
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Renove Sua Experiência ',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  Divider(
-                                    thickness: 1.0,
-                                    color: FlutterFlowTheme.of(context).accent4,
-                                  ),
-                                  Text(
-                                    'Seu plano expirou, mas isso não significa o fim da sua jornada de divulgação. \n\nÉ hora de renovar sua experiência e continuar aproveitando todos os benefícios da nossa plataforma. Mantenha seu perfil ativo, alcance um público maior e não perca oportunidades de negócio. ',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 8.0)),
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'BLOQUEIO_PAGE_Container_y960gu5w_ON_TAP');
-                                      await launchURL(
-                                          '${FFAppConstants.whatsapp}${FFAppConstants.WhatsSuporte}');
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 60.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 5.0,
-                                            color: Color(0x3416202A),
-                                            offset: Offset(
-                                              0.0,
-                                              2.0,
-                                            ),
-                                          )
-                                        ],
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        shape: BoxShape.rectangle,
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Fale com nossa Equipe',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.9, 0.0),
-                                                child: Icon(
-                                                  Icons.arrow_forward_ios,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 18.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'BLOQUEIO_PAGE_Container_0ed9hfqg_ON_TAP');
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'BLOQUEIO_PAGE_Container_0ed9hfqg_ON_TAP');
 
-                                      context.pushNamed('Feed');
-                                    },
+                                    context.pushNamed('Feed');
+                                  },
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 1.0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
                                     child: Container(
                                       width: double.infinity,
                                       height: 60.0,
@@ -386,10 +381,10 @@ class _BloqueioWidgetState extends State<BloqueioWidget> {
                                       ),
                                     ),
                                   ),
-                                ].divide(SizedBox(height: 12.0)),
-                              ),
-                            ].divide(SizedBox(height: 24.0)),
-                          ),
+                                ),
+                              ].divide(SizedBox(height: 12.0)),
+                            ),
+                          ].divide(SizedBox(height: 24.0)),
                         ),
                       ),
                     ),

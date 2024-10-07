@@ -234,8 +234,8 @@ class _MeDashboardmecontrataWidgetState
                                                   'CriarNovaVaga',
                                                   queryParameters: {
                                                     'status': serializeParam(
-                                                      BoolToString.Novo.name,
-                                                      ParamType.String,
+                                                      Status.novo,
+                                                      ParamType.Enum,
                                                     ),
                                                   }.withoutNulls,
                                                 );

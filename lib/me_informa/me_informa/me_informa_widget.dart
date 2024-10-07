@@ -1,11 +1,12 @@
 import '/auth/base_auth_user_provider.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/componentes_globais/menus/menu_horizontal/menu_horizontal_widget.dart';
+import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -103,7 +104,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: Color(0xFFEFF1F3),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
                 width: 30.0,
@@ -128,28 +129,33 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                 onWillPop: () async => false,
                 child: Scaffold(
                   key: scaffoldKey,
-                  backgroundColor: Color(0xFFEFF1F3),
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).primaryBackground,
                   floatingActionButton: Visibility(
                     visible: meInformaMateriasRecordList.length >= 5,
-                    child: FloatingActionButton(
-                      onPressed: () async {
-                        logFirebaseEvent(
-                            'ME_INFORMA_FloatingActionButton_psec0m5u');
-                        await _model.columnController2?.animateTo(
-                          0,
-                          duration: Duration(milliseconds: 100),
-                          curve: Curves.ease,
-                        );
-                      },
-                      backgroundColor: FlutterFlowTheme.of(context).alternate,
-                      elevation: 6.0,
-                      child: Icon(
-                        Icons.arrow_upward_rounded,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 34.0,
-                      ),
-                    ).animateOnPageLoad(animationsMap[
-                        'floatingActionButtonOnPageLoadAnimation']!),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
+                      child: FloatingActionButton(
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'ME_INFORMA_FloatingActionButton_psec0m5u');
+                          await _model.columnController1?.animateTo(
+                            0,
+                            duration: Duration(milliseconds: 100),
+                            curve: Curves.ease,
+                          );
+                        },
+                        backgroundColor: FlutterFlowTheme.of(context).alternate,
+                        elevation: 6.0,
+                        child: Icon(
+                          Icons.arrow_upward_rounded,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 34.0,
+                        ),
+                      ).animateOnPageLoad(animationsMap[
+                          'floatingActionButtonOnPageLoadAnimation']!),
+                    ),
                   ),
                   drawer: Drawer(
                     elevation: 16.0,
@@ -165,9 +171,9 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                   ),
                   appBar: AppBar(
                     backgroundColor: valueOrDefault<Color>(
-                      kBreakpointLarge != null
-                          ? FlutterFlowTheme.of(context).secondaryBackground
-                          : FlutterFlowTheme.of(context).alternate,
+                      MediaQuery.sizeOf(context).width <= kBreakpointLarge
+                          ? FlutterFlowTheme.of(context).alternate
+                          : FlutterFlowTheme.of(context).secondaryBackground,
                       FlutterFlowTheme.of(context).alternate,
                     ),
                     automaticallyImplyLeading: false,
@@ -207,22 +213,6 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                FlutterFlowIconButton(
-                                  borderColor: Colors.transparent,
-                                  borderRadius: 20.0,
-                                  buttonSize: 40.0,
-                                  icon: Icon(
-                                    Icons.menu_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'ME_INFORMA_PAGE_menu_rounded_ICN_ON_TAP');
-                                    scaffoldKey.currentState!.openDrawer();
-                                  },
-                                ),
                                 Expanded(
                                   child: Container(
                                     height: 48.0,
@@ -239,7 +229,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                           child: Icon(
                                             FFIcons.kmeInformaOFF,
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                                .white,
                                             size: 24.0,
                                           ),
                                         ),
@@ -267,7 +257,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                 fontFamily: 'markPro',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
+                                                        .white,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w800,
                                                 useGoogleFonts: false,
@@ -277,527 +267,82 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width: 48.0,
-                                  height: 48.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
                               ],
                             ),
                           ),
                       ],
                     ),
                     actions: [],
-                    centerTitle: true,
+                    centerTitle: false,
                     elevation: 2.0,
                   ),
                   body: SafeArea(
                     top: true,
-                    child: SingleChildScrollView(
-                      controller: _model.columnController1,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          if (responsiveVisibility(
-                            context: context,
-                            desktop: false,
-                          ))
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: SingleChildScrollView(
-                                controller: _model.columnController2,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      height: 300.0,
-                                      decoration: BoxDecoration(),
-                                      child: Stack(
-                                        children: [
-                                          Builder(
-                                            builder: (context) {
-                                              final listmobile =
-                                                  meInformaMateriasRecordList
-                                                      .where((e) =>
-                                                          e.materiaDestaque ==
-                                                          true)
-                                                      .toList()
-                                                      .take(5)
-                                                      .toList();
-
-                                              return Container(
-                                                width: double.infinity,
-                                                height: 307.0,
-                                                child: CarouselSlider.builder(
-                                                  itemCount: listmobile.length,
-                                                  itemBuilder: (context,
-                                                      listmobileIndex, _) {
-                                                    final listmobileItem =
-                                                        listmobile[
-                                                            listmobileIndex];
-                                                    return InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'ME_INFORMA_PAGE_Stack_7ip09ie4_ON_TAP');
-                                                        if (loggedIn == true) {
-                                                          context.pushNamed(
-                                                            'meinformaDetalhesNoticia',
-                                                            queryParameters: {
-                                                              'materiadoc':
-                                                                  serializeParam(
-                                                                listmobileItem,
-                                                                ParamType
-                                                                    .Document,
-                                                              ),
-                                                            }.withoutNulls,
-                                                            extra: <String,
-                                                                dynamic>{
-                                                              'materiadoc':
-                                                                  listmobileItem,
-                                                            },
-                                                          );
-                                                        } else {
-                                                          await showModalBottomSheet(
-                                                            isScrollControlled:
-                                                                true,
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            enableDrag: false,
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return WebViewAware(
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () =>
-                                                                      FocusScope.of(
-                                                                              context)
-                                                                          .unfocus(),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: MediaQuery
-                                                                        .viewInsetsOf(
-                                                                            context),
-                                                                    child:
-                                                                        UsarDeslogadoUsoExclusivoCompWidget(
-                                                                      usoExclusivo:
-                                                                          false,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ).then((value) =>
-                                                              safeSetState(
-                                                                  () {}));
-                                                        }
-                                                      },
-                                                      child: Stack(
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        0.0),
-                                                            child:
-                                                                Image.network(
-                                                              listmobileItem
-                                                                  .imagemCapa,
-                                                              width: double
-                                                                  .infinity,
-                                                              height: 300.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            width:
-                                                                double.infinity,
-                                                            height:
-                                                                double.infinity,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  Color(
-                                                                      0x1A000000),
-                                                                  Color(
-                                                                      0x66000000)
-                                                                ],
-                                                                stops: [
-                                                                  0.0,
-                                                                  1.0
-                                                                ],
-                                                                begin:
-                                                                    AlignmentDirectional(
-                                                                        0.0,
-                                                                        -1.0),
-                                                                end:
-                                                                    AlignmentDirectional(
-                                                                        0, 1.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        24.0,
-                                                                        0.0,
-                                                                        24.0,
-                                                                        32.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  listmobileItem
-                                                                      .categoria,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyLarge
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .accent3,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  listmobileItem
-                                                                      .tituloMateria,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineLarge
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  dateTimeFormat(
-                                                                    "relative",
-                                                                    listmobileItem
-                                                                        .dataPublicacaoMateria!,
-                                                                    locale: FFLocalizations.of(
-                                                                            context)
-                                                                        .languageCode,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .accent3,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                              ].divide(SizedBox(
-                                                                  height: 8.0)),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                  carouselController: _model
-                                                          .carouselController ??=
-                                                      CarouselController(),
-                                                  options: CarouselOptions(
-                                                    initialPage: max(
-                                                        0,
-                                                        min(
-                                                            1,
-                                                            listmobile.length -
-                                                                1)),
-                                                    viewportFraction: 1.0,
-                                                    disableCenter: true,
-                                                    enlargeCenterPage: true,
-                                                    enlargeFactor: 0.25,
-                                                    enableInfiniteScroll: true,
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    autoPlay:
-                                                        valueOrDefault<bool>(
-                                                      meInformaMateriasRecordList
-                                                              .length >
-                                                          1,
-                                                      false,
-                                                    ),
-                                                    autoPlayAnimationDuration:
-                                                        Duration(
-                                                            milliseconds: 800),
-                                                    autoPlayInterval: Duration(
-                                                        milliseconds:
-                                                            (800 + 6000)),
-                                                    autoPlayCurve:
-                                                        Curves.linear,
-                                                    pauseAutoPlayInFiniteScroll:
-                                                        true,
-                                                    onPageChanged: (index, _) =>
-                                                        _model.carouselCurrentIndex =
-                                                            index,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
+                    child: Builder(
+                      builder: (context) {
+                        if (MediaQuery.sizeOf(context).width <=
+                            kBreakpointLarge) {
+                          return FutureBuilder<ApiCallResponse>(
+                            future: GooglenewsCall.call(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color(0xFF622AE2),
                                       ),
                                     ),
-                                    Container(
-                                      width: 500.0,
-                                      decoration: BoxDecoration(),
+                                  ),
+                                );
+                              }
+                              final mobileGooglenewsResponse = snapshot.data!;
+
+                              return Container(
+                                height: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Stack(
+                                  children: [
+                                    SingleChildScrollView(
+                                      controller: _model.columnController1,
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
                                         children: [
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                          ))
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      24.0, 8.0, 24.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                          Flexible(
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 300.0,
+                                              decoration: BoxDecoration(),
+                                              child: Stack(
                                                 children: [
-                                                  Text(
-                                                    dateTimeFormat(
-                                                      "EEEE",
-                                                      getCurrentTimestamp,
-                                                      locale:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .languageCode,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 16.0, 0.0),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  controller:
-                                                      _model.rowController,
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Flexible(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      8.0,
-                                                                      0.0,
-                                                                      8.0),
-                                                          child:
-                                                              FlutterFlowChoiceChips(
-                                                            options: [
-                                                              ChipData(
-                                                                  'Últimas'),
-                                                              ChipData('Saúde'),
-                                                              ChipData(
-                                                                  'Politica'),
-                                                              ChipData('Tempo'),
-                                                              ChipData(
-                                                                  'Esporte'),
-                                                              ChipData(
-                                                                  'Segurança'),
-                                                              ChipData(
-                                                                  'Transporte'),
-                                                              ChipData(
-                                                                  'Meio ambiente'),
-                                                              ChipData(
-                                                                  'Internacional'),
-                                                              ChipData(
-                                                                  'Arte/Cultura'),
-                                                              ChipData(
-                                                                  'Educação'),
-                                                              ChipData(
-                                                                  'Comunidade'),
-                                                              ChipData(
-                                                                  'Eventos'),
-                                                              ChipData(
-                                                                  'Cidades')
-                                                            ],
-                                                            onChanged: (val) =>
-                                                                safeSetState(() =>
-                                                                    _model.choiceChipsValue =
-                                                                        val?.firstOrNull),
-                                                            selectedChipStyle:
-                                                                ChipStyle(
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                              iconColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              iconSize: 18.0,
-                                                              elevation: 2.0,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          16.0),
-                                                            ),
-                                                            unselectedChipStyle:
-                                                                ChipStyle(
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.normal,
-                                                                      ),
-                                                              iconColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              iconSize: 18.0,
-                                                              elevation: 1.0,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          16.0),
-                                                            ),
-                                                            chipSpacing: 8.0,
-                                                            rowSpacing: 12.0,
-                                                            multiselect: false,
-                                                            initialized: _model
-                                                                    .choiceChipsValue !=
-                                                                null,
-                                                            alignment:
-                                                                WrapAlignment
-                                                                    .start,
-                                                            controller: _model
-                                                                    .choiceChipsValueController ??=
-                                                                FormFieldController<
-                                                                    List<
-                                                                        String>>(
-                                                              ['Últimas'],
-                                                            ),
-                                                            wrapped: true,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ]
-                                                        .addToStart(SizedBox(
-                                                            width: 16.0))
-                                                        .addToEnd(SizedBox(
-                                                            width: 16.0)),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          Builder(
-                                            builder: (context) {
-                                              if (_model.choiceChipsValue ==
-                                                  'Últimas') {
-                                                return Container(
-                                                  decoration: BoxDecoration(),
-                                                  child: Builder(
+                                                  Builder(
                                                     builder: (context) {
-                                                      final materias =
+                                                      final listmobile =
                                                           meInformaMateriasRecordList
+                                                              .where((e) =>
+                                                                  e.materiaDestaque ==
+                                                                  true)
+                                                              .toList()
+                                                              .take(5)
                                                               .toList();
 
-                                                      return Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: List.generate(
-                                                                materias.length,
-                                                                (materiasIndex) {
-                                                          final materiasItem =
-                                                              materias[
-                                                                  materiasIndex];
-                                                          return Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        12.0,
-                                                                        0.0,
-                                                                        12.0,
-                                                                        0.0),
-                                                            child: InkWell(
+                                                      return Container(
+                                                        width: double.infinity,
+                                                        height: 307.0,
+                                                        child: CarouselSlider
+                                                            .builder(
+                                                          itemCount:
+                                                              listmobile.length,
+                                                          itemBuilder: (context,
+                                                              listmobileIndex,
+                                                              _) {
+                                                            final listmobileItem =
+                                                                listmobile[
+                                                                    listmobileIndex];
+                                                            return InkWell(
                                                               splashColor: Colors
                                                                   .transparent,
                                                               focusColor: Colors
@@ -809,7 +354,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                       .transparent,
                                                               onTap: () async {
                                                                 logFirebaseEvent(
-                                                                    'ME_INFORMA_Container_dilwvyby_ON_TAP');
+                                                                    'ME_INFORMA_PAGE_Stack_7ip09ie4_ON_TAP');
                                                                 if (loggedIn ==
                                                                     true) {
                                                                   context
@@ -819,7 +364,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                         {
                                                                       'materiadoc':
                                                                           serializeParam(
-                                                                        materiasItem,
+                                                                        listmobileItem,
                                                                         ParamType
                                                                             .Document,
                                                                       ),
@@ -827,7 +372,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                     extra: <String,
                                                                         dynamic>{
                                                                       'materiadoc':
-                                                                          materiasItem,
+                                                                          listmobileItem,
                                                                     },
                                                                   );
                                                                 } else {
@@ -854,7 +399,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                                 MediaQuery.viewInsetsOf(context),
                                                                             child:
                                                                                 UsarDeslogadoUsoExclusivoCompWidget(
-                                                                              usoExclusivo: true,
+                                                                              usoExclusivo: false,
                                                                             ),
                                                                           ),
                                                                         ),
@@ -865,133 +410,727 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                           () {}));
                                                                 }
                                                               },
-                                                              child:
-                                                                  MeinformaCardListaWidget(
-                                                                key: Key(
-                                                                    'Keydil_${materiasIndex}_of_${materias.length}'),
-                                                                parameter1:
-                                                                    materiasItem
-                                                                        .imagemCapa,
-                                                                parameter2:
-                                                                    materiasItem
-                                                                        .categoria,
-                                                                parameter3:
-                                                                    materiasItem
-                                                                        .tituloMateria,
-                                                                publicado:
-                                                                    materiasItem
-                                                                        .dataPublicacaoMateria!,
+                                                              child: Stack(
+                                                                children: [
+                                                                  ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0.0),
+                                                                    child: Image
+                                                                        .network(
+                                                                      listmobileItem
+                                                                          .imagemCapa,
+                                                                      width: double
+                                                                          .infinity,
+                                                                      height:
+                                                                          300.0,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height: double
+                                                                        .infinity,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      gradient:
+                                                                          LinearGradient(
+                                                                        colors: [
+                                                                          Color(
+                                                                              0x1A000000),
+                                                                          Color(
+                                                                              0x66000000)
+                                                                        ],
+                                                                        stops: [
+                                                                          0.0,
+                                                                          1.0
+                                                                        ],
+                                                                        begin: AlignmentDirectional(
+                                                                            0.0,
+                                                                            -1.0),
+                                                                        end: AlignmentDirectional(
+                                                                            0,
+                                                                            1.0),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            24.0,
+                                                                            0.0,
+                                                                            24.0,
+                                                                            32.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .end,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children:
+                                                                          [
+                                                                        Text(
+                                                                          listmobileItem
+                                                                              .categoria,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyLarge
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FontWeight.normal,
+                                                                              ),
+                                                                        ),
+                                                                        Text(
+                                                                          listmobileItem
+                                                                              .tituloMateria,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .headlineLarge
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                        Text(
+                                                                          dateTimeFormat(
+                                                                            "relative",
+                                                                            listmobileItem.dataPublicacaoMateria!,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FontWeight.normal,
+                                                                              ),
+                                                                        ),
+                                                                      ].divide(SizedBox(
+                                                                              height: 8.0)),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
+                                                            );
+                                                          },
+                                                          carouselController: _model
+                                                                  .carouselController ??=
+                                                              CarouselController(),
+                                                          options:
+                                                              CarouselOptions(
+                                                            initialPage: max(
+                                                                0,
+                                                                min(
+                                                                    1,
+                                                                    listmobile
+                                                                            .length -
+                                                                        1)),
+                                                            viewportFraction:
+                                                                1.0,
+                                                            disableCenter: true,
+                                                            enlargeCenterPage:
+                                                                true,
+                                                            enlargeFactor: 0.25,
+                                                            enableInfiniteScroll:
+                                                                true,
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            autoPlay:
+                                                                valueOrDefault<
+                                                                    bool>(
+                                                              meInformaMateriasRecordList
+                                                                      .length >
+                                                                  1,
+                                                              false,
                                                             ),
-                                                          );
-                                                        })
-                                                            .divide(SizedBox(
-                                                                height: 12.0))
-                                                            .around(SizedBox(
-                                                                height: 12.0)),
+                                                            autoPlayAnimationDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        800),
+                                                            autoPlayInterval:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        (800 +
+                                                                            6000)),
+                                                            autoPlayCurve:
+                                                                Curves.linear,
+                                                            pauseAutoPlayInFiniteScroll:
+                                                                true,
+                                                            onPageChanged: (index,
+                                                                    _) =>
+                                                                _model.carouselCurrentIndex =
+                                                                    index,
+                                                          ),
+                                                        ),
                                                       );
                                                     },
                                                   ),
-                                                );
-                                              } else {
-                                                return Builder(
-                                                  builder: (context) {
-                                                    final materias =
-                                                        meInformaMateriasRecordList
-                                                            .where((e) =>
-                                                                e.categoria ==
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  _model
-                                                                      .choiceChipsValue,
-                                                                  'todos',
-                                                                ))
-                                                            .toList();
-
-                                                    return Column(
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 500.0,
+                                            decoration: BoxDecoration(),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                if (responsiveVisibility(
+                                                  context: context,
+                                                  desktop: false,
+                                                ))
+                                                  SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    controller:
+                                                        _model.rowController,
+                                                    child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
-                                                      children: List.generate(
-                                                              materias.length,
-                                                              (materiasIndex) {
-                                                        final materiasItem =
-                                                            materias[
-                                                                materiasIndex];
-                                                        return InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'ME_INFORMA_Container_66hud8d5_ON_TAP');
+                                                      children: [
+                                                        Flexible(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        8.0,
+                                                                        0.0,
+                                                                        8.0),
+                                                            child:
+                                                                FlutterFlowChoiceChips(
+                                                              options: [
+                                                                ChipData(
+                                                                    'Últimas'),
+                                                                ChipData(
+                                                                    'Saúde'),
+                                                                ChipData(
+                                                                    'Politica'),
+                                                                ChipData(
+                                                                    'Tempo'),
+                                                                ChipData(
+                                                                    'Esporte'),
+                                                                ChipData(
+                                                                    'Segurança'),
+                                                                ChipData(
+                                                                    'Transporte'),
+                                                                ChipData(
+                                                                    'Meio ambiente'),
+                                                                ChipData(
+                                                                    'Internacional'),
+                                                                ChipData(
+                                                                    'Arte/Cultura'),
+                                                                ChipData(
+                                                                    'Educação'),
+                                                                ChipData(
+                                                                    'Comunidade'),
+                                                                ChipData(
+                                                                    'Eventos'),
+                                                                ChipData(
+                                                                    'Cidades'),
+                                                                ChipData(
+                                                                    'Mundo')
+                                                              ],
+                                                              onChanged: (val) =>
+                                                                  safeSetState(() =>
+                                                                      _model.choiceChipsValue =
+                                                                          val?.firstOrNull),
+                                                              selectedChipStyle:
+                                                                  ChipStyle(
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                                iconColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info,
+                                                                iconSize: 18.0,
+                                                                elevation: 2.0,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16.0),
+                                                              ),
+                                                              unselectedChipStyle:
+                                                                  ChipStyle(
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .error,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                    ),
+                                                                iconColor: Color(
+                                                                    0x00000000),
+                                                                iconSize: 18.0,
+                                                                elevation: 1.0,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16.0),
+                                                              ),
+                                                              chipSpacing: 8.0,
+                                                              rowSpacing: 12.0,
+                                                              multiselect:
+                                                                  false,
+                                                              initialized: _model
+                                                                      .choiceChipsValue !=
+                                                                  null,
+                                                              alignment:
+                                                                  WrapAlignment
+                                                                      .start,
+                                                              controller: _model
+                                                                      .choiceChipsValueController ??=
+                                                                  FormFieldController<
+                                                                      List<
+                                                                          String>>(
+                                                                ['Últimas'],
+                                                              ),
+                                                              wrapped: true,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ]
+                                                          .addToStart(SizedBox(
+                                                              width: 16.0))
+                                                          .addToEnd(SizedBox(
+                                                              width: 16.0)),
+                                                    ),
+                                                  ),
+                                                Builder(
+                                                  builder: (context) {
+                                                    if (_model
+                                                            .choiceChipsValue ==
+                                                        'Últimas') {
+                                                      return Container(
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Builder(
+                                                          builder: (context) {
+                                                            final materias =
+                                                                meInformaMateriasRecordList
+                                                                    .toList();
 
-                                                            context.pushNamed(
-                                                              'meinformaDetalhesNoticia',
-                                                              queryParameters: {
-                                                                'materiadoc':
-                                                                    serializeParam(
-                                                                  materiasItem,
-                                                                  ParamType
-                                                                      .Document,
-                                                                ),
-                                                              }.withoutNulls,
-                                                              extra: <String,
-                                                                  dynamic>{
-                                                                'materiadoc':
-                                                                    materiasItem,
-                                                              },
+                                                            return Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: List.generate(
+                                                                      materias
+                                                                          .length,
+                                                                      (materiasIndex) {
+                                                                final materiasItem =
+                                                                    materias[
+                                                                        materiasIndex];
+                                                                return Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'ME_INFORMA_Container_dilwvyby_ON_TAP');
+                                                                      if (loggedIn ==
+                                                                          true) {
+                                                                        context
+                                                                            .pushNamed(
+                                                                          'meinformaDetalhesNoticia',
+                                                                          queryParameters:
+                                                                              {
+                                                                            'materiadoc':
+                                                                                serializeParam(
+                                                                              materiasItem,
+                                                                              ParamType.Document,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                          extra: <String,
+                                                                              dynamic>{
+                                                                            'materiadoc':
+                                                                                materiasItem,
+                                                                          },
+                                                                        );
+                                                                      } else {
+                                                                        await showModalBottomSheet(
+                                                                          isScrollControlled:
+                                                                              true,
+                                                                          backgroundColor:
+                                                                              Colors.transparent,
+                                                                          enableDrag:
+                                                                              false,
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (context) {
+                                                                            return WebViewAware(
+                                                                              child: GestureDetector(
+                                                                                onTap: () => FocusScope.of(context).unfocus(),
+                                                                                child: Padding(
+                                                                                  padding: MediaQuery.viewInsetsOf(context),
+                                                                                  child: UsarDeslogadoUsoExclusivoCompWidget(
+                                                                                    usoExclusivo: true,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                        ).then((value) =>
+                                                                            safeSetState(() {}));
+                                                                      }
+                                                                    },
+                                                                    child:
+                                                                        MeinformaCardListaWidget(
+                                                                      key: Key(
+                                                                          'Keydil_${materiasIndex}_of_${materias.length}'),
+                                                                      parameter1:
+                                                                          materiasItem
+                                                                              .imagemCapa,
+                                                                      parameter2:
+                                                                          materiasItem
+                                                                              .categoria,
+                                                                      parameter3:
+                                                                          materiasItem
+                                                                              .tituloMateria,
+                                                                      publicado:
+                                                                          materiasItem
+                                                                              .dataPublicacaoMateria!,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              })
+                                                                  .divide(SizedBox(
+                                                                      height:
+                                                                          12.0))
+                                                                  .around(SizedBox(
+                                                                      height:
+                                                                          12.0)),
                                                             );
                                                           },
-                                                          child:
-                                                              MeinformaCardListaWidget(
-                                                            key: Key(
-                                                                'Key66h_${materiasIndex}_of_${materias.length}'),
-                                                            parameter1:
-                                                                materiasItem
-                                                                    .imagemCapa,
-                                                            parameter2:
-                                                                materiasItem
-                                                                    .categoria,
-                                                            parameter3:
-                                                                materiasItem
-                                                                    .tituloMateria,
-                                                            publicado: materiasItem
-                                                                .dataPublicacaoMateria!,
+                                                        ),
+                                                      );
+                                                    } else if (_model
+                                                            .choiceChipsValue ==
+                                                        'Mundo') {
+                                                      return Container(
+                                                        height: 600.0,
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      0.0,
+                                                                      16.0,
+                                                                      0.0),
+                                                          child: Builder(
+                                                            builder: (context) {
+                                                              final googleNews =
+                                                                  (GooglenewsCall
+                                                                              .itens(
+                                                                            mobileGooglenewsResponse.jsonBody,
+                                                                          )?.toList() ??
+                                                                          [])
+                                                                      .take(30)
+                                                                      .toList();
+
+                                                              return ListView
+                                                                  .separated(
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        vertical:
+                                                                            8.0),
+                                                                primary: false,
+                                                                scrollDirection:
+                                                                    Axis.vertical,
+                                                                itemCount:
+                                                                    googleNews
+                                                                        .length,
+                                                                separatorBuilder: (_,
+                                                                        __) =>
+                                                                    SizedBox(
+                                                                        height:
+                                                                            8.0),
+                                                                itemBuilder:
+                                                                    (context,
+                                                                        googleNewsIndex) {
+                                                                  final googleNewsItem =
+                                                                      googleNews[
+                                                                          googleNewsIndex];
+                                                                  return Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                                    elevation:
+                                                                        0.0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children:
+                                                                          [
+                                                                        Flexible(
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                            child:
+                                                                                Image.network(
+                                                                              getJsonField(
+                                                                                googleNewsItem,
+                                                                                r'''$.images.thumbnailProxied''',
+                                                                              ).toString(),
+                                                                              width: 100.0,
+                                                                              height: 100.0,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Flexible(
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children:
+                                                                                [
+                                                                              Text(
+                                                                                getJsonField(
+                                                                                  googleNewsItem,
+                                                                                  r'''$.title''',
+                                                                                ).toString(),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                              Text(
+                                                                                getJsonField(
+                                                                                  googleNewsItem,
+                                                                                  r'''$.publisher''',
+                                                                                ).toString(),
+                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ].divide(SizedBox(height: 4.0)),
+                                                                          ),
+                                                                        ),
+                                                                      ].divide(SizedBox(
+                                                                              width: 8.0)),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                controller: _model
+                                                                    .listViewController,
+                                                              );
+                                                            },
                                                           ),
-                                                        );
-                                                      })
-                                                          .divide(SizedBox(
-                                                              height: 12.0))
-                                                          .around(SizedBox(
-                                                              height: 12.0)),
-                                                    );
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      return Builder(
+                                                        builder: (context) {
+                                                          final materias =
+                                                              meInformaMateriasRecordList
+                                                                  .where((e) =>
+                                                                      e
+                                                                          .categoria ==
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        _model
+                                                                            .choiceChipsValue,
+                                                                        'todos',
+                                                                      ))
+                                                                  .toList();
+
+                                                          return Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: List.generate(
+                                                                    materias
+                                                                        .length,
+                                                                    (materiasIndex) {
+                                                              final materiasItem =
+                                                                  materias[
+                                                                      materiasIndex];
+                                                              return InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'ME_INFORMA_Container_66hud8d5_ON_TAP');
+
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'meinformaDetalhesNoticia',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'materiadoc':
+                                                                          serializeParam(
+                                                                        materiasItem,
+                                                                        ParamType
+                                                                            .Document,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                    extra: <String,
+                                                                        dynamic>{
+                                                                      'materiadoc':
+                                                                          materiasItem,
+                                                                    },
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    MeinformaCardListaWidget(
+                                                                  key: Key(
+                                                                      'Key66h_${materiasIndex}_of_${materias.length}'),
+                                                                  parameter1:
+                                                                      materiasItem
+                                                                          .imagemCapa,
+                                                                  parameter2:
+                                                                      materiasItem
+                                                                          .categoria,
+                                                                  parameter3:
+                                                                      materiasItem
+                                                                          .tituloMateria,
+                                                                  publicado:
+                                                                      materiasItem
+                                                                          .dataPublicacaoMateria!,
+                                                                ),
+                                                              );
+                                                            })
+                                                                .divide(SizedBox(
+                                                                    height:
+                                                                        12.0))
+                                                                .around(SizedBox(
+                                                                    height:
+                                                                        12.0)),
+                                                          );
+                                                        },
+                                                      );
+                                                    }
                                                   },
-                                                );
-                                              }
-                                            },
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 16.0),
+                                          child: wrapWithModel(
+                                            model: _model.navbarModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: NavbarWidget(
+                                              paginaAtual:
+                                                  TelasMenuDrawer.meinforma,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ),
+                              );
+                            },
+                          );
+                        } else {
+                          return Visibility(
+                            visible: responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
                             ),
-                          if (responsiveVisibility(
-                            context: context,
-                            phone: false,
-                            tablet: false,
-                            tabletLandscape: false,
-                          ))
-                            Container(
+                            child: Container(
                               decoration: BoxDecoration(),
                               child: SingleChildScrollView(
-                                controller: _model.columnController3,
+                                controller: _model.columnController2,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -1301,7 +1440,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                             gridDesktop2Item.categoria,
                                                                             style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  color: FlutterFlowTheme.of(context).accent3,
+                                                                                  color: FlutterFlowTheme.of(context).white,
                                                                                   fontSize: 12.0,
                                                                                   letterSpacing: 0.0,
                                                                                 ),
@@ -1310,9 +1449,10 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                             gridDesktop2Item.tituloMateria,
                                                                             style: FlutterFlowTheme.of(context).headlineLarge.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                  color: FlutterFlowTheme.of(context).white,
                                                                                   fontSize: gridDesktop2Index == 0 ? 32.0 : 24.0,
                                                                                   letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.bold,
                                                                                 ),
                                                                           ),
                                                                           Text(
@@ -1323,7 +1463,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).titleSmall.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  color: FlutterFlowTheme.of(context).white,
                                                                                   fontSize: 12.0,
                                                                                   letterSpacing: 0.0,
                                                                                 ),
@@ -1761,7 +1901,7 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      SizedBox(height: 50.0)),
+                                                      SizedBox(height: 30.0)),
                                                 ),
                                               ),
                                             ),
@@ -1773,8 +1913,9 @@ class _MeInformaWidgetState extends State<MeInformaWidget>
                                 ),
                               ),
                             ),
-                        ],
-                      ),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),

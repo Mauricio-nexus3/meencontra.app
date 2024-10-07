@@ -31,6 +31,7 @@ enum TelasMenuDrawer {
   Configuracoes,
   Teste_Atual,
   dashboard_me,
+  perfil,
 }
 
 enum PerfilUsuario {
@@ -53,14 +54,17 @@ enum PlanoAssinatura {
 enum BoolToString {
   Sim,
   Nao,
-  Novo,
-  Editar,
 }
 
 enum TipoAlerta {
   confirmacao,
   alerta,
   exclusao,
+}
+
+enum Status {
+  novo,
+  editar,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {
@@ -86,6 +90,8 @@ T? deserializeEnum<T>(String? value) {
       return BoolToString.values.deserialize(value) as T?;
     case (TipoAlerta):
       return TipoAlerta.values.deserialize(value) as T?;
+    case (Status):
+      return Status.values.deserialize(value) as T?;
     default:
       return null;
   }

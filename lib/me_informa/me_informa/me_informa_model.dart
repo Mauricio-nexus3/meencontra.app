@@ -1,11 +1,12 @@
 import '/auth/base_auth_user_provider.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/componentes_globais/menus/menu_horizontal/menu_horizontal_widget.dart';
+import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -30,8 +31,6 @@ class MeInformaModel extends FlutterFlowModel<MeInformaWidget> {
 
   // State field(s) for Column widget.
   ScrollController? columnController1;
-  // State field(s) for Column widget.
-  ScrollController? columnController2;
   // State field(s) for Carousel widget.
   CarouselController? carouselController;
   int carouselCurrentIndex = 1;
@@ -44,8 +43,12 @@ class MeInformaModel extends FlutterFlowModel<MeInformaWidget> {
       choiceChipsValueController?.value?.firstOrNull;
   set choiceChipsValue(String? val) =>
       choiceChipsValueController?.value = val != null ? [val] : [];
+  // State field(s) for ListView widget.
+  ScrollController? listViewController;
+  // Model for navbar component.
+  late NavbarModel navbarModel;
   // State field(s) for Column widget.
-  ScrollController? columnController3;
+  ScrollController? columnController2;
   // State field(s) for StaggeredView widget.
   ScrollController? staggeredViewController;
   // Model for cardRightMeinforma component.
@@ -62,9 +65,10 @@ class MeInformaModel extends FlutterFlowModel<MeInformaWidget> {
   @override
   void initState(BuildContext context) {
     columnController1 = ScrollController();
-    columnController2 = ScrollController();
     rowController = ScrollController();
-    columnController3 = ScrollController();
+    listViewController = ScrollController();
+    navbarModel = createModel(context, () => NavbarModel());
+    columnController2 = ScrollController();
     staggeredViewController = ScrollController();
     cardRightMeinformaModel1 =
         createModel(context, () => CardRightMeinformaModel());
@@ -79,9 +83,10 @@ class MeInformaModel extends FlutterFlowModel<MeInformaWidget> {
   @override
   void dispose() {
     columnController1?.dispose();
-    columnController2?.dispose();
     rowController?.dispose();
-    columnController3?.dispose();
+    listViewController?.dispose();
+    navbarModel.dispose();
+    columnController2?.dispose();
     staggeredViewController?.dispose();
     cardRightMeinformaModel1.dispose();
     cardRightMeinformaModel2.dispose();

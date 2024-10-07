@@ -1,7 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/componentes_globais/list_view_vazio/list_view_vazio_widget.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menus/list_view_vazio/list_view_vazio_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -117,7 +117,7 @@ class _DashAnuncianteSuporteWidgetState
                 buttonSize: 48.0,
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  color: FlutterFlowTheme.of(context).white,
                   size: 24.0,
                 ),
                 onPressed: () async {
@@ -129,7 +129,7 @@ class _DashAnuncianteSuporteWidgetState
                 'Suporte',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context).white,
                       fontSize: 22.0,
                       letterSpacing: 0.0,
                     ),
@@ -284,379 +284,387 @@ class _DashAnuncianteSuporteWidgetState
                                       ],
                                     ),
                                   ),
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(),
-                                                  child: Column(
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 16.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        RichText(
+                                                          textScaler:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .textScaler,
+                                                          text: TextSpan(
+                                                            children: [
+                                                              TextSpan(
+                                                                text:
+                                                                    'Você possui ',
+                                                                style:
+                                                                    TextStyle(),
+                                                              ),
+                                                              TextSpan(
+                                                                text: '4 ',
+                                                                style:
+                                                                    TextStyle(),
+                                                              ),
+                                                              TextSpan(
+                                                                text:
+                                                                    'chamados em aberto',
+                                                                style:
+                                                                    TextStyle(),
+                                                              )
+                                                            ],
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    16.0),
-                                                        child: Row(
+                                                            EdgeInsets.all(8.0),
+                                                        child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            RichText(
-                                                              textScaler:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .textScaler,
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                    text:
-                                                                        'Você possui ',
-                                                                    style:
-                                                                        TextStyle(),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text: '4 ',
-                                                                    style:
-                                                                        TextStyle(),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text:
-                                                                        'chamados em aberto',
-                                                                    style:
-                                                                        TextStyle(),
-                                                                  )
-                                                                ],
-                                                                style: FlutterFlowTheme.of(
+                                                            Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              height: 40.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      letterSpacing:
-                                                                          0.0,
+                                                                    .primaryBackground,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          8.0),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          8.0),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      flex: 4,
+                                                                      child:
+                                                                          Text(
+                                                                        'Titulo',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
                                                                     ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 2,
+                                                                        child:
+                                                                            Text(
+                                                                          'Protocolo',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodySmall
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        'Status',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        'Ações',
+                                                                        textAlign:
+                                                                            TextAlign.end,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              height: 500.0,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: FutureBuilder<
+                                                                  List<
+                                                                      TicketSuporteRecord>>(
+                                                                future:
+                                                                    queryTicketSuporteRecordOnce(
+                                                                  queryBuilder:
+                                                                      (ticketSuporteRecord) =>
+                                                                          ticketSuporteRecord
+                                                                              .where(
+                                                                    'UsuarioRef',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  ),
+                                                                ),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return Center(
+                                                                      child:
+                                                                          SizedBox(
+                                                                        width:
+                                                                            30.0,
+                                                                        height:
+                                                                            30.0,
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          valueColor:
+                                                                              AlwaysStoppedAnimation<Color>(
+                                                                            Color(0xFF622AE2),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  List<TicketSuporteRecord>
+                                                                      listViewTicketSuporteRecordList =
+                                                                      snapshot
+                                                                          .data!;
+                                                                  if (listViewTicketSuporteRecordList
+                                                                      .isEmpty) {
+                                                                    return ListViewVazioWidget(
+                                                                      icone:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .receipt_long,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .accent2,
+                                                                        size:
+                                                                            80.0,
+                                                                      ),
+                                                                      titulo:
+                                                                          'Você não possui nenhuma solicitação aberto',
+                                                                      mensagem:
+                                                                          'Seus pedidos de suporte serão exibidas aqui',
+                                                                    );
+                                                                  }
+
+                                                                  return ListView
+                                                                      .separated(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    primary:
+                                                                        false,
+                                                                    scrollDirection:
+                                                                        Axis.vertical,
+                                                                    itemCount:
+                                                                        listViewTicketSuporteRecordList
+                                                                            .length,
+                                                                    separatorBuilder: (_,
+                                                                            __) =>
+                                                                        SizedBox(
+                                                                            height:
+                                                                                12.0),
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            listViewIndex) {
+                                                                      final listViewTicketSuporteRecord =
+                                                                          listViewTicketSuporteRecordList[
+                                                                              listViewIndex];
+                                                                      return Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            1.0),
+                                                                        child:
+                                                                            Container(
+                                                                          width:
+                                                                              100.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                blurRadius: 0.0,
+                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                offset: Offset(
+                                                                                  0.0,
+                                                                                  1.0,
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                16.0,
+                                                                                0.0,
+                                                                                16.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  flex: 4,
+                                                                                  child: Text(
+                                                                                    listViewTicketSuporteRecord.assunto,
+                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                if (responsiveVisibility(
+                                                                                  context: context,
+                                                                                  phone: false,
+                                                                                  tablet: false,
+                                                                                ))
+                                                                                  Expanded(
+                                                                                    flex: 2,
+                                                                                    child: Text(
+                                                                                      listViewTicketSuporteRecord.ticket,
+                                                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                            fontFamily: 'Inter',
+                                                                                            letterSpacing: 0.0,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    listViewTicketSuporteRecord.resolvido == true ? 'Encerrado' : 'Aberto',
+                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                FlutterFlowIconButton(
+                                                                                  borderRadius: 20.0,
+                                                                                  borderWidth: 1.0,
+                                                                                  buttonSize: 40.0,
+                                                                                  icon: Icon(
+                                                                                    Icons.more_vert,
+                                                                                    color: FlutterFlowTheme.of(context).accent2,
+                                                                                    size: 24.0,
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    print('IconButton pressed ...');
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
                                                               ),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            16.0,
-                                                                            0.0,
-                                                                            16.0,
-                                                                            0.0),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          flex:
-                                                                              4,
-                                                                          child:
-                                                                              Text(
-                                                                            'Titulo',
-                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                        if (responsiveVisibility(
-                                                                          context:
-                                                                              context,
-                                                                          phone:
-                                                                              false,
-                                                                          tablet:
-                                                                              false,
-                                                                        ))
-                                                                          Expanded(
-                                                                            flex:
-                                                                                2,
-                                                                            child:
-                                                                                Text(
-                                                                              'Protocolo',
-                                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                    fontFamily: 'Inter',
-                                                                                    letterSpacing: 0.0,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        Expanded(
-                                                                          child:
-                                                                              Text(
-                                                                            'Status',
-                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                        Expanded(
-                                                                          child:
-                                                                              Text(
-                                                                            'Ações',
-                                                                            textAlign:
-                                                                                TextAlign.end,
-                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Container(
-                                                                  height: 500.0,
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                  child: FutureBuilder<
-                                                                      List<
-                                                                          TicketSuporteRecord>>(
-                                                                    future:
-                                                                        queryTicketSuporteRecordOnce(
-                                                                      queryBuilder:
-                                                                          (ticketSuporteRecord) =>
-                                                                              ticketSuporteRecord.where(
-                                                                        'UsuarioRef',
-                                                                        isEqualTo:
-                                                                            currentUserReference,
-                                                                      ),
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
-                                                                          child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                30.0,
-                                                                            height:
-                                                                                30.0,
-                                                                            child:
-                                                                                CircularProgressIndicator(
-                                                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                Color(0xFF622AE2),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      List<TicketSuporteRecord>
-                                                                          listViewTicketSuporteRecordList =
-                                                                          snapshot
-                                                                              .data!;
-                                                                      if (listViewTicketSuporteRecordList
-                                                                          .isEmpty) {
-                                                                        return ListViewVazioWidget(
-                                                                          icone:
-                                                                              Icon(
-                                                                            Icons.receipt_long,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).accent2,
-                                                                            size:
-                                                                                80.0,
-                                                                          ),
-                                                                          titulo:
-                                                                              'Você não possui nenhuma solicitação aberto',
-                                                                          mensagem:
-                                                                              'Seus pedidos de suporte serão exibidas aqui',
-                                                                        );
-                                                                      }
-
-                                                                      return ListView
-                                                                          .separated(
-                                                                        padding:
-                                                                            EdgeInsets.zero,
-                                                                        primary:
-                                                                            false,
-                                                                        scrollDirection:
-                                                                            Axis.vertical,
-                                                                        itemCount:
-                                                                            listViewTicketSuporteRecordList.length,
-                                                                        separatorBuilder:
-                                                                            (_, __) =>
-                                                                                SizedBox(height: 12.0),
-                                                                        itemBuilder:
-                                                                            (context,
-                                                                                listViewIndex) {
-                                                                          final listViewTicketSuporteRecord =
-                                                                              listViewTicketSuporteRecordList[listViewIndex];
-                                                                          return Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0.0,
-                                                                                0.0,
-                                                                                0.0,
-                                                                                1.0),
-                                                                            child:
-                                                                                Container(
-                                                                              width: 100.0,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    blurRadius: 0.0,
-                                                                                    color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                    offset: Offset(
-                                                                                      0.0,
-                                                                                      1.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    Expanded(
-                                                                                      flex: 4,
-                                                                                      child: Text(
-                                                                                        listViewTicketSuporteRecord.assunto,
-                                                                                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                              fontFamily: 'Inter',
-                                                                                              letterSpacing: 0.0,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    if (responsiveVisibility(
-                                                                                      context: context,
-                                                                                      phone: false,
-                                                                                      tablet: false,
-                                                                                    ))
-                                                                                      Expanded(
-                                                                                        flex: 2,
-                                                                                        child: Text(
-                                                                                          listViewTicketSuporteRecord.ticket,
-                                                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                                fontFamily: 'Inter',
-                                                                                                letterSpacing: 0.0,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    Expanded(
-                                                                                      child: Text(
-                                                                                        listViewTicketSuporteRecord.resolvido == true ? 'Encerrado' : 'Aberto',
-                                                                                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                              fontFamily: 'Inter',
-                                                                                              letterSpacing: 0.0,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    FlutterFlowIconButton(
-                                                                                      borderRadius: 20.0,
-                                                                                      borderWidth: 1.0,
-                                                                                      buttonSize: 40.0,
-                                                                                      icon: Icon(
-                                                                                        Icons.more_vert,
-                                                                                        color: FlutterFlowTheme.of(context).accent2,
-                                                                                        size: 24.0,
-                                                                                      ),
-                                                                                      onPressed: () {
-                                                                                        print('IconButton pressed ...');
-                                                                                      },
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
                                                     ],
                                                   ),
-                                                ),
-                                              ]
-                                                  .divide(
-                                                      SizedBox(height: 24.0))
-                                                  .around(
-                                                      SizedBox(height: 24.0)),
+                                                ],
+                                              ),
                                             ),
-                                          ),
+                                          ]
+                                              .divide(SizedBox(height: 24.0))
+                                              .around(SizedBox(height: 24.0)),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ]
                                     .divide(SizedBox(height: 4.0))

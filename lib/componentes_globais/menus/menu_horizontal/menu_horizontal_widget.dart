@@ -680,18 +680,15 @@ class _MenuHorizontalWidgetState extends State<MenuHorizontalWidget> {
                                         ).then((s) => s.firstOrNull);
 
                                         context.pushNamed(
-                                          'AnunciantePage',
+                                          'AnunciantePerfil',
                                           queryParameters: {
-                                            'documentoRefAnunciante':
+                                            'referenciaAnunciante':
                                                 serializeParam(
-                                              _model.anuncianteReferencia,
-                                              ParamType.Document,
+                                              _model.anuncianteReferencia
+                                                  ?.reference,
+                                              ParamType.DocumentReference,
                                             ),
                                           }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            'documentoRefAnunciante':
-                                                _model.anuncianteReferencia,
-                                          },
                                         );
                                       }
 

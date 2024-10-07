@@ -178,9 +178,6 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0),
                     ),
-                    border: Border.all(
-                      width: 1.0,
-                    ),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -595,7 +592,7 @@ class _LogoNomeFantasiaWidgetState extends State<LogoNomeFantasiaWidget>
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                      .primaryText,
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 2.0,

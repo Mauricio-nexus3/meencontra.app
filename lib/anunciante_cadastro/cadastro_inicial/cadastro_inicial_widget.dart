@@ -114,7 +114,7 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                   buttonSize: 54.0,
                   icon: Icon(
                     FFIcons.karrowBack,
-                    color: FlutterFlowTheme.of(context).secondaryText,
+                    color: FlutterFlowTheme.of(context).primaryText,
                     size: 24.0,
                   ),
                   onPressed: () async {
@@ -127,7 +127,7 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                   'Cadastrar anunciante',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Inter',
-                        color: FlutterFlowTheme.of(context).secondaryText,
+                        color: FlutterFlowTheme.of(context).primaryText,
                         letterSpacing: 0.0,
                       ),
                 ),
@@ -750,14 +750,14 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .roxo,
+                                                      .primary,
                                               letterSpacing: 0.0,
                                             ),
                                       ),
                                       Icon(
                                         FFIcons.ksuporte,
                                         color: FlutterFlowTheme.of(context)
-                                            .meencontraAntigo,
+                                            .primary,
                                         size: 16.0,
                                       ),
                                     ].divide(SizedBox(width: 4.0)),
@@ -925,19 +925,19 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                                       }
                                     } else {
                                       context.pushNamed(
-                                        'AnunciantePage',
+                                        'AnunciantePerfil',
                                         queryParameters: {
-                                          'documentoRefAnunciante':
+                                          'referenciaAnunciante':
                                               serializeParam(
-                                            _model.adminAnuncianteRef,
-                                            ParamType.Document,
+                                            _model
+                                                .adminAnuncianteRef?.reference,
+                                            ParamType.DocumentReference,
                                           ),
                                         }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'documentoRefAnunciante':
-                                              _model.adminAnuncianteRef,
-                                        },
                                       );
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
                                     }
                                   } else {
                                     await showDialog(
@@ -977,8 +977,8 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                                       .bodyLarge
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 1.0,
@@ -1040,7 +1040,8 @@ class _CadastroInicialWidgetState extends State<CadastroInicialWidget> {
                                       ),
                                   elevation: 0.8,
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),

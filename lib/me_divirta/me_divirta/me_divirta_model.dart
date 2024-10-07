@@ -1,7 +1,8 @@
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/componentes_globais/menus/menu_horizontal/menu_horizontal_widget.dart';
+import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -36,8 +37,8 @@ class MeDivirtaModel extends FlutterFlowModel<MeDivirtaWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for ColumnOK widget.
-  ScrollController? columnOK;
+  // State field(s) for Column widget.
+  ScrollController? column;
   // State field(s) for Carousel widget.
   CarouselController? carouselController;
   int carouselCurrentIndex = 1;
@@ -48,6 +49,8 @@ class MeDivirtaModel extends FlutterFlowModel<MeDivirtaWidget> {
 
   // State field(s) for GridView widget.
   ScrollController? gridViewController;
+  // Model for navbar component.
+  late NavbarModel navbarModel;
   // Model for menuHorizontal component.
   late MenuHorizontalModel menuHorizontalModel;
   // Model for MenuDrawer component.
@@ -55,14 +58,18 @@ class MeDivirtaModel extends FlutterFlowModel<MeDivirtaWidget> {
 
   @override
   void initState(BuildContext context) {
+    column = ScrollController();
     gridViewController = ScrollController();
+    navbarModel = createModel(context, () => NavbarModel());
     menuHorizontalModel = createModel(context, () => MenuHorizontalModel());
     menuDrawerModel = createModel(context, () => MenuDrawerModel());
   }
 
   @override
   void dispose() {
+    column?.dispose();
     gridViewController?.dispose();
+    navbarModel.dispose();
     menuHorizontalModel.dispose();
     menuDrawerModel.dispose();
   }

@@ -529,6 +529,8 @@ class ListCustomersUsuariosAtivoCall {
 class GeminiaiCall {
   static Future<ApiCallResponse> call({
     String? textfildPrompt = '',
+    String? systemInstructions =
+        'Você se chama Tony, seja amigável, gentil e prestativo',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -540,7 +542,15 @@ class GeminiaiCall {
         }
       ]
     }
-  ]
+  ],
+  "systemInstruction": {
+    "role": "user",
+    "parts": [
+      {
+        "text": "${systemInstructions}"
+      }
+    ]
+  }
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Geminiai',
@@ -567,6 +577,94 @@ class GeminiaiCall {
         response,
         r'''$.candidates[:].content.parts[:].text''',
       ));
+}
+
+class GooglenewsCall {
+  static Future<ApiCallResponse> call({
+    String? tipoNoticia = 'latest',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'googlenews',
+      apiUrl: 'https://google-news13.p.rapidapi.com/${tipoNoticia}?lr=pt-BR',
+      callType: ApiCallType.GET,
+      headers: {
+        'x-rapidapi-host': 'google-news13.p.rapidapi.com',
+        'x-rapidapi-key': 'afd0aa2b6cmshca0a2c4a9455efcp156fb9jsn5b8d8c360316',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? titulo(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].title''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? materia(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].snippet''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? publicadoPor(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].publisher''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? horario(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].timestamp''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? url(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].newsUrl''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List? imgs(dynamic response) => getJsonField(
+        response,
+        r'''$.items[:].images''',
+        true,
+      ) as List?;
+  static List<String>? thumbnail(dynamic response) => (getJsonField(
+        response,
+        r'''$.items[:].images.thumbnail''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List? itens(dynamic response) => getJsonField(
+        response,
+        r'''$.items''',
+        true,
+      ) as List?;
 }
 
 class ApiPagingParams {

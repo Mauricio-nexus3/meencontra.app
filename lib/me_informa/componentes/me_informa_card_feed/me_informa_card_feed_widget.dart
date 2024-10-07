@@ -155,6 +155,7 @@ class _MeInformaCardFeedWidgetState extends State<MeInformaCardFeedWidget>
                             color: FlutterFlowTheme.of(context).alternate,
                             fontSize: 14.0,
                             letterSpacing: 0.0,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ],

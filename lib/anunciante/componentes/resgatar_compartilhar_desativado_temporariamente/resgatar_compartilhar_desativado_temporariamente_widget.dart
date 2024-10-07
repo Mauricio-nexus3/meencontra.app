@@ -222,7 +222,7 @@ class _ResgatarCompartilharDesativadoTemporariamenteWidgetState
                                                 ));
 
                                                 context.pushNamed(
-                                                  'painelAdministrativo',
+                                                  'AnunciantePage',
                                                   queryParameters: {
                                                     'documentoRefAnunciante':
                                                         serializeParam(

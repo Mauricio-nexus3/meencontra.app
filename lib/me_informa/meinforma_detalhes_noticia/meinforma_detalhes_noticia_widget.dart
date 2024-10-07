@@ -120,8 +120,7 @@ class _MeinformaDetalhesNoticiaWidgetState
                         },
                         child: Icon(
                           Icons.arrow_back_ios_rounded,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).white,
                           size: 24.0,
                         ),
                       ),
@@ -136,8 +135,7 @@ class _MeinformaDetalhesNoticiaWidgetState
                                 0.0, 0.0, 8.0, 0.0),
                             child: Icon(
                               FFIcons.kmeInformaOFF,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: FlutterFlowTheme.of(context).white,
                               size: 24.0,
                             ),
                           ),
@@ -161,8 +159,7 @@ class _MeinformaDetalhesNoticiaWidgetState
                                 .headlineLarge
                                 .override(
                                   fontFamily: 'markPro',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color: FlutterFlowTheme.of(context).white,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                   useGoogleFonts: false,
@@ -208,8 +205,7 @@ class _MeinformaDetalhesNoticiaWidgetState
                               },
                               child: Icon(
                                 Icons.ios_share_outlined,
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                color: FlutterFlowTheme.of(context).white,
                                 size: 24.0,
                               ),
                             ),

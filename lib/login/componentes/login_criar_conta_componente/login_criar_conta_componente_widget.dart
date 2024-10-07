@@ -575,15 +575,7 @@ class _LoginCriarContaComponenteWidgetState
                                           ));
 
                                           context.goNamedAuth(
-                                            'CriarPerfil',
-                                            context.mounted,
-                                            queryParameters: {
-                                              'userRef': serializeParam(
-                                                currentUserReference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                            }.withoutNulls,
-                                          );
+                                              'Perfil', context.mounted);
                                         },
                                         text: 'Confirmar',
                                         options: FFButtonOptions(
@@ -687,7 +679,7 @@ class _LoginCriarContaComponenteWidgetState
                                                   fontFamily: 'Inter',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .blackTextos,
+                                                      .primaryText,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -699,7 +691,7 @@ class _LoginCriarContaComponenteWidgetState
                                                   fontFamily: 'Inter',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .blackTextos,
+                                                      .primaryText,
                                                   fontSize: 28.0,
                                                   letterSpacing: 0.0,
                                                 ),
@@ -918,6 +910,8 @@ class _LoginCriarContaComponenteWidgetState
                                                                             .primary,
                                                                         letterSpacing:
                                                                             0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
                                                                       ),
                                                                 ),
                                                               ),
@@ -1139,7 +1133,7 @@ class _LoginCriarContaComponenteWidgetState
                                                   fontFamily: 'Inter',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .blackTextos,
+                                                      .primaryText,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -1220,7 +1214,7 @@ class _LoginCriarContaComponenteWidgetState
                                                           fontFamily: 'Inter',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryText,
+                                                              .white,
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 1.0,
@@ -1275,7 +1269,7 @@ class _LoginCriarContaComponenteWidgetState
                                                           fontFamily: 'Inter',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryText,
+                                                              .white,
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 1.0,

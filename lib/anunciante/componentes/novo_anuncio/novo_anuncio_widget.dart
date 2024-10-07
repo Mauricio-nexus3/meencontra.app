@@ -130,9 +130,6 @@ class _NovoAnuncioWidgetState extends State<NovoAnuncioWidget>
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
-                border: Border.all(
-                  width: 1.0,
-                ),
               ),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
@@ -144,8 +141,8 @@ class _NovoAnuncioWidgetState extends State<NovoAnuncioWidget>
                       SizedBox(
                         width: 40.0,
                         child: Divider(
-                          thickness: 3.0,
-                          color: FlutterFlowTheme.of(context).primary,
+                          thickness: 2.0,
+                          color: FlutterFlowTheme.of(context).white,
                         ),
                       ),
                       Padding(
@@ -267,8 +264,8 @@ class _NovoAnuncioWidgetState extends State<NovoAnuncioWidget>
                                       .bodyLarge
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,

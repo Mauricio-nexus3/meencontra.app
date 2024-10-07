@@ -13,14 +13,12 @@ import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:io';
 import 'criar_novo_evento_widget.dart' show CriarNovoEventoWidget;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
@@ -31,13 +29,13 @@ class CriarNovoEventoModel extends FlutterFlowModel<CriarNovoEventoWidget> {
 
   int? etapaCadastro = 1;
 
+  String alterarFoto = 'Não';
+
   ///  State fields for stateful widgets in this page.
 
-  final formKey = GlobalKey<FormState>();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
 
   // State field(s) for Titulo widget.
   FocusNode? tituloFocusNode;
@@ -67,6 +65,15 @@ class CriarNovoEventoModel extends FlutterFlowModel<CriarNovoEventoWidget> {
   DateTime? datePicked;
   // State field(s) for PlacePicker widget.
   FFPlace placePickerValue = FFPlace();
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
+  bool isDataUploading3 = false;
+  FFUploadedFile uploadedLocalFile3 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl3 = '';
 
   @override
   void initState(BuildContext context) {}

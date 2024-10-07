@@ -66,7 +66,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                 buttonSize: 54.0,
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  color: FlutterFlowTheme.of(context).white,
                   size: 24.0,
                 ),
                 onPressed: () async {
@@ -81,7 +81,7 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context).white,
                       fontSize: 22.0,
                       letterSpacing: 0.0,
                     ),
@@ -198,17 +198,13 @@ class _ResultadoWidgetState extends State<ResultadoWidget> {
                                     'RESULTADO_PAGE_Container_pop14iua_ON_TAP');
 
                                 context.pushNamed(
-                                  'AnunciantePage',
+                                  'AnunciantePerfil',
                                   queryParameters: {
-                                    'documentoRefAnunciante': serializeParam(
-                                      listViewAnuncianteRecord,
-                                      ParamType.Document,
+                                    'referenciaAnunciante': serializeParam(
+                                      listViewAnuncianteRecord.reference,
+                                      ParamType.DocumentReference,
                                     ),
                                   }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'documentoRefAnunciante':
-                                        listViewAnuncianteRecord,
-                                  },
                                 );
                               },
                               child: CardListaSubCategoriaWidget(

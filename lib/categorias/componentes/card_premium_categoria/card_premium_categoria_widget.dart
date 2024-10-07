@@ -77,16 +77,13 @@ class _CardPremiumCategoriaWidgetState
         ).then((s) => s.firstOrNull);
 
         context.pushNamed(
-          'AnunciantePage',
+          'AnunciantePerfil',
           queryParameters: {
-            'documentoRefAnunciante': serializeParam(
-              _model.anunciante,
-              ParamType.Document,
+            'referenciaAnunciante': serializeParam(
+              widget!.auncianteREF,
+              ParamType.DocumentReference,
             ),
           }.withoutNulls,
-          extra: <String, dynamic>{
-            'documentoRefAnunciante': _model.anunciante,
-          },
         );
 
         safeSetState(() {});
@@ -155,7 +152,7 @@ class _CardPremiumCategoriaWidgetState
                                         .override(
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .white,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,

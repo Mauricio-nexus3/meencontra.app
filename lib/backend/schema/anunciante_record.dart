@@ -65,11 +65,6 @@ class AnuncianteRecord extends FirestoreRecord {
   String get emailComercial => _emailComercial ?? '';
   bool hasEmailComercial() => _emailComercial != null;
 
-  // "PlanoModelo01" field.
-  String? _planoModelo01;
-  String get planoModelo01 => _planoModelo01 ?? '';
-  bool hasPlanoModelo01() => _planoModelo01 != null;
-
   // "NomeSubCategoria01" field.
   String? _nomeSubCategoria01;
   String get nomeSubCategoria01 => _nomeSubCategoria01 ?? '';
@@ -230,7 +225,6 @@ class AnuncianteRecord extends FirestoreRecord {
     _categoria = snapshotData['Categoria'] as String?;
     _telefoneFixo = snapshotData['TelefoneFixo'] as String?;
     _emailComercial = snapshotData['EmailComercial'] as String?;
-    _planoModelo01 = snapshotData['PlanoModelo01'] as String?;
     _nomeSubCategoria01 = snapshotData['NomeSubCategoria01'] as String?;
     _nomeSubCategoria02 = snapshotData['NomeSubCategoria02'] as String?;
     _notaMedia = castToType<double>(snapshotData['NotaMedia']);
@@ -305,7 +299,6 @@ class AnuncianteRecord extends FirestoreRecord {
           'Categoria': snapshot.data['Categoria'],
           'TelefoneFixo': snapshot.data['TelefoneFixo'],
           'EmailComercial': snapshot.data['EmailComercial'],
-          'PlanoModelo01': snapshot.data['PlanoModelo01'],
           'NomeSubCategoria01': snapshot.data['NomeSubCategoria01'],
           'NomeSubCategoria02': snapshot.data['NomeSubCategoria02'],
           'NotaMedia': convertAlgoliaParam(
@@ -419,7 +412,6 @@ Map<String, dynamic> createAnuncianteRecordData({
   String? categoria,
   String? telefoneFixo,
   String? emailComercial,
-  String? planoModelo01,
   String? nomeSubCategoria01,
   String? nomeSubCategoria02,
   double? notaMedia,
@@ -461,7 +453,6 @@ Map<String, dynamic> createAnuncianteRecordData({
       'Categoria': categoria,
       'TelefoneFixo': telefoneFixo,
       'EmailComercial': emailComercial,
-      'PlanoModelo01': planoModelo01,
       'NomeSubCategoria01': nomeSubCategoria01,
       'NomeSubCategoria02': nomeSubCategoria02,
       'NotaMedia': notaMedia,
@@ -512,7 +503,6 @@ class AnuncianteRecordDocumentEquality implements Equality<AnuncianteRecord> {
         e1?.categoria == e2?.categoria &&
         e1?.telefoneFixo == e2?.telefoneFixo &&
         e1?.emailComercial == e2?.emailComercial &&
-        e1?.planoModelo01 == e2?.planoModelo01 &&
         e1?.nomeSubCategoria01 == e2?.nomeSubCategoria01 &&
         e1?.nomeSubCategoria02 == e2?.nomeSubCategoria02 &&
         e1?.notaMedia == e2?.notaMedia &&
@@ -556,7 +546,6 @@ class AnuncianteRecordDocumentEquality implements Equality<AnuncianteRecord> {
         e?.categoria,
         e?.telefoneFixo,
         e?.emailComercial,
-        e?.planoModelo01,
         e?.nomeSubCategoria01,
         e?.nomeSubCategoria02,
         e?.notaMedia,

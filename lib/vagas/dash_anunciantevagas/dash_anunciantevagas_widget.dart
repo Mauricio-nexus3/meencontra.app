@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -146,7 +146,7 @@ class _DashAnunciantevagasWidgetState extends State<DashAnunciantevagasWidget>
                     buttonSize: 54.0,
                     icon: Icon(
                       Icons.menu_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context).white,
                       size: 24.0,
                     ),
                     onPressed: () async {
@@ -159,8 +159,7 @@ class _DashAnunciantevagasWidgetState extends State<DashAnunciantevagasWidget>
                     'Anuncie uma vaga',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Inter',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).white,
                           fontSize: 22.0,
                           letterSpacing: 0.0,
                         ),
@@ -216,6 +215,7 @@ class _DashAnunciantevagasWidgetState extends State<DashAnunciantevagasWidget>
                               Expanded(
                                 flex: 10,
                                 child: SingleChildScrollView(
+                                  primary: false,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     crossAxisAlignment:
@@ -323,339 +323,336 @@ class _DashAnunciantevagasWidgetState extends State<DashAnunciantevagasWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  16.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            'Você possui 4 vagas em aberto',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Column(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 16.0),
+                                                    child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                width: double
-                                                                    .infinity,
-                                                                height: 40.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            8.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            8.0),
-                                                                  ),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          16.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        flex: 4,
-                                                                        child:
-                                                                            Text(
-                                                                          'Nome da vaga',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodySmall
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                      if (responsiveVisibility(
-                                                                        context:
-                                                                            context,
-                                                                        phone:
-                                                                            false,
-                                                                        tablet:
-                                                                            false,
-                                                                      ))
-                                                                        Expanded(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              Text(
-                                                                            'Nº visualizações',
-                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      if (responsiveVisibility(
-                                                                        context:
-                                                                            context,
-                                                                        phone:
-                                                                            false,
-                                                                      ))
-                                                                        Expanded(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              Text(
-                                                                            'Nº candidatos',
-                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          'Status',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodySmall
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          'Ações',
-                                                                          textAlign:
-                                                                              TextAlign.end,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodySmall
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
+                                                        Text(
+                                                          'Você possui 4 vagas em aberto',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
-                                                              Container(
-                                                                height: 500.0,
-                                                                decoration:
-                                                                    BoxDecoration(),
-                                                                child: Builder(
-                                                                  builder:
-                                                                      (context) {
-                                                                    final vagas =
-                                                                        dashAnunciantevagasMeContrataVAGASRecordList
-                                                                            .toList();
-
-                                                                    return ListView
-                                                                        .separated(
-                                                                      padding: EdgeInsets.symmetric(
-                                                                          vertical:
-                                                                              12.0),
-                                                                      scrollDirection:
-                                                                          Axis.vertical,
-                                                                      itemCount:
-                                                                          vagas
-                                                                              .length,
-                                                                      separatorBuilder: (_,
-                                                                              __) =>
-                                                                          SizedBox(
-                                                                              height: 12.0),
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              vagasIndex) {
-                                                                        final vagasItem =
-                                                                            vagas[vagasIndex];
-                                                                        return Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              16.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Expanded(
-                                                                                flex: 4,
-                                                                                child: Text(
-                                                                                  vagasItem.nomeVaga,
-                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                              if (responsiveVisibility(
-                                                                                context: context,
-                                                                                phone: false,
-                                                                                tablet: false,
-                                                                              ))
-                                                                                Expanded(
-                                                                                  flex: 2,
-                                                                                  child: Text(
-                                                                                    vagasItem.numeroVisualizacoes.toString(),
-                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                          fontFamily: 'Inter',
-                                                                                          letterSpacing: 0.0,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                              if (responsiveVisibility(
-                                                                                context: context,
-                                                                                phone: false,
-                                                                              ))
-                                                                                Expanded(
-                                                                                  flex: 2,
-                                                                                  child: Text(
-                                                                                    vagasItem.candidaturas.length.toString(),
-                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                          fontFamily: 'Inter',
-                                                                                          letterSpacing: 0.0,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                              Expanded(
-                                                                                child: Text(
-                                                                                  vagasItem.status,
-                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                              if (responsiveVisibility(
-                                                                                context: context,
-                                                                                phone: false,
-                                                                              ))
-                                                                                Expanded(
-                                                                                  child: InkWell(
-                                                                                    splashColor: Colors.transparent,
-                                                                                    focusColor: Colors.transparent,
-                                                                                    hoverColor: Colors.transparent,
-                                                                                    highlightColor: Colors.transparent,
-                                                                                    onTap: () async {
-                                                                                      logFirebaseEvent('DASH_ANUNCIANTEVAGAS_Text_sfyys9dj_ON_TA');
-
-                                                                                      await vagasItem.reference.update(createMeContrataVAGASRecordData(
-                                                                                        status: 'Finalizado',
-                                                                                      ));
-                                                                                    },
-                                                                                    child: Text(
-                                                                                      'Finalzizar',
-                                                                                      textAlign: TextAlign.end,
-                                                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                            fontFamily: 'Inter',
-                                                                                            letterSpacing: 0.0,
-                                                                                          ),
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              if (responsiveVisibility(
-                                                                                context: context,
-                                                                                desktop: false,
-                                                                              ))
-                                                                                FlutterFlowIconButton(
-                                                                                  borderRadius: 20.0,
-                                                                                  borderWidth: 1.0,
-                                                                                  buttonSize: 40.0,
-                                                                                  icon: Icon(
-                                                                                    Icons.more_vert,
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    size: 24.0,
-                                                                                  ),
-                                                                                  onPressed: () {
-                                                                                    print('IconButton pressed ...');
-                                                                                  },
-                                                                                ),
-                                                                            ],
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
                                                         ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              height: 40.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          8.0),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          8.0),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      flex: 4,
+                                                                      child:
+                                                                          Text(
+                                                                        'Nome da vaga',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 2,
+                                                                        child:
+                                                                            Text(
+                                                                          'Nº visualizações',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodySmall
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 2,
+                                                                        child:
+                                                                            Text(
+                                                                          'Nº candidatos',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodySmall
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        'Status',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        'Ações',
+                                                                        textAlign:
+                                                                            TextAlign.end,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              height: 500.0,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  final vagas =
+                                                                      dashAnunciantevagasMeContrataVAGASRecordList
+                                                                          .toList();
+
+                                                                  return ListView
+                                                                      .separated(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            12.0),
+                                                                    primary:
+                                                                        false,
+                                                                    scrollDirection:
+                                                                        Axis.vertical,
+                                                                    itemCount: vagas
+                                                                        .length,
+                                                                    separatorBuilder: (_,
+                                                                            __) =>
+                                                                        SizedBox(
+                                                                            height:
+                                                                                12.0),
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            vagasIndex) {
+                                                                      final vagasItem =
+                                                                          vagas[
+                                                                              vagasIndex];
+                                                                      return Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            16.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              flex: 4,
+                                                                              child: Text(
+                                                                                vagasItem.nomeVaga,
+                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            if (responsiveVisibility(
+                                                                              context: context,
+                                                                              phone: false,
+                                                                              tablet: false,
+                                                                            ))
+                                                                              Expanded(
+                                                                                flex: 2,
+                                                                                child: Text(
+                                                                                  vagasItem.numeroVisualizacoes.toString(),
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                        fontFamily: 'Inter',
+                                                                                        letterSpacing: 0.0,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            if (responsiveVisibility(
+                                                                              context: context,
+                                                                              phone: false,
+                                                                            ))
+                                                                              Expanded(
+                                                                                flex: 2,
+                                                                                child: Text(
+                                                                                  vagasItem.candidaturas.length.toString(),
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                        fontFamily: 'Inter',
+                                                                                        letterSpacing: 0.0,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                vagasItem.status,
+                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            if (responsiveVisibility(
+                                                                              context: context,
+                                                                              phone: false,
+                                                                            ))
+                                                                              Expanded(
+                                                                                child: InkWell(
+                                                                                  splashColor: Colors.transparent,
+                                                                                  focusColor: Colors.transparent,
+                                                                                  hoverColor: Colors.transparent,
+                                                                                  highlightColor: Colors.transparent,
+                                                                                  onTap: () async {
+                                                                                    logFirebaseEvent('DASH_ANUNCIANTEVAGAS_Text_sfyys9dj_ON_TA');
+
+                                                                                    await vagasItem.reference.update(createMeContrataVAGASRecordData(
+                                                                                      status: 'Finalizado',
+                                                                                    ));
+                                                                                  },
+                                                                                  child: Text(
+                                                                                    'Finalzizar',
+                                                                                    textAlign: TextAlign.end,
+                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            if (responsiveVisibility(
+                                                                              context: context,
+                                                                              desktop: false,
+                                                                            ))
+                                                                              FlutterFlowIconButton(
+                                                                                borderRadius: 20.0,
+                                                                                borderWidth: 1.0,
+                                                                                buttonSize: 40.0,
+                                                                                icon: Icon(
+                                                                                  Icons.more_vert,
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                onPressed: () {
+                                                                                  print('IconButton pressed ...');
+                                                                                },
+                                                                              ),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
-                                            ]
-                                                .divide(SizedBox(height: 24.0))
-                                                .around(SizedBox(height: 24.0)),
-                                          ),
+                                            ),
+                                          ]
+                                              .divide(SizedBox(height: 24.0))
+                                              .around(SizedBox(height: 24.0)),
                                         ),
                                       ),
                                     ]

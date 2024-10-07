@@ -66,30 +66,16 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
   // State field(s) for DropDown_Regime widget.
   String? dropDownRegimeValue;
   FormFieldController<String>? dropDownRegimeValueController;
-  // State field(s) for description widget.
-  FocusNode? descriptionFocusNode1;
-  TextEditingController? descriptionTextController1;
-  String? Function(BuildContext, String?)? descriptionTextController1Validator;
-  // State field(s) for description widget.
-  FocusNode? descriptionFocusNode2;
-  TextEditingController? descriptionTextController2;
-  String? Function(BuildContext, String?)? descriptionTextController2Validator;
-  // State field(s) for PlanodeSaude widget.
-  bool? planodeSaudeValue;
-  // State field(s) for PlanoOdontolgico widget.
-  bool? planoOdontolgicoValue;
-  // State field(s) for Vale-Alimentao widget.
-  bool? valeAlimentaoValue;
-  // State field(s) for Vale-Refeio widget.
-  bool? valeRefeioValue;
-  // State field(s) for Vale-Transporte widget.
-  bool? valeTransporteValue;
-  // State field(s) for ParticipaonosLucrosPLR widget.
-  bool? participaonosLucrosPLRValue;
-  // State field(s) for Auxlio-Educao widget.
-  bool? auxlioEducaoValue;
-  // State field(s) for Auxlio-Creche widget.
-  bool? auxlioCrecheValue;
+  // State field(s) for descriptionBenefic widget.
+  FocusNode? descriptionBeneficFocusNode;
+  TextEditingController? descriptionBeneficTextController;
+  String? Function(BuildContext, String?)?
+      descriptionBeneficTextControllerValidator;
+  // State field(s) for descriptionQualification widget.
+  FocusNode? descriptionQualificationFocusNode;
+  TextEditingController? descriptionQualificationTextController;
+  String? Function(BuildContext, String?)?
+      descriptionQualificationTextControllerValidator;
   DateTime? datePicked;
   // State field(s) for SwitchURL widget.
   bool? switchURLValue;
@@ -115,11 +101,11 @@ class CriarNovaVagaModel extends FlutterFlowModel<CriarNovaVagaWidget> {
     salarioFocusNode?.dispose();
     salarioTextController?.dispose();
 
-    descriptionFocusNode1?.dispose();
-    descriptionTextController1?.dispose();
+    descriptionBeneficFocusNode?.dispose();
+    descriptionBeneficTextController?.dispose();
 
-    descriptionFocusNode2?.dispose();
-    descriptionTextController2?.dispose();
+    descriptionQualificationFocusNode?.dispose();
+    descriptionQualificationTextController?.dispose();
 
     urlFocusNode?.dispose();
     urlTextController?.dispose();

@@ -123,9 +123,6 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget>
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0),
                     ),
-                    border: Border.all(
-                      width: 1.0,
-                    ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
@@ -148,7 +145,7 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget>
                             width: 50.0,
                             child: Divider(
                               thickness: 3.0,
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: FlutterFlowTheme.of(context).primaryText,
                             ),
                           ),
                         ),

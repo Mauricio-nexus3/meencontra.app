@@ -712,18 +712,14 @@ class _PopupUsuarioWidgetState extends State<PopupUsuarioWidget> {
                                       ).then((s) => s.firstOrNull);
 
                                       context.pushNamed(
-                                        'AnunciantePage',
+                                        'AnunciantePerfil',
                                         queryParameters: {
-                                          'documentoRefAnunciante':
+                                          'referenciaAnunciante':
                                               serializeParam(
-                                            _model.anuncianteRef,
-                                            ParamType.Document,
+                                            _model.anuncianteRef?.reference,
+                                            ParamType.DocumentReference,
                                           ),
                                         }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'documentoRefAnunciante':
-                                              _model.anuncianteRef,
-                                        },
                                       );
 
                                       safeSetState(() {});

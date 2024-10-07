@@ -151,7 +151,7 @@ class _MedivirtaFeedWidgetState extends State<MedivirtaFeedWidget>
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .white,
                                               fontSize:
                                                   MediaQuery.sizeOf(context)
                                                               .width >
@@ -178,7 +178,7 @@ class _MedivirtaFeedWidgetState extends State<MedivirtaFeedWidget>
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .white,
                                               fontSize: 12.0,
                                               letterSpacing: 0.0,
                                             ),

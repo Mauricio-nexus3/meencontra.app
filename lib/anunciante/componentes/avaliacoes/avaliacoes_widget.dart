@@ -275,6 +275,7 @@ class _AvaliacoesWidgetState extends State<AvaliacoesWidget> {
                                           .toList();
 
                                   return SingleChildScrollView(
+                                    primary: false,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children:

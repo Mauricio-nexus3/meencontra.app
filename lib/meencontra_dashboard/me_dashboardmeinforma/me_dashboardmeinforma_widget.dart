@@ -236,11 +236,11 @@ class _MeDashboardmeinformaWidgetState
                                                 ).then((s) => s.firstOrNull);
 
                                                 context.pushNamed(
-                                                  'Materia',
+                                                  'cadastrarMateria',
                                                   queryParameters: {
                                                     'status': serializeParam(
-                                                      BoolToString.Novo.name,
-                                                      ParamType.String,
+                                                      Status.novo,
+                                                      ParamType.Enum,
                                                     ),
                                                   }.withoutNulls,
                                                 );
@@ -824,7 +824,7 @@ class _MeDashboardmeinformaWidgetState
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsets.all(16.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
@@ -1507,11 +1507,11 @@ class _MeDashboardmeinformaWidgetState
                                                                                                 },
                                                                                                 editar: () async {
                                                                                                   context.pushNamed(
-                                                                                                    'Materia',
+                                                                                                    'cadastrarMateria',
                                                                                                     queryParameters: {
                                                                                                       'status': serializeParam(
-                                                                                                        BoolToString.Editar.name,
-                                                                                                        ParamType.String,
+                                                                                                        Status.editar,
+                                                                                                        ParamType.Enum,
                                                                                                       ),
                                                                                                       'materiaDoc': serializeParam(
                                                                                                         tabelaMeinformaItem,
@@ -1590,11 +1590,11 @@ class _MeDashboardmeinformaWidgetState
                                                                                                 },
                                                                                                 editar: () async {
                                                                                                   context.pushNamed(
-                                                                                                    'Materia',
+                                                                                                    'cadastrarMateria',
                                                                                                     queryParameters: {
                                                                                                       'status': serializeParam(
-                                                                                                        BoolToString.Editar.name,
-                                                                                                        ParamType.String,
+                                                                                                        Status.editar,
+                                                                                                        ParamType.Enum,
                                                                                                       ),
                                                                                                       'materiaDoc': serializeParam(
                                                                                                         tabelaMeinformaItem,

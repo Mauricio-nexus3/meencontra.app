@@ -244,6 +244,7 @@ class _MeDashboardWidgetState extends State<MeDashboardWidget>
                               ),
                               decoration: BoxDecoration(),
                               child: SingleChildScrollView(
+                                primary: false,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [

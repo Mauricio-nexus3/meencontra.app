@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -111,32 +110,6 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 8.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 20.0,
-                    buttonSize: 40.0,
-                    fillColor: FlutterFlowTheme.of(context).accent4,
-                    icon: Icon(
-                      Icons.close_rounded,
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 24.0,
-                    ),
-                    onPressed: () async {
-                      logFirebaseEvent(
-                          'ENDERECO_GOOGLE_MAPS_close_rounded_ICN_O');
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
             Container(
               width: double.infinity,
               constraints: BoxConstraints(
@@ -160,9 +133,6 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
-                border: Border.all(
-                  width: 1.0,
-                ),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -181,7 +151,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                       width: 40.0,
                       child: Divider(
                         thickness: 3.0,
-                        color: FlutterFlowTheme.of(context).primary,
+                        color: FlutterFlowTheme.of(context).primaryText,
                       ),
                     ),
                   ),
@@ -356,7 +326,7 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                           .override(
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                                .white,
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
@@ -427,12 +397,12 @@ class _EnderecoGoogleMapsWidgetState extends State<EnderecoGoogleMapsWidget>
                                         .override(
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .accent2,
                                           letterSpacing: 0.0,
                                         ),
                                     borderSide: BorderSide(
                                       color:
-                                          FlutterFlowTheme.of(context).primary,
+                                          FlutterFlowTheme.of(context).accent2,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),

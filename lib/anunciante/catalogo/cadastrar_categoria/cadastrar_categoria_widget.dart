@@ -526,7 +526,7 @@ class _CadastrarCategoriaWidgetState extends State<CadastrarCategoriaWidget>
                                           .override(
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                                .white,
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 2.0,

@@ -132,7 +132,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                   buttonSize: 60.0,
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: FlutterFlowTheme.of(context).secondaryText,
+                    color: FlutterFlowTheme.of(context).white,
                     size: 30.0,
                   ),
                   onPressed: () async {
@@ -179,7 +179,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                 'Suporte',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: FlutterFlowTheme.of(context).white,
                       letterSpacing: 0.0,
                     ),
               ),
@@ -225,7 +225,7 @@ class _SuporteWidgetState extends State<SuporteWidget>
                                   .override(
                                     fontFamily: 'Inter',
                                     color: FlutterFlowTheme.of(context)
-                                        .blackTextos,
+                                        .primaryText,
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,

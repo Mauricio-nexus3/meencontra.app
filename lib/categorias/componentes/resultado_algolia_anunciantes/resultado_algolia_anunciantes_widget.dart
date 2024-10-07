@@ -76,16 +76,13 @@ class _ResultadoAlgoliaAnunciantesWidgetState
             logFirebaseEvent('RESULTADO_ALGOLIA_ANUNCIANTES_Row_76uzva');
 
             context.pushNamed(
-              'AnunciantePage',
+              'AnunciantePerfil',
               queryParameters: {
-                'documentoRefAnunciante': serializeParam(
-                  widget!.parameter7,
-                  ParamType.Document,
+                'referenciaAnunciante': serializeParam(
+                  widget!.parameter7?.reference,
+                  ParamType.DocumentReference,
                 ),
               }.withoutNulls,
-              extra: <String, dynamic>{
-                'documentoRefAnunciante': widget!.parameter7,
-              },
             );
           },
           child: Row(
@@ -172,7 +169,7 @@ class _ResultadoAlgoliaAnunciantesWidgetState
                 borderRadius: 20.0,
                 buttonSize: 40.0,
                 icon: Icon(
-                  FFIcons.karrowRIght,
+                  Icons.arrow_forward_ios_rounded,
                   color: FlutterFlowTheme.of(context).primary,
                   size: 20.0,
                 ),

@@ -108,7 +108,7 @@ class _EditarAnuncianteWidgetState extends State<EditarAnuncianteWidget> {
         maxWidth: 500.0,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
           BoxShadow(
             blurRadius: 4.0,

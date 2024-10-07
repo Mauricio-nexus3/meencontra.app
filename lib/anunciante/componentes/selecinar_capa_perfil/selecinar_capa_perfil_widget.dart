@@ -395,8 +395,8 @@ class _SelecinarCapaPerfilWidgetState extends State<SelecinarCapaPerfilWidget>
                                       .bodyLarge
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,

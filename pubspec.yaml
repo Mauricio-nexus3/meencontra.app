@@ -26,10 +26,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   algolia: 1.1.1
+  aligned_dialog: 0.0.6
   aligned_tooltip: 0.0.1
   auto_size_text: 3.0.0
   badges: 2.0.2
-  blurhash_dart: 1.2.1
   cached_network_image: 3.3.1
   carousel_slider: 4.2.1
   chewie: 1.8.1
@@ -63,7 +63,6 @@ dependencies:
   firebase_storage_platform_interface: 5.1.20
   firebase_storage_web: 3.9.5
   flutter_animate: 4.5.0
-  flutter_blurhash: 0.8.2
   flutter_cache_manager: 3.3.1
   flutter_google_places: 
     git:
@@ -74,7 +73,7 @@ dependencies:
   flutter_rating_bar: 4.0.1
   flutter_staggered_grid_view: 0.7.0
   flutter_svg: 2.0.9
-  font_awesome_flutter: 10.6.0
+  font_awesome_flutter: 10.7.0
   from_css_color: 2.0.0
   geolocator: 12.0.0
   geolocator_android: 4.6.0
@@ -96,7 +95,6 @@ dependencies:
   google_sign_in_platform_interface: 2.4.2
   google_sign_in_web: 0.12.1
   http: 1.2.1
-  image: 4.0.17
   image_picker: 1.0.4
   image_picker_android: 0.8.8
   image_picker_for_web: 3.0.1
@@ -108,7 +106,6 @@ dependencies:
   map_launcher: 2.5.0+1
   mask_text_input_formatter: 2.9.0
   mime_type: 1.0.0
-  octo_image: 2.0.0
   package_info_plus: 8.0.0
   package_info_plus_platform_interface: 3.0.0
   page_transition: 2.1.0
@@ -139,9 +136,9 @@ dependencies:
   text_search: 1.0.1
   timeago: 3.6.1
   universal_io: 2.2.2
-  url_launcher: 6.2.5
-  url_launcher_android: 6.3.0
-  url_launcher_ios: 6.2.5
+  url_launcher: 6.3.0
+  url_launcher_android: 6.3.4
+  url_launcher_ios: 6.3.1
   url_launcher_platform_interface: 2.3.2
   uuid: ^4.0.0
   video_player: 2.8.6
@@ -171,6 +168,9 @@ dependency_overrides:
 dev_dependencies:
   flutter_launcher_icons: 0.13.1
   flutter_lints: 4.0.0
+  image: 4.0.17
+  integration_test: 
+    sdk: flutter
   lints: 4.0.0
   flutter_test:
     sdk: flutter
@@ -205,6 +205,7 @@ flutter:
     - assets/lottie_animations/
     - assets/rive_animations/
     - assets/pdfs/
+
   fonts:
     - family: 'markPro'
       fonts:

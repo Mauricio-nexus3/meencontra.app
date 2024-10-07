@@ -60,7 +60,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
                 width: 40.0,
@@ -84,8 +84,7 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
               onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                 body: FutureBuilder<List<AnuncianteRecord>>(
                   future: queryAnuncianteRecordOnce(
                     queryBuilder: (anuncianteRecord) => anuncianteRecord.where(
@@ -844,16 +843,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_hphg9yu2_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  cardBig01Item,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  cardBig01Item.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': cardBig01Item,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:
@@ -1076,16 +1072,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_f8oyogzt_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  cardSmal01Item,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  cardSmal01Item.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': cardSmal01Item,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:
@@ -1207,16 +1200,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_r1t9j81j_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  cardBig02Item,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  cardBig02Item.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': cardBig02Item,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:
@@ -1437,16 +1427,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_elfpl03y_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  cardSmal02Item,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  cardSmal02Item.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': cardSmal02Item,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:
@@ -1640,16 +1627,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_uf43w2sx_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  descobrirItem,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  descobrirItem.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': descobrirItem,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:
@@ -1808,16 +1792,13 @@ class _SubCtegoriaWidgetState extends State<SubCtegoriaWidget> {
                                                                             logFirebaseEvent('SUB_CTEGORIA_Container_ov7su8kd_ON_TAP');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  emAltadesktopItem,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  emAltadesktopItem.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': emAltadesktopItem,
-                                                                              },
                                                                             );
                                                                           },
                                                                           child:

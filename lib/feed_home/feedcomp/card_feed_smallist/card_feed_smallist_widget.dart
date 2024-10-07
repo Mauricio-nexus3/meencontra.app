@@ -121,7 +121,8 @@ class _CardFeedSmallistWidgetState extends State<CardFeedSmallistWidget> {
                                   .labelSmall
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context).accent2,
+                                    color: FlutterFlowTheme.of(context)
+                                        .cinzaEscuro,
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,

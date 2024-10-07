@@ -66,9 +66,7 @@ class _TonyComponentWidgetState extends State<TonyComponentWidget>
     return Container(
       width: 400.0,
       height: 400.0,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
+      decoration: BoxDecoration(),
       child: Padding(
         padding: EdgeInsets.all(24.0),
         child: Column(

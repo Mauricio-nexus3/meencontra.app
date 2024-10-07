@@ -3,9 +3,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+const kThemeModeKey = '__theme_mode__';
+SharedPreferences? _prefs;
+
 abstract class FlutterFlowTheme {
+  static Future initialize() async =>
+      _prefs = await SharedPreferences.getInstance();
+  static ThemeMode get themeMode {
+    final darkMode = _prefs?.getBool(kThemeModeKey);
+    return darkMode == null
+        ? ThemeMode.system
+        : darkMode
+            ? ThemeMode.dark
+            : ThemeMode.light;
+  }
+
+  static void saveThemeMode(ThemeMode mode) => mode == ThemeMode.system
+      ? _prefs?.remove(kThemeModeKey)
+      : _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
+
   static FlutterFlowTheme of(BuildContext context) {
-    return LightModeTheme();
+    return Theme.of(context).brightness == Brightness.dark
+        ? DarkModeTheme()
+        : LightModeTheme();
   }
 
   @Deprecated('Use primary instead')
@@ -35,11 +57,8 @@ abstract class FlutterFlowTheme {
   late Color gradient1180deg;
   late Color gradient2;
   late Color inputLightGray;
-  late Color purpleMeEncontra;
-  late Color blackTextos;
   late Color btnWhats;
   late Color lineColor;
-  late Color roxo;
   late Color lilas;
   late Color grdInforma190deg;
   late Color grdContrata190deg;
@@ -48,10 +67,8 @@ abstract class FlutterFlowTheme {
   late Color grdDiverte290deg;
   late Color shadow10;
   late Color cinzaEscuro;
-  late Color meencontraAntigo;
-  late Color customColor1;
-  late Color customColor2;
   late Color meAmarelo;
+  late Color white;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -130,7 +147,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color alternate = const Color(0xFFEE0C32);
   late Color primaryText = const Color(0xFF091747);
   late Color secondaryText = const Color(0xFFF1F4F8);
-  late Color primaryBackground = const Color(0xFFEFF1F3);
+  late Color primaryBackground = const Color(0xFFF3F2F7);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color accent1 = const Color(0xFFBDBCC2);
   late Color accent2 = const Color(0xFF667085);
@@ -144,11 +161,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color gradient1180deg = Color(0xFF561CF6);
   late Color gradient2 = Color(0xFF26115F);
   late Color inputLightGray = Color(0xFFDCDCDD);
-  late Color purpleMeEncontra = Color(0xFF622AE2);
-  late Color blackTextos = Color(0xFF1C1C1E);
   late Color btnWhats = Color(0xFF2CD03E);
   late Color lineColor = Color(0xFFE0E3E7);
-  late Color roxo = Color(0xFF421CAC);
   late Color lilas = Color(0xFF9116C3);
   late Color grdInforma190deg = Color(0xFF93051B);
   late Color grdContrata190deg = Color(0xFF006911);
@@ -156,11 +170,9 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color grdDiverte190deg = Color(0xFF7D0178);
   late Color grdDiverte290deg = Color(0xFFC500BD);
   late Color shadow10 = Color(0x1A000000);
-  late Color cinzaEscuro = Color(0xFFBDBCC2);
-  late Color meencontraAntigo = Color(0xFF622AE2);
-  late Color customColor1 = Color(0xFF4CEACB);
-  late Color customColor2 = Color(0xFF393CB4);
+  late Color cinzaEscuro = Color(0xFF8F8F90);
   late Color meAmarelo = Color(0xFFFFC800);
+  late Color white = Color(0xFFFFFFFF);
 }
 
 abstract class Typography {
@@ -306,6 +318,48 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 12.0,
       );
+}
+
+class DarkModeTheme extends FlutterFlowTheme {
+  @Deprecated('Use primary instead')
+  Color get primaryColor => primary;
+  @Deprecated('Use secondary instead')
+  Color get secondaryColor => secondary;
+  @Deprecated('Use tertiary instead')
+  Color get tertiaryColor => tertiary;
+
+  late Color primary = const Color(0xFF6800A0);
+  late Color secondary = const Color(0xFF119526);
+  late Color tertiary = const Color(0xFFE513DC);
+  late Color alternate = const Color(0xFFEE0C32);
+  late Color primaryText = const Color(0xFFFFFFFF);
+  late Color secondaryText = const Color(0xFF95A1AC);
+  late Color primaryBackground = const Color(0xFF141517);
+  late Color secondaryBackground = const Color(0xFF232323);
+  late Color accent1 = const Color(0xFFEEEEEE);
+  late Color accent2 = const Color(0xFFE0E0E0);
+  late Color accent3 = const Color(0xFF757575);
+  late Color accent4 = const Color(0xFF616161);
+  late Color success = const Color(0xFF04A24C);
+  late Color warning = const Color(0xFFFCDC0C);
+  late Color error = const Color(0xFFE21C3D);
+  late Color info = const Color(0xFF1C4494);
+
+  late Color gradient1180deg = Color(0xFF22282F);
+  late Color gradient2 = Color(0xFF7110AE);
+  late Color inputLightGray = Color(0xFF22282F);
+  late Color btnWhats = Color(0xFF2CD03E);
+  late Color lineColor = Color(0xFF22282F);
+  late Color lilas = Color(0xFF22196F);
+  late Color grdInforma190deg = Color(0xFF0E6E5E);
+  late Color grdContrata190deg = Color(0xFFDF3F07);
+  late Color grdContrata290deg = Color(0xFF19E3A1);
+  late Color grdDiverte190deg = Color(0xFF2EC894);
+  late Color grdDiverte290deg = Color(0xFFBB6D6F);
+  late Color shadow10 = Color(0x1A000000);
+  late Color cinzaEscuro = Color(0xFFBDBCC2);
+  late Color meAmarelo = Color(0xFF02F23D);
+  late Color white = Color(0xFFFFFFFF);
 }
 
 extension TextStyleHelper on TextStyle {

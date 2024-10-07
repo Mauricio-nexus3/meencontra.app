@@ -58,7 +58,7 @@ class _NovoAnuncianteWidgetState extends State<NovoAnuncianteWidget> {
                 buttonSize: 60.0,
                 icon: Icon(
                   FFIcons.karrowBack,
-                  color: FlutterFlowTheme.of(context).secondaryText,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 30.0,
                 ),
                 onPressed: () async {
@@ -70,7 +70,7 @@ class _NovoAnuncianteWidgetState extends State<NovoAnuncianteWidget> {
                 'Novo anunciante',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 22.0,
                       letterSpacing: 0.0,
                     ),

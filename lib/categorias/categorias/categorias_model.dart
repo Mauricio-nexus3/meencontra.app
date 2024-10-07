@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/categorias/componentes/resultado_algolia_anunciantes/resultado_algolia_anunciantes_widget.dart';
 import '/componentes_globais/menus/menu_horizontal/menu_horizontal_widget.dart';
+import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -34,6 +35,8 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
   String? Function(BuildContext, String?)? allAppTextControllerValidator;
   // Algolia Search Results from action on allApp
   List<AnuncianteRecord>? algoliaSearchResults = [];
+  // Model for navbar component.
+  late NavbarModel navbarModel;
   // Model for menuHorizontal component.
   late MenuHorizontalModel menuHorizontalModel;
 
@@ -56,6 +59,7 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
 
   @override
   void initState(BuildContext context) {
+    navbarModel = createModel(context, () => NavbarModel());
     menuHorizontalModel = createModel(context, () => MenuHorizontalModel());
   }
 
@@ -63,6 +67,7 @@ class CategoriasModel extends FlutterFlowModel<CategoriasWidget> {
   void dispose() {
     allAppFocusNode?.dispose();
 
+    navbarModel.dispose();
     menuHorizontalModel.dispose();
 
     /// Dispose query cache managers for this widget.

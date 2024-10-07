@@ -447,7 +447,7 @@ class _SubCategoriasWidgetState extends State<SubCategoriasWidget>
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .white,
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
@@ -523,7 +523,7 @@ class _SubCategoriasWidgetState extends State<SubCategoriasWidget>
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                      .primaryText,
                                               letterSpacing: 0.0,
                                             ),
                                         borderSide: BorderSide(

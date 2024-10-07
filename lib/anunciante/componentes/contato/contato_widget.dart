@@ -95,8 +95,8 @@ class _ContatoWidgetState extends State<ContatoWidget> {
                     child: SizedBox(
                       width: 50.0,
                       child: Divider(
-                        thickness: 3.0,
-                        color: FlutterFlowTheme.of(context).primary,
+                        thickness: 2.0,
+                        color: FlutterFlowTheme.of(context).primaryText,
                       ),
                     ),
                   ),

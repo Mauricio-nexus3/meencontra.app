@@ -22,6 +22,17 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
+      if (prefs.containsKey('ff_anunciante')) {
+        try {
+          final serializedData = prefs.getString('ff_anunciante') ?? '{}';
+          _anunciante =
+              AnuncianteStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+    _safeInit(() {
       _acaoDeAtualizacao =
           prefs.getBool('ff_acaoDeAtualizacao') ?? _acaoDeAtualizacao;
     });
@@ -39,8 +50,9 @@ class FFAppState extends ChangeNotifier {
               : _ultimaNotificacaoAtualizacao;
     });
     _safeInit(() {
-      _versaoNoDispositivo =
-          prefs.getString('ff_versaoNoDispositivo') ?? _versaoNoDispositivo;
+      _versaoNoDispositivoUsuario =
+          prefs.getString('ff_versaoNoDispositivoUsuario') ??
+              _versaoNoDispositivoUsuario;
     });
     _safeInit(() {
       _versaoAtualMobile =
@@ -75,6 +87,9 @@ class FFAppState extends ChangeNotifier {
           prefs.getStringList('ff_nomesProdutosCarrinhoUsuer') ??
               _nomesProdutosCarrinhoUsuer;
     });
+    _safeInit(() {
+      _avatarUrl = prefs.getString('ff_avatarUrl') ?? _avatarUrl;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -83,6 +98,19 @@ class FFAppState extends ChangeNotifier {
   }
 
   late SharedPreferences prefs;
+
+  AnuncianteStruct _anunciante = AnuncianteStruct.fromSerializableMap(
+      jsonDecode('{\"nome\":\"mauricio\"}'));
+  AnuncianteStruct get anunciante => _anunciante;
+  set anunciante(AnuncianteStruct value) {
+    _anunciante = value;
+    prefs.setString('ff_anunciante', value.serialize());
+  }
+
+  void updateAnuncianteStruct(Function(AnuncianteStruct) updateFn) {
+    updateFn(_anunciante);
+    prefs.setString('ff_anunciante', _anunciante.serialize());
+  }
 
   bool _EsconderDaTela = false;
   bool get EsconderDaTela => _EsconderDaTela;
@@ -204,11 +232,11 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_ultimaNotificacaoAtualizacao');
   }
 
-  String _versaoNoDispositivo = '2.0.1';
-  String get versaoNoDispositivo => _versaoNoDispositivo;
-  set versaoNoDispositivo(String value) {
-    _versaoNoDispositivo = value;
-    prefs.setString('ff_versaoNoDispositivo', value);
+  String _versaoNoDispositivoUsuario = '2.0.1';
+  String get versaoNoDispositivoUsuario => _versaoNoDispositivoUsuario;
+  set versaoNoDispositivoUsuario(String value) {
+    _versaoNoDispositivoUsuario = value;
+    prefs.setString('ff_versaoNoDispositivoUsuario', value);
   }
 
   String _versaoAtualMobile = '';
@@ -391,6 +419,13 @@ class FFAppState extends ChangeNotifier {
   String get HTMLMessage => _HTMLMessage;
   set HTMLMessage(String value) {
     _HTMLMessage = value;
+  }
+
+  String _avatarUrl = '';
+  String get avatarUrl => _avatarUrl;
+  set avatarUrl(String value) {
+    _avatarUrl = value;
+    prefs.setString('ff_avatarUrl', value);
   }
 }
 

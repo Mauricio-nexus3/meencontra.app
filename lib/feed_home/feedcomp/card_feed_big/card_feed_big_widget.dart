@@ -141,8 +141,7 @@ class _CardFeedBigWidgetState extends State<CardFeedBigWidget>
                                   .titleMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                    color: FlutterFlowTheme.of(context).white,
                                     fontSize: 18.0,
                                     letterSpacing: 0.0,
                                   ),
@@ -162,8 +161,7 @@ class _CardFeedBigWidgetState extends State<CardFeedBigWidget>
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                    color: FlutterFlowTheme.of(context).white,
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                   ),

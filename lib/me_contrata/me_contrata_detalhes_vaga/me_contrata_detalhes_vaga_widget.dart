@@ -127,8 +127,7 @@ class _MeContrataDetalhesVagaWidgetState
                             },
                             child: Icon(
                               Icons.arrow_back_ios_rounded,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: FlutterFlowTheme.of(context).white,
                               size: 24.0,
                             ),
                           ),
@@ -143,8 +142,7 @@ class _MeContrataDetalhesVagaWidgetState
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
                                   FFIcons.kmeContrataOFF,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color: FlutterFlowTheme.of(context).white,
                                   size: 24.0,
                                 ),
                               ),
@@ -169,8 +167,7 @@ class _MeContrataDetalhesVagaWidgetState
                                     .headlineLarge
                                     .override(
                                       fontFamily: 'markPro',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                      color: FlutterFlowTheme.of(context).white,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w800,
                                       useGoogleFonts: false,
@@ -215,8 +212,7 @@ class _MeContrataDetalhesVagaWidgetState
                                   },
                                   child: Icon(
                                     Icons.ios_share_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                    color: FlutterFlowTheme.of(context).white,
                                     size: 24.0,
                                   ),
                                 ),
@@ -251,641 +247,561 @@ class _MeContrataDetalhesVagaWidgetState
                 ),
                 body: SafeArea(
                   top: true,
-                  child: SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 8.0),
                     child: Column(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: 80.0,
-                                      height: 80.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        meContrataDetalhesVagaMeContrataVAGASRecord
-                                            .logoEmpresa,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Text(
-                                      meContrataDetalhesVagaMeContrataVAGASRecord
-                                          .nomeEmpresa,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Text(
-                                      meContrataDetalhesVagaMeContrataVAGASRecord
-                                          .nomeVaga,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          FFIcons.kpikerMap,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 16.0,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
                                         ),
-                                        Text(
+                                        child: Image.network(
                                           meContrataDetalhesVagaMeContrataVAGASRecord
-                                              .localidade,
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                              ),
+                                              .logoEmpresa,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/error_image.png',
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                      ].divide(SizedBox(width: 4.0)),
-                                    ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                      ),
+                                      Text(
+                                        meContrataDetalhesVagaMeContrataVAGASRecord
+                                            .nomeEmpresa,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Text(
+                                        meContrataDetalhesVagaMeContrataVAGASRecord
+                                            .nomeVaga,
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            FFIcons.kpikerMap,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 16.0,
+                                          ),
+                                          Text(
+                                            meContrataDetalhesVagaMeContrataVAGASRecord
+                                                .localidade,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 4.0)),
+                                      ),
+                                    ].divide(SizedBox(height: 8.0)),
+                                  ),
                                 ),
-                              ),
-                              if ((valueOrDefault<bool>(
-                                          currentUserDocument?.isImprensa,
-                                          false) ==
-                                      true) ||
-                                  (valueOrDefault(
-                                          currentUserDocument?.perfil, '') ==
-                                      'Admin'))
-                                AuthUserStreamWidget(
-                                  builder: (context) => Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          child: FFButtonWidget(
-                                            onPressed:
-                                                (meContrataDetalhesVagaMeContrataVAGASRecord
-                                                            .notificacaoEnviada ==
-                                                        true)
-                                                    ? null
-                                                    : () async {
-                                                        logFirebaseEvent(
-                                                            'ME_CONTRATA_DETALHES_VAGA_ENVIAR_NOTIFIC');
-                                                        var _shouldSetState =
-                                                            false;
-                                                        var confirmDialogResponse =
-                                                            await showDialog<
-                                                                    bool>(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return WebViewAware(
-                                                                      child:
-                                                                          AlertDialog(
-                                                                        title: Text(
-                                                                            'Enviar notificação?'),
-                                                                        content:
-                                                                            Text('Tem certeza quer enviar uma notificação para os usuarios dessa vaga?'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, false),
-                                                                            child:
-                                                                                Text('Não enviar'),
-                                                                          ),
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, true),
-                                                                            child:
-                                                                                Text('Sim, enviar notificação'),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ) ??
-                                                                false;
-                                                        if (confirmDialogResponse) {
-                                                          _model.usuariosRef =
-                                                              await queryUsersRecordOnce();
-                                                          _shouldSetState =
-                                                              true;
-                                                          triggerPushNotification(
-                                                            notificationTitle:
-                                                                'mecontrata',
-                                                            notificationText:
-                                                                meContrataDetalhesVagaMeContrataVAGASRecord
-                                                                    .nomeVaga,
-                                                            notificationImageUrl:
-                                                                valueOrDefault<
-                                                                    String>(
-                                                              _model
-                                                                  .imgLogoMecontrata,
-                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/meencontra-gflgrp/assets/4b9l3nmyuy4k/contratame.png',
-                                                            ),
-                                                            notificationSound:
-                                                                'default',
-                                                            userRefs: _model
-                                                                .usuariosRef!
-                                                                .map((e) =>
-                                                                    e.reference)
-                                                                .toList(),
-                                                            initialPageName:
-                                                                'meContrataDetalhesVaga',
-                                                            parameterData: {
-                                                              'vagaRef': widget!
-                                                                  .vagaRef,
-                                                            },
-                                                          );
+                                if ((valueOrDefault<bool>(
+                                            currentUserDocument?.isImprensa,
+                                            false) ==
+                                        true) ||
+                                    (valueOrDefault(
+                                            currentUserDocument?.perfil, '') ==
+                                        'Admin'))
+                                  AuthUserStreamWidget(
+                                    builder: (context) => Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: FFButtonWidget(
+                                              onPressed:
+                                                  (meContrataDetalhesVagaMeContrataVAGASRecord
+                                                              .notificacaoEnviada ==
+                                                          true)
+                                                      ? null
+                                                      : () async {
+                                                          logFirebaseEvent(
+                                                              'ME_CONTRATA_DETALHES_VAGA_ENVIAR_NOTIFIC');
+                                                          var _shouldSetState =
+                                                              false;
+                                                          var confirmDialogResponse =
+                                                              await showDialog<
+                                                                      bool>(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return WebViewAware(
+                                                                        child:
+                                                                            AlertDialog(
+                                                                          title:
+                                                                              Text('Enviar notificação?'),
+                                                                          content:
+                                                                              Text('Tem certeza quer enviar uma notificação para os usuarios dessa vaga?'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                              child: Text('Não enviar'),
+                                                                            ),
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                              child: Text('Sim, enviar notificação'),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ) ??
+                                                                  false;
+                                                          if (confirmDialogResponse) {
+                                                            _model.usuariosRef =
+                                                                await queryUsersRecordOnce();
+                                                            _shouldSetState =
+                                                                true;
+                                                            triggerPushNotification(
+                                                              notificationTitle:
+                                                                  'mecontrata',
+                                                              notificationText:
+                                                                  meContrataDetalhesVagaMeContrataVAGASRecord
+                                                                      .nomeVaga,
+                                                              notificationImageUrl:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                _model
+                                                                    .imgLogoMecontrata,
+                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/meencontra-gflgrp/assets/4b9l3nmyuy4k/contratame.png',
+                                                              ),
+                                                              notificationSound:
+                                                                  'default',
+                                                              userRefs: _model
+                                                                  .usuariosRef!
+                                                                  .map((e) => e
+                                                                      .reference)
+                                                                  .toList(),
+                                                              initialPageName:
+                                                                  'meContrataDetalhesVaga',
+                                                              parameterData: {
+                                                                'vagaRef':
+                                                                    widget!
+                                                                        .vagaRef,
+                                                              },
+                                                            );
 
-                                                          await widget!.vagaRef!
-                                                              .reference
-                                                              .update(
-                                                                  createMeContrataVAGASRecordData(
-                                                            notificacaoEnviada:
-                                                                true,
-                                                          ));
-                                                          await showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return WebViewAware(
-                                                                child:
-                                                                    AlertDialog(
-                                                                  title: Text(
-                                                                      'Notificação enviada'),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () =>
-                                                                              Navigator.pop(alertDialogContext),
-                                                                      child: Text(
-                                                                          'Ok'),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        } else {
+                                                            await widget!
+                                                                .vagaRef!
+                                                                .reference
+                                                                .update(
+                                                                    createMeContrataVAGASRecordData(
+                                                              notificacaoEnviada:
+                                                                  true,
+                                                            ));
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return WebViewAware(
+                                                                  child:
+                                                                      AlertDialog(
+                                                                    title: Text(
+                                                                        'Notificação enviada'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                        child: Text(
+                                                                            'Ok'),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          } else {
+                                                            if (_shouldSetState)
+                                                              safeSetState(
+                                                                  () {});
+                                                            return;
+                                                          }
+
                                                           if (_shouldSetState)
                                                             safeSetState(() {});
-                                                          return;
-                                                        }
-
-                                                        if (_shouldSetState)
-                                                          safeSetState(() {});
-                                                      },
-                                            text: meContrataDetalhesVagaMeContrataVAGASRecord
-                                                        .notificacaoEnviada ==
-                                                    false
-                                                ? 'Enviar notificação'
-                                                : 'Notificação enviada',
-                                            icon: FaIcon(
-                                              FontAwesomeIcons.solidBell,
-                                              size: 16.0,
-                                            ),
-                                            options: FFButtonOptions(
-                                              height: 40.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color: meContrataDetalhesVagaMeContrataVAGASRecord
+                                                        },
+                                              text: meContrataDetalhesVagaMeContrataVAGASRecord
                                                           .notificacaoEnviada ==
                                                       false
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .secondary
-                                                  : Color(0xFF0A4A16),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color: Colors.white,
-                                                        fontSize: 14.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              elevation: 1.0,
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1.0,
+                                                  ? 'Enviar notificação'
+                                                  : 'Notificação enviada',
+                                              icon: FaIcon(
+                                                FontAwesomeIcons.solidBell,
+                                                size: 16.0,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            'Total de visualizacoes: ${meContrataDetalhesVagaMeContrataVAGASRecord.numeroVisualizacoes.toString()}',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              Material(
-                                color: Colors.transparent,
-                                elevation: 2.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              'Experiencia',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent2,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              meContrataDetalhesVagaMeContrataVAGASRecord
-                                                  .experiencia,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(height: 8.0)),
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              'Salario',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent2,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              meContrataDetalhesVagaMeContrataVAGASRecord
-                                                  .salario,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(height: 8.0)),
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              'Contrato',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent2,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              meContrataDetalhesVagaMeContrataVAGASRecord
-                                                  .contratoTrabalho,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(SizedBox(height: 8.0)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Descrição',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          Text(
-                                            meContrataDetalhesVagaMeContrataVAGASRecord
-                                                .descricao,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ].divide(SizedBox(height: 8.0)),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Pré-requesitos',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Flexible(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    meContrataDetalhesVagaMeContrataVAGASRecord
-                                                        .qualificacao,
-                                                    style: FlutterFlowTheme.of(
+                                              options: FFButtonOptions(
+                                                height: 40.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        24.0, 0.0, 24.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color: meContrataDetalhesVagaMeContrataVAGASRecord
+                                                            .notificacaoEnviada ==
+                                                        false
+                                                    ? FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium
+                                                        .secondary
+                                                    : Color(0xFF0A4A16),
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
                                                         .override(
                                                           fontFamily: 'Inter',
+                                                          color: Colors.white,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                         ),
-                                                  ),
+                                                elevation: 1.0,
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1.0,
                                                 ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
                                               ),
-                                            ],
-                                          ),
-                                        ].divide(SizedBox(height: 8.0)),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Benefícios',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          Container(
-                                            height: 500.0,
-                                            decoration: BoxDecoration(),
-                                            child: Builder(
-                                              builder: (context) {
-                                                final beneficios =
-                                                    meContrataDetalhesVagaMeContrataVAGASRecord
-                                                        .beneficios
-                                                        .toList();
-
-                                                return ListView.separated(
-                                                  padding: EdgeInsets.zero,
-                                                  primary: false,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount: beneficios.length,
-                                                  separatorBuilder: (_, __) =>
-                                                      SizedBox(height: 8.0),
-                                                  itemBuilder: (context,
-                                                      beneficiosIndex) {
-                                                    final beneficiosItem =
-                                                        beneficios[
-                                                            beneficiosIndex];
-                                                    return Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          '•',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                        Flexible(
-                                                          child: Text(
-                                                            beneficiosItem,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ].divide(
-                                                          SizedBox(width: 4.0)),
-                                                    );
-                                                  },
-                                                );
-                                              },
                                             ),
                                           ),
-                                        ].divide(SizedBox(height: 8.0)),
+                                          Flexible(
+                                            child: Text(
+                                              'Total de visualizacoes: ${meContrataDetalhesVagaMeContrataVAGASRecord.numeroVisualizacoes.toString()}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ].divide(SizedBox(height: 12.0)),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(),
-                                child: Visibility(
-                                  visible:
-                                      meContrataDetalhesVagaMeContrataVAGASRecord
-                                                  .uRLexterno !=
-                                              null &&
-                                          meContrataDetalhesVagaMeContrataVAGASRecord
-                                                  .uRLexterno !=
-                                              '',
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'ME_CONTRATA_DETALHES_VAGA_APLICAR_A_VAGA');
-
-                                      context.pushNamed(
-                                        'LinkExterno',
-                                        queryParameters: {
-                                          'linkExterno': serializeParam(
-                                            meContrataDetalhesVagaMeContrataVAGASRecord
-                                                .uRLexterno,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    text: 'Aplicar a vaga',
-                                    options: FFButtonOptions(
-                                      height: 48.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
+                                  ),
+                                Material(
+                                  color: Colors.transparent,
+                                  elevation: 2.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 2.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
+                                          .secondaryBackground,
                                       borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Experiencia',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent2,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                meContrataDetalhesVagaMeContrataVAGASRecord
+                                                    .experiencia,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].divide(SizedBox(height: 8.0)),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Salario',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent2,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                meContrataDetalhesVagaMeContrataVAGASRecord
+                                                    .salario,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].divide(SizedBox(height: 8.0)),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Contrato',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent2,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                meContrataDetalhesVagaMeContrataVAGASRecord
+                                                    .contratoTrabalho,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].divide(SizedBox(height: 8.0)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ].divide(SizedBox(height: 24.0)),
+                                Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Descrição',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            Text(
+                                              meContrataDetalhesVagaMeContrataVAGASRecord
+                                                  .descricao,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ].divide(SizedBox(height: 8.0)),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Pré-requesitos',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(8.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      meContrataDetalhesVagaMeContrataVAGASRecord
+                                                          .qualificacao,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ].divide(SizedBox(height: 8.0)),
+                                        ),
+                                      ),
+                                    ].divide(SizedBox(height: 12.0)),
+                                  ),
+                                ),
+                              ].divide(SizedBox(height: 16.0)),
+                            ),
                           ),
                         ),
-                      ],
+                        Container(
+                          decoration: BoxDecoration(),
+                          child: Visibility(
+                            visible: meContrataDetalhesVagaMeContrataVAGASRecord
+                                        .uRLexterno !=
+                                    null &&
+                                meContrataDetalhesVagaMeContrataVAGASRecord
+                                        .uRLexterno !=
+                                    '',
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'ME_CONTRATA_DETALHES_VAGA_APLICAR_A_VAGA');
+
+                                context.pushNamed(
+                                  'LinkExterno',
+                                  queryParameters: {
+                                    'linkExterno': serializeParam(
+                                      meContrataDetalhesVagaMeContrataVAGASRecord
+                                          .uRLexterno,
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              },
+                              text: 'Aplicar a vaga',
+                              options: FFButtonOptions(
+                                height: 48.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).secondary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                    ),
+                                elevation: 2.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ].divide(SizedBox(height: 24.0)),
                     ),
                   ),
                 ),

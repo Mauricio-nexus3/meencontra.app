@@ -324,7 +324,7 @@ class _ConsultaEstabelecimentoWidgetState
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                                      .white,
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 2.0,
@@ -819,7 +819,7 @@ class _ConsultaEstabelecimentoWidgetState
                                           ).then((s) => s.firstOrNull);
 
                                           context.pushNamed(
-                                            'painelAdministrativo',
+                                            'AnunciantePage',
                                             queryParameters: {
                                               'documentoRefAnunciante':
                                                   serializeParam(
@@ -868,7 +868,7 @@ class _ConsultaEstabelecimentoWidgetState
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                                      .white,
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 2.0,

@@ -245,8 +245,7 @@ class _ResultadoCardWidgetState extends State<ResultadoCardWidget> {
                             padding: EdgeInsets.all(3.0),
                             child: FaIcon(
                               FontAwesomeIcons.whatsapp,
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                              color: FlutterFlowTheme.of(context).white,
                               size: 16.0,
                             ),
                           ),

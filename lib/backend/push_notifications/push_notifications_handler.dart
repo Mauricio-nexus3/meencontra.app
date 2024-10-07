@@ -132,11 +132,7 @@ final parametersBuilderMap =
           'usuarioRef': getParameter<DocumentReference>(data, 'usuarioRef'),
         },
       ),
-  'EditarPerfil': (data) async => ParameterData(
-        allParams: {
-          'usuarioREF': getParameter<DocumentReference>(data, 'usuarioREF'),
-        },
-      ),
+  'myProfile': ParameterData.none(),
   'LinkExterno': (data) async => ParameterData(
         allParams: {
           'linkExterno': getParameter<String>(data, 'linkExterno'),
@@ -156,7 +152,7 @@ final parametersBuilderMap =
               data, 'materiadoc', MateriasRecord.fromSnapshot),
         },
       ),
-  'Imprensa': (data) async => ParameterData(
+  'PerfilImprensa': (data) async => ParameterData(
         allParams: {
           'imprensaRef': getParameter<DocumentReference>(data, 'imprensaRef'),
         },
@@ -178,32 +174,25 @@ final parametersBuilderMap =
               data, 'eventoRef', MeDiverteRecord.fromSnapshot),
         },
       ),
-  'Materia': (data) async => ParameterData(
+  'cadastrarMateria': (data) async => ParameterData(
         allParams: {
-          'status': getParameter<String>(data, 'status'),
           'materiaDoc': await getDocumentParameter<MateriasRecord>(
               data, 'materiaDoc', MateriasRecord.fromSnapshot),
         },
       ),
   'CriarNovaVaga': (data) async => ParameterData(
         allParams: {
-          'status': getParameter<String>(data, 'status'),
           'vagaDoc': await getDocumentParameter<MeContrataVAGASRecord>(
               data, 'vagaDoc', MeContrataVAGASRecord.fromSnapshot),
         },
       ),
   'CriarNovoEvento': (data) async => ParameterData(
         allParams: {
-          'status': getParameter<String>(data, 'status'),
           'eventoDoc': await getDocumentParameter<MeDiverteRecord>(
               data, 'eventoDoc', MeDiverteRecord.fromSnapshot),
         },
       ),
-  'CriarPerfil': (data) async => ParameterData(
-        allParams: {
-          'userRef': getParameter<DocumentReference>(data, 'userRef'),
-        },
-      ),
+  'Perfil': ParameterData.none(),
   'meDashboardAnunciantes': ParameterData.none(),
   'meDashboard': ParameterData.none(),
   'meDashboardmecontrata': ParameterData.none(),
@@ -212,11 +201,10 @@ final parametersBuilderMap =
   'meDashboardUsuarios': ParameterData.none(),
   'meDashboardmeinforma': ParameterData.none(),
   'testeAtual': ParameterData.none(),
-  'AnunciantePage': (data) async => ParameterData(
+  'AnunciantePerfil': (data) async => ParameterData(
         allParams: {
-          'documentoRefAnunciante':
-              await getDocumentParameter<AnuncianteRecord>(data,
-                  'documentoRefAnunciante', AnuncianteRecord.fromSnapshot),
+          'referenciaAnunciante':
+              getParameter<DocumentReference>(data, 'referenciaAnunciante'),
         },
       ),
   'DashAnuncianteCatalogo': (data) async => ParameterData(
@@ -238,7 +226,7 @@ final parametersBuilderMap =
         },
       ),
   'Feed': ParameterData.none(),
-  'painelAdministrativo': (data) async => ParameterData(
+  'AnunciantePage': (data) async => ParameterData(
         allParams: {
           'documentoRefAnunciante':
               await getDocumentParameter<AnuncianteRecord>(data,
@@ -255,12 +243,20 @@ final parametersBuilderMap =
   'meDashboardSuporte': ParameterData.none(),
   'configuracoes': ParameterData.none(),
   'impreendimentos': ParameterData.none(),
-  'webView': (data) async => ParameterData(
+  'TonyAssist': ParameterData.none(),
+  'meuperfil': ParameterData.none(),
+  'definirImg': (data) async => ParameterData(
+        allParams: {},
+      ),
+  'tema': ParameterData.none(),
+  'localizacao': ParameterData.none(),
+  'edit': (data) async => ParameterData(
         allParams: {
-          'url': getParameter<String>(data, 'url'),
+          'input': getParameter<String>(data, 'input'),
+          'title': getParameter<String>(data, 'title'),
         },
       ),
-  'TonyAssist': ParameterData.none(),
+  'optionsNotification': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

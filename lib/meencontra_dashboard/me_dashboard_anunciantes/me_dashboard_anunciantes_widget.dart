@@ -121,7 +121,7 @@ class _MeDashboardAnunciantesWidgetState
                           buttonSize: 54.0,
                           icon: Icon(
                             FFIcons.kmenuAnunciante,
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: FlutterFlowTheme.of(context).white,
                             size: 24.0,
                           ),
                           onPressed: () async {
@@ -143,8 +143,7 @@ class _MeDashboardAnunciantesWidgetState
                                   .headlineMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: FlutterFlowTheme.of(context).white,
                                     fontSize: 22.0,
                                     letterSpacing: 0.0,
                                   ),
@@ -1027,7 +1026,9 @@ class _MeDashboardAnunciantesWidgetState
                                               maxWidth: 1170.0,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 3.0,
@@ -1161,8 +1162,8 @@ class _MeDashboardAnunciantesWidgetState
                                                                       .override(
                                                                         fontFamily:
                                                                             'Readex Pro',
-                                                                        color: Color(
-                                                                            0xFF14181B),
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .accent2,
                                                                         fontSize:
                                                                             12.0,
                                                                         letterSpacing:
@@ -1174,8 +1175,9 @@ class _MeDashboardAnunciantesWidgetState
                                                                   OutlineInputBorder(
                                                                 borderSide:
                                                                     BorderSide(
-                                                                  color: Color(
-                                                                      0xFFF1F4F8),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent2,
                                                                   width: 2.0,
                                                                 ),
                                                                 borderRadius:
@@ -1275,8 +1277,9 @@ class _MeDashboardAnunciantesWidgetState
                                                                 .override(
                                                                   fontFamily:
                                                                       'Readex Pro',
-                                                                  color: Color(
-                                                                      0xFF14181B),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize:
                                                                       14.0,
                                                                   letterSpacing:
@@ -1347,7 +1350,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                           'Readex Pro',
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
+                                                                          .white,
                                                                       fontSize:
                                                                           12.0,
                                                                       letterSpacing:
@@ -1420,7 +1423,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                           'Readex Pro',
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
+                                                                          .white,
                                                                       fontSize:
                                                                           12.0,
                                                                       letterSpacing:
@@ -1445,7 +1448,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                           'Readex Pro',
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryText,
+                                                                          .white,
                                                                       fontSize:
                                                                           12.0,
                                                                       letterSpacing:
@@ -1500,7 +1503,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                       ),
                                                                     );
                                                                   }
-                                                                  final tableAnunciantesAlgolia =
+                                                                  final algoliatableAnunciantes =
                                                                       (_model.algoliaSearchResults?.toList() ??
                                                                               [])
                                                                           .take(
@@ -1517,7 +1520,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                     scrollDirection:
                                                                         Axis.vertical,
                                                                     itemCount:
-                                                                        tableAnunciantesAlgolia
+                                                                        algoliatableAnunciantes
                                                                             .length,
                                                                     separatorBuilder: (_,
                                                                             __) =>
@@ -1526,22 +1529,22 @@ class _MeDashboardAnunciantesWidgetState
                                                                                 8.0),
                                                                     itemBuilder:
                                                                         (context,
-                                                                            tableAnunciantesAlgoliaIndex) {
-                                                                      final tableAnunciantesAlgoliaItem =
-                                                                          tableAnunciantesAlgolia[
-                                                                              tableAnunciantesAlgoliaIndex];
+                                                                            algoliatableAnunciantesIndex) {
+                                                                      final algoliatableAnunciantesItem =
+                                                                          algoliatableAnunciantes[
+                                                                              algoliatableAnunciantesIndex];
                                                                       return Builder(
                                                                         builder:
                                                                             (context) =>
                                                                                 ComponenteGeralWidget(
                                                                           key: Key(
-                                                                              'Key2z1_${tableAnunciantesAlgoliaIndex}_of_${tableAnunciantesAlgolia.length}'),
+                                                                              'Key2z1_${algoliatableAnunciantesIndex}_of_${algoliatableAnunciantes.length}'),
                                                                           col01Imagem:
-                                                                              tableAnunciantesAlgoliaItem.logo,
+                                                                              algoliatableAnunciantesItem.logo,
                                                                           col01StringPrincipal:
-                                                                              tableAnunciantesAlgoliaItem.nomeFantasia,
+                                                                              algoliatableAnunciantesItem.nomeFantasia,
                                                                           col01StringSecundario:
-                                                                              tableAnunciantesAlgoliaItem.whatsComercial,
+                                                                              algoliatableAnunciantesItem.whatsComercial,
                                                                           col02Icon:
                                                                               Icon(
                                                                             FFIcons.kanuncios,
@@ -1551,7 +1554,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                                 16.0,
                                                                           ),
                                                                           col02String:
-                                                                              tableAnunciantesAlgoliaItem.categoria,
+                                                                              algoliatableAnunciantesItem.categoria,
                                                                           col03Icone:
                                                                               Icon(
                                                                             FFIcons.kestatisticas,
@@ -1561,7 +1564,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                                 16.0,
                                                                           ),
                                                                           col03String:
-                                                                              tableAnunciantesAlgoliaItem.planoAssinatura,
+                                                                              algoliatableAnunciantesItem.planoAssinatura,
                                                                           col04icon:
                                                                               Icon(
                                                                             FFIcons.kmEENCONTRAVECTORGradiente,
@@ -1569,7 +1572,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                                 0.0,
                                                                           ),
                                                                           col04bool:
-                                                                              tableAnunciantesAlgoliaItem.resgatado,
+                                                                              algoliatableAnunciantesItem.resgatado,
                                                                           paginaAtual:
                                                                               'Anunciantes',
                                                                           actionCallBackIconMore:
@@ -1591,16 +1594,13 @@ class _MeDashboardAnunciantesWidgetState
                                                                                         compartiharURL: () async {},
                                                                                         visualizar: () async {
                                                                                           context.pushNamed(
-                                                                                            'AnunciantePage',
+                                                                                            'AnunciantePerfil',
                                                                                             queryParameters: {
-                                                                                              'documentoRefAnunciante': serializeParam(
-                                                                                                tableAnunciantesAlgoliaItem,
-                                                                                                ParamType.Document,
+                                                                                              'referenciaAnunciante': serializeParam(
+                                                                                                algoliatableAnunciantesItem.reference,
+                                                                                                ParamType.DocumentReference,
                                                                                               ),
                                                                                             }.withoutNulls,
-                                                                                            extra: <String, dynamic>{
-                                                                                              'documentoRefAnunciante': tableAnunciantesAlgoliaItem,
-                                                                                            },
                                                                                           );
                                                                                         },
                                                                                         editar: () async {
@@ -1616,7 +1616,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                                                   child: GestureDetector(
                                                                                                     onTap: () => FocusScope.of(dialogContext).unfocus(),
                                                                                                     child: EditarAnuncianteWidget(
-                                                                                                      auncianteDoc: tableAnunciantesAlgoliaItem,
+                                                                                                      auncianteDoc: algoliatableAnunciantesItem,
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
@@ -1648,8 +1648,8 @@ class _MeDashboardAnunciantesWidgetState
                                                                                               ) ??
                                                                                               false;
                                                                                           if (confirmDialogResponse) {
-                                                                                            await FirebaseStorage.instance.refFromURL(tableAnunciantesAlgoliaItem.logo).delete();
-                                                                                            await tableAnunciantesAlgoliaItem.reference.delete();
+                                                                                            await FirebaseStorage.instance.refFromURL(algoliatableAnunciantesItem.logo).delete();
+                                                                                            await algoliatableAnunciantesItem.reference.delete();
                                                                                           } else {
                                                                                             return;
                                                                                           }
@@ -1657,14 +1657,14 @@ class _MeDashboardAnunciantesWidgetState
                                                                                         enviarNotificacao: () async {
                                                                                           _model.allUsers = await queryUsersRecordOnce();
                                                                                           triggerPushNotification(
-                                                                                            notificationTitle: tableAnunciantesAlgoliaItem.nomeFantasia,
-                                                                                            notificationText: tableAnunciantesAlgoliaItem.descricao,
-                                                                                            notificationImageUrl: tableAnunciantesAlgoliaItem.logo,
+                                                                                            notificationTitle: algoliatableAnunciantesItem.nomeFantasia,
+                                                                                            notificationText: algoliatableAnunciantesItem.descricao,
+                                                                                            notificationImageUrl: algoliatableAnunciantesItem.logo,
                                                                                             notificationSound: 'default',
                                                                                             userRefs: _model.allUsers!.map((e) => e.reference).toList(),
-                                                                                            initialPageName: 'AnunciantePage',
+                                                                                            initialPageName: 'AnunciantePerfil',
                                                                                             parameterData: {
-                                                                                              'documentoRefAnunciante': tableAnunciantesAlgoliaItem,
+                                                                                              'referenciaAnunciante': algoliatableAnunciantesItem.reference,
                                                                                             },
                                                                                           );
                                                                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1694,16 +1694,13 @@ class _MeDashboardAnunciantesWidgetState
                                                                             logFirebaseEvent('ME_DASHBOARD_ANUNCIANTES_Container_2z1zl');
 
                                                                             context.pushNamed(
-                                                                              'AnunciantePage',
+                                                                              'AnunciantePerfil',
                                                                               queryParameters: {
-                                                                                'documentoRefAnunciante': serializeParam(
-                                                                                  tableAnunciantesAlgoliaItem,
-                                                                                  ParamType.Document,
+                                                                                'referenciaAnunciante': serializeParam(
+                                                                                  algoliatableAnunciantesItem.reference,
+                                                                                  ParamType.DocumentReference,
                                                                                 ),
                                                                               }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'documentoRefAnunciante': tableAnunciantesAlgoliaItem,
-                                                                              },
                                                                             );
                                                                           },
                                                                         ),
@@ -1768,7 +1765,7 @@ class _MeDashboardAnunciantesWidgetState
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             color:
-                                                                                Colors.white,
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
                                                                             boxShadow: [
                                                                               BoxShadow(
                                                                                 blurRadius: 0.0,
@@ -1975,16 +1972,13 @@ class _MeDashboardAnunciantesWidgetState
                                                                                                               compartiharURL: () async {},
                                                                                                               visualizar: () async {
                                                                                                                 context.pushNamed(
-                                                                                                                  'AnunciantePage',
+                                                                                                                  'AnunciantePerfil',
                                                                                                                   queryParameters: {
-                                                                                                                    'documentoRefAnunciante': serializeParam(
-                                                                                                                      tableAnunciantesItem,
-                                                                                                                      ParamType.Document,
+                                                                                                                    'referenciaAnunciante': serializeParam(
+                                                                                                                      tableAnunciantesItem.reference,
+                                                                                                                      ParamType.DocumentReference,
                                                                                                                     ),
                                                                                                                   }.withoutNulls,
-                                                                                                                  extra: <String, dynamic>{
-                                                                                                                    'documentoRefAnunciante': tableAnunciantesItem,
-                                                                                                                  },
                                                                                                                 );
                                                                                                               },
                                                                                                               editar: () async {

@@ -1,7 +1,7 @@
 import '/anunciante/catalogo/cadastrar_categoria/cadastrar_categoria_widget.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/componentes_globais/menus/menu_drawer/menu_drawer_widget.dart';
+import '/componentes_globais/menu_drawer/menu_drawer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,19 +21,15 @@ class DashAnuncianteCatalogoModel
   ///  State fields for stateful widgets in this page.
 
   // Model for MenuDrawer component.
-  late MenuDrawerModel menuDrawerModel1;
-  // Model for MenuDrawer component.
-  late MenuDrawerModel menuDrawerModel2;
+  late MenuDrawerModel menuDrawerModel;
 
   @override
   void initState(BuildContext context) {
-    menuDrawerModel1 = createModel(context, () => MenuDrawerModel());
-    menuDrawerModel2 = createModel(context, () => MenuDrawerModel());
+    menuDrawerModel = createModel(context, () => MenuDrawerModel());
   }
 
   @override
   void dispose() {
-    menuDrawerModel1.dispose();
-    menuDrawerModel2.dispose();
+    menuDrawerModel.dispose();
   }
 }

@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -99,32 +98,6 @@ class _UsarDeslogadoUsoExclusivoCompWidgetState
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 20.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).accent4,
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    logFirebaseEvent(
-                        'USAR_DESLOGADO_USO_EXCLUSIVO_close_round');
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
           Container(
             width: double.infinity,
             constraints: BoxConstraints(
@@ -145,11 +118,8 @@ class _UsarDeslogadoUsoExclusivoCompWidgetState
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(0.0),
                 bottomRight: Radius.circular(0.0),
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0),
-              ),
-              border: Border.all(
-                width: 1.0,
+                topLeft: Radius.circular(24.0),
+                topRight: Radius.circular(24.0),
               ),
             ),
             child: Padding(
@@ -280,7 +250,7 @@ class _UsarDeslogadoUsoExclusivoCompWidgetState
                                               fontFamily: 'Inter',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .white,
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 1.0,

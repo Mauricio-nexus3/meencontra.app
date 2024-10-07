@@ -13,7 +13,6 @@ import 'backend/firebase/firebase_config.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
@@ -25,6 +24,8 @@ void main() async {
   usePathUrlStrategy();
   await initFirebase();
 
+  await FlutterFlowTheme.initialize();
+
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
@@ -35,18 +36,22 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key, this.entryPage});
+
   // This widget is the root of your application.
   @override
   State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
+
+  final Widget? entryPage;
 }
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
 
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -61,7 +66,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _appStateNotifier = AppStateNotifier.instance;
-    _router = createRouter(_appStateNotifier);
+    _router = createRouter(_appStateNotifier, widget.entryPage);
     userStream = meencontraFirebaseUserStream()
       ..listen((user) {
         _appStateNotifier.update(user);
@@ -86,6 +91,7 @@ class _MyAppState extends State<MyApp> {
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
         _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
       });
 
   @override
@@ -104,133 +110,15 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
-        useMaterial3: false,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
       ),
       themeMode: _themeMode,
       routerConfig: _router,
       builder: (_, child) => DynamicLinksHandler(
         router: _router,
         child: child!,
-      ),
-    );
-  }
-}
-
-class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
-
-  final String? initialPage;
-  final Widget? page;
-
-  @override
-  _NavBarPageState createState() => _NavBarPageState();
-}
-
-/// This is the private State class that goes with NavBarPage.
-class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Feed';
-  late Widget? _currentPage;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentPageName = widget.initialPage ?? _currentPageName;
-    _currentPage = widget.page;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final tabs = {
-      'Feed': FeedWidget(),
-      'Categorias': CategoriasWidget(),
-      'meInforma': MeInformaWidget(),
-      'meContrata': MeContrataWidget(),
-      'meDivirta': MeDivirtaWidget(),
-    };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
-
-    return Scaffold(
-      body: _currentPage ?? tabs[_currentPageName],
-      bottomNavigationBar: Visibility(
-        visible: responsiveVisibility(
-          context: context,
-          desktop: false,
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) => safeSetState(() {
-            _currentPage = null;
-            _currentPageName = tabs.keys.toList()[i];
-          }),
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          selectedItemColor: FlutterFlowTheme.of(context).primary,
-          unselectedItemColor: FlutterFlowTheme.of(context).accent2,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                FFIcons.khomeOFFStroke,
-                size: 20.0,
-              ),
-              activeIcon: Icon(
-                FFIcons.khomeON,
-                size: 24.0,
-              ),
-              label: 'Inicio',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FFIcons.klupa,
-                size: 24.0,
-              ),
-              activeIcon: Icon(
-                FFIcons.klupa,
-                size: 24.0,
-              ),
-              label: 'Categoria',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FFIcons.kmeInformaOFF,
-                size: 20.0,
-              ),
-              activeIcon: Icon(
-                FFIcons.kmeInformaON,
-                size: 24.0,
-              ),
-              label: 'meinforma',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FFIcons.kmeContrataOFF,
-                size: 20.0,
-              ),
-              activeIcon: Icon(
-                FFIcons.kmeContrataOFF,
-                size: 24.0,
-              ),
-              label: 'mecontrata',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FFIcons.kmeDivirtaOFF,
-                size: 20.0,
-              ),
-              activeIcon: Icon(
-                FFIcons.kmeDivirtaON,
-                size: 24.0,
-              ),
-              label: 'medivirta',
-              tooltip: '',
-            )
-          ],
-        ),
       ),
     );
   }

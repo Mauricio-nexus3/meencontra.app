@@ -231,8 +231,8 @@ class _MeDashboardmedivirtaWidgetState
                                                   'CriarNovoEvento',
                                                   queryParameters: {
                                                     'status': serializeParam(
-                                                      BoolToString.Novo.name,
-                                                      ParamType.String,
+                                                      Status.novo,
+                                                      ParamType.Enum,
                                                     ),
                                                   }.withoutNulls,
                                                 );
@@ -1335,8 +1335,8 @@ class _MeDashboardmedivirtaWidgetState
                                                                                   'CriarNovoEvento',
                                                                                   queryParameters: {
                                                                                     'status': serializeParam(
-                                                                                      BoolToString.Editar.name,
-                                                                                      ParamType.String,
+                                                                                      Status.editar,
+                                                                                      ParamType.Enum,
                                                                                     ),
                                                                                     'eventoDoc': serializeParam(
                                                                                       tablevagasItem,

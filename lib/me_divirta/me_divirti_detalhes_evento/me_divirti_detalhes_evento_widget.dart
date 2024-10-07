@@ -125,8 +125,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                         },
                         child: Icon(
                           Icons.arrow_back_ios_rounded,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).white,
                           size: 24.0,
                         ),
                       ),
@@ -141,8 +140,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                                 0.0, 0.0, 8.0, 0.0),
                             child: Icon(
                               FFIcons.kmeDivirtaOFF,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: FlutterFlowTheme.of(context).white,
                               size: 24.0,
                             ),
                           ),
@@ -166,8 +164,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                                 .headlineLarge
                                 .override(
                                   fontFamily: 'markPro',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color: FlutterFlowTheme.of(context).white,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                   useGoogleFonts: false,
@@ -212,8 +209,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                               },
                               child: Icon(
                                 Icons.ios_share_outlined,
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                color: FlutterFlowTheme.of(context).white,
                                 size: 24.0,
                               ),
                             ),
@@ -549,9 +545,12 @@ class _MeDivirtiDetalhesEventoWidgetState
                                                                       'Inter',
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .secondaryText,
+                                                                      .white,
                                                                   letterSpacing:
                                                                       0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
                                                                 ),
                                                           ),
                                                           Icon(
@@ -559,7 +558,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                                                                 .confirmation_num_outlined,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryText,
+                                                                .white,
                                                             size: 16.0,
                                                           ),
                                                         ].divide(SizedBox(
@@ -899,7 +898,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                                                           fontFamily: 'Inter',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryText,
+                                                              .white,
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -907,7 +906,7 @@ class _MeDivirtiDetalhesEventoWidgetState
                                                     FFIcons.kmapMarker,
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .white,
                                                     size: 24.0,
                                                   ),
                                                 ].divide(SizedBox(width: 8.0)),

@@ -71,7 +71,7 @@ class _ComponenteGeralWidgetState extends State<ComponenteGeralWidget> {
       padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 0.0,
