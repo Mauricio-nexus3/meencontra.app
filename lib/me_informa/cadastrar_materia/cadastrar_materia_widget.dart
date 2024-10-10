@@ -948,58 +948,72 @@ class _CadastrarMateriaWidgetState extends State<CadastrarMateriaWidget>
                                   decoration: BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Matéria destaque?',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Switch.adaptive(
-                                        value: _model.destaqueValue!,
-                                        onChanged: (newValue) async {
-                                          safeSetState(() =>
-                                              _model.destaqueValue = newValue!);
-                                        },
-                                        activeColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent1,
-                                        inactiveTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent2,
-                                        inactiveThumbColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent3,
-                                      ),
                                       Flexible(
                                         child: Text(
-                                          _model.destaqueValue == true
-                                              ? 'Sim'
-                                              : 'Não',
+                                          'Matéria destaque?',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodySmall
+                                              .bodyMedium
                                               .override(
                                                 fontFamily: 'Inter',
-                                                color:
-                                                    _model.destaqueValue == true
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent1,
-                                                fontSize:
-                                                    _model.destaqueValue == true
-                                                        ? 14.0
-                                                        : 12.0,
                                                 letterSpacing: 0.0,
                                               ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Switch.adaptive(
+                                              value: _model.destaqueValue!,
+                                              onChanged: (newValue) async {
+                                                safeSetState(() => _model
+                                                    .destaqueValue = newValue!);
+                                              },
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              activeTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent1,
+                                              inactiveTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent2,
+                                              inactiveThumbColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent3,
+                                            ),
+                                            Text(
+                                              _model.destaqueValue == true
+                                                  ? 'Sim'
+                                                  : 'Não',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color: _model
+                                                                    .destaqueValue ==
+                                                                true
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .alternate
+                                                            : FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent1,
+                                                        fontSize:
+                                                            _model.destaqueValue ==
+                                                                    true
+                                                                ? 14.0
+                                                                : 12.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ].divide(SizedBox(width: 4.0)),
                                         ),
                                       ),
                                     ],

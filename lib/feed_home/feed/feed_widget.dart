@@ -73,7 +73,7 @@ class _FeedWidgetState extends State<FeedWidget> {
         safeSetState(() {});
         if ((FFAppState().versaoAtualMobile !=
                 FFAppState().versaoNoDispositivoUsuario) &&
-            (isWeb != false)) {
+            (MediaQuery.sizeOf(context).width <= kBreakpointLarge)) {
           await showAlignedDialog(
             context: context,
             isGlobal: false,
@@ -2493,15 +2493,19 @@ class _FeedWidgetState extends State<FeedWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            wrapWithModel(
-                                              model: _model.navbarModel,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: NavbarWidget(
-                                                paginaAtual:
-                                                    TelasMenuDrawer.Inicio,
+                                            if (responsiveVisibility(
+                                              context: context,
+                                              desktop: false,
+                                            ))
+                                              wrapWithModel(
+                                                model: _model.navbarModel,
+                                                updateCallback: () =>
+                                                    safeSetState(() {}),
+                                                child: NavbarWidget(
+                                                  paginaAtual:
+                                                      TelasMenuDrawer.Inicio,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),

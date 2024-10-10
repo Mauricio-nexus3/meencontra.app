@@ -155,209 +155,196 @@ class _DashAnuncianteCatalogoWidgetState
                 ),
                 body: SafeArea(
                   top: true,
-                  child: Visibility(
-                    visible: responsiveVisibility(
-                      context: context,
-                      tabletLandscape: false,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (responsiveVisibility(
-                                context: context,
-                                phone: false,
-                              ))
-                                Material(
-                                  color: Colors.transparent,
-                                  elevation: 2.0,
-                                  child: Container(
-                                    constraints: BoxConstraints(
-                                      maxWidth: 270.0,
-                                    ),
-                                    decoration: BoxDecoration(),
-                                    child: wrapWithModel(
-                                      model: _model.menuDrawerModel,
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: MenuDrawerWidget(
-                                        paginaAtual:
-                                            TelasMenuDrawer.Catalogo.name,
-                                      ),
-                                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                            ))
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 2.0,
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 270.0,
                                   ),
-                                ),
-                              Flexible(
-                                child: Padding(
-                                  padding: EdgeInsets.all(24.0),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                phone: false,
-                                              ))
-                                                Text(
-                                                  'Categorias do catálogo',
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'textOnPageLoadAnimation']!),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Builder(
-                                                      builder: (context) =>
-                                                          FFButtonWidget(
-                                                        onPressed: () async {
-                                                          logFirebaseEvent(
-                                                              'DASH_ANUNCIANTE_CATALOGO_CATEGORIA_BTN_O');
-                                                          await showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (dialogContext) {
-                                                              return Dialog(
-                                                                elevation: 0,
-                                                                insetPadding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                alignment: AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                                child:
-                                                                    WebViewAware(
-                                                                  child:
-                                                                      GestureDetector(
-                                                                    onTap: () =>
-                                                                        FocusScope.of(dialogContext)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        CadastrarCategoriaWidget(
-                                                                      categoriaProdutoAnunciante:
-                                                                          widget!
-                                                                              .anuncianteDoc!,
-                                                                      editar:
-                                                                          false,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                        text: 'Categoria',
-                                                        icon: Icon(
-                                                          Icons.add,
-                                                          size: 15.0,
-                                                        ),
-                                                        options:
-                                                            FFButtonOptions(
-                                                          height: 40.0,
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      24.0,
-                                                                      0.0,
-                                                                      24.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color: valueOrDefault<
-                                                              Color>(
-                                                            widget!
-                                                                .anuncianteDoc
-                                                                ?.cor,
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                          ),
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                  ),
-                                                          elevation: 3.0,
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ].divide(
-                                                      SizedBox(height: 8.0)),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ]
-                                          .divide(SizedBox(height: 16.0))
-                                          .around(SizedBox(height: 16.0)),
+                                  decoration: BoxDecoration(),
+                                  child: wrapWithModel(
+                                    model: _model.menuDrawerModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: MenuDrawerWidget(
+                                      paginaAtual:
+                                          TelasMenuDrawer.Catalogo.name,
                                     ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            Flexible(
+                              child: Padding(
+                                padding: EdgeInsets.all(24.0),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            if (responsiveVisibility(
+                                              context: context,
+                                              phone: false,
+                                            ))
+                                              Text(
+                                                'Categorias do catálogo',
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation']!),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Builder(
+                                                    builder: (context) =>
+                                                        FFButtonWidget(
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'DASH_ANUNCIANTE_CATALOGO_CATEGORIA_BTN_O');
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child:
+                                                                  WebViewAware(
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () =>
+                                                                      FocusScope.of(
+                                                                              dialogContext)
+                                                                          .unfocus(),
+                                                                  child:
+                                                                      CadastrarCategoriaWidget(
+                                                                    categoriaProdutoAnunciante:
+                                                                        widget!
+                                                                            .anuncianteDoc!,
+                                                                    editar:
+                                                                        false,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      text: 'Categoria',
+                                                      icon: Icon(
+                                                        Icons.add,
+                                                        size: 15.0,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        height: 40.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    24.0,
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color: valueOrDefault<
+                                                            Color>(
+                                                          widget!.anuncianteDoc
+                                                              ?.cor,
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                        elevation: 3.0,
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ].divide(SizedBox(height: 8.0)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]
+                                        .divide(SizedBox(height: 16.0))
+                                        .around(SizedBox(height: 16.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
